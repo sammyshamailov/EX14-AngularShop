@@ -1,16 +1,14 @@
-{
-    "Category":[
-        {
-            "id": "5fbac2ba-ba1d-11e9-a2a3-2a2ae2dbcce4",
-            "Title": "External Hard-Drives"
-        },
-        {
-            "id": "5fbac166-ba1d-11e9-a2a3-2a2ae2dbcce4",
-            "Title": "Smart Phone Accessories"
-        },
-        {
-            "id": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
-            "Title": "Smart Phones"
-        }
-    ]
-}
+[
+    {
+        "id": "5fbac2ba-ba1d-11e9-a2a3-2a2ae2dbcce4",
+        "Title": "External Hard-Drives"
+    },
+    {
+        "id": "5fbac166-ba1d-11e9-a2a3-2a2ae2dbcce4",
+        "Title": "Smart Phone Accessories"
+    },
+    {
+        "id": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
+        "Title": "Smart Phones"
+    }
+]

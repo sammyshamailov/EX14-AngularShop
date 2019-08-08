@@ -1,5 +1,4 @@
-{
-    "Product":[
+[
         {
             "CategoryId": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg53327.jpg",
@@ -85,5 +84,4 @@
             "Description": "240GB, 2.5Inch, SSD, USB Type-C"
         }
         
-    ]
-}
+]
