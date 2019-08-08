@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -8,8 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   @Input() isVisible: boolean;
+  @Output() chosenPage = new EventEmitter<string>();
 
   constructor() { }
+
+  menuItemClicked(e){
+    this.chosenPage.emit(e.target.innerText);
+    console.log("menu", e.target.innerText)
+  }
 
   ngOnInit() {
   }

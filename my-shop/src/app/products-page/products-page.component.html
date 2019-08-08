@@ -1,1 +1,8 @@
-<p>products-page works!</p>
+<app-category-choice></app-category-choice>
+<div class="product-list">
+    <div *ngFor="let product of products" class="product-list__product">
+        {{product.Title}}
+        <img src='{{product.Image}}' alt='product image'>
+        Price: {{product.Price}}
+    </div>
+</div>

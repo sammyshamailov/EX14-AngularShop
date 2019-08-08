@@ -12,6 +12,7 @@
     margin: 0;
     padding: 0;
     background-color: #b5e1ec;
+    opacity: 0.5;
 }
 
 .menu__item{

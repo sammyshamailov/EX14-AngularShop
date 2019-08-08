@@ -1,7 +1,10 @@
 <app-header (isVisible)="updateVisibility($event)"></app-header>
-<app-menu [isVisible]="isVisible"></app-menu>
-<app-home-page></app-home-page>
-<app-about></app-about>
-<app-products-page></app-products-page>
-<app-contact-page></app-contact-page>
+<app-menu (chosenPage)="showChosenPage($event)" [isVisible]="isVisible"></app-menu>
+<div [ngSwitch]="chosenPage">
+    <app-home-page *ngSwitchCase="'Home'"></app-home-page>
+    <app-about *ngSwitchCase="'About'"></app-about>
+    <app-products-page *ngSwitchCase="'Products'"></app-products-page>
+    <app-contact-page *ngSwitchCase="'Contact'"></app-contact-page>
+</div>
+
 <app-products-details-page></app-products-details-page>
