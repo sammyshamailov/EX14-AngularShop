@@ -5,6 +5,7 @@ import Category from '../../assets/static/category.json';
 export interface IProduct{
   CategoryId: string;
   Image: string;
+  BigImage: string;
   Title: string;
   Price: string;
   Description: string;
@@ -41,8 +42,7 @@ export class ProductsPageComponent implements OnInit {
   }
 
   showDetailsPage(e){
-    console.log(e);
-    this.chosenProduct = this.productsData.find(p => p.Title === e.srcElement.childNodes[0].data)
+    this.chosenProduct = this.productsData.find(p => p.Title === e.srcElement.alt)
     this.deatailsPageShown = !this.deatailsPageShown;
   }
 
