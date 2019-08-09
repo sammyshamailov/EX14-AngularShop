@@ -3,7 +3,7 @@
     flex-direction: column;
     position: fixed;
     z-index: 1000;
-    width: 150px;
+    width: 200px;
     height: 100%;
     left: 9px;
     top: 9px;
@@ -11,8 +11,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #b5e1ec;
-    opacity: 0.5;
+    background-color: #0652b4;
 }
 
 .menu__item{
@@ -29,7 +28,7 @@
 
 .menu__item a{
     text-decoration: none;
-    color: #000;
+    color: #fff;
 }
 
 .hidden{

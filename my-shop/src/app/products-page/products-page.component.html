@@ -1,8 +1,16 @@
-<app-category-choice></app-category-choice>
-<div class="product-list">
-    <div *ngFor="let product of products" class="product-list__product">
+<app-category-choice (chosenCategory)="showChosenCategory($event)"></app-category-choice>
+<button [hidden]="!deatailsPageShown" (click)="showProductsPage()">Back</button>
+<div [class]="deatailsPageShown? 'hidden': 'product-list'">
+    <div *ngFor="let product of productsShown" class="product-list__product" (click)="showDetailsPage($event)">
         {{product.Title}}
         <img src='{{product.Image}}' alt='product image'>
         Price: {{product.Price}}
+    </div>
+</div>
+<div [class]="deatailsPageShown? 'product-list': 'hidden'">
+    <div class="product-list__product">
+        {{chosenProduct.Title}}
+        <img src='{{chosenProduct.Image}}' alt='product image'>
+        {{chosenProduct.Description}}
     </div>
 </div>

@@ -16,6 +16,6 @@ export class AppComponent {
 
   showChosenPage(e:string){
     this.chosenPage = e;
-    console.log("app", e)
+    this.isVisible = !this.isVisible;
   }
 }

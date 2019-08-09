@@ -14,7 +14,6 @@ export class MenuComponent implements OnInit {
 
   menuItemClicked(e){
     this.chosenPage.emit(e.target.innerText);
-    console.log("menu", e.target.innerText)
   }
 
   ngOnInit() {
