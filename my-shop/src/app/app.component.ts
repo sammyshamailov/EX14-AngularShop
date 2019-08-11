@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class AppComponent {
 
   isVisible: boolean = false;
-  chosenPage: string = "Home";
+  chosenPage: string;
 
   updateVisibility(){
     this.isVisible = !this.isVisible;
