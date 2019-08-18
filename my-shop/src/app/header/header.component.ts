@@ -8,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Output() isVisible = new EventEmitter<boolean>();
-  visible: boolean;
+  visible: boolean = false;
   constructor() { }
 
   isMenuVisible() {
@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
   
 
   ngOnInit() {
-    this.visible = false;
   }
 
 }
