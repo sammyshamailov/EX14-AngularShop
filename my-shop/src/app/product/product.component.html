@@ -1,0 +1,11 @@
+<button class = "back-button" (click)="hideDetailsPage()">Back</button>
+<div class="product-list__product-details">
+    <h1>{{chosenProduct.Title}}</h1>
+    <img src='{{chosenProduct.BigImage}}' alt='product image'>
+    <pre>
+        Description: 
+        {{chosenProduct.Description}}
+        Price:
+        {{chosenProduct.Price}}
+    </pre>
+</div>

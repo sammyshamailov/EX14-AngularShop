@@ -1,0 +1,10 @@
+.product-list__product-details{
+    width: 500px;
+    margin: auto;
+    padding: 30px;
+    font-weight: bold;
+}
+
+.back-button{
+    margin: 25px;
+}

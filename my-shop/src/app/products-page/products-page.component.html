@@ -1,0 +1,11 @@
+<span class="header">Buy Our Products</span>
+<div class="category-choice">
+    <app-category-choice (chosenCategory)="showChosenCategory($event)" [categories]="categories"></app-category-choice>
+</div>
+<div class="product-list">
+    <div *ngFor="let product of productsShown" class="product-list__product">
+        {{product.Title}}
+        <img src='{{product.Image}}' alt='{{product.Title}}' (click)="showDetailsPage($event)">
+        Price: {{product.Price}}
+    </div>
+</div>
