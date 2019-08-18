@@ -1,6 +1,3 @@
 <select (change)="showChosenCategory($event)">
-    <option value="All">All</option>
-    <option value="Smart Phones">Smart Phones</option>
-    <option value="Smart Phone Accessories">Smart Phone Accessories</option>
-    <option value="External Hard-Drives">External Hard-Drives</option>
+    <option *ngFor="let category of categories" value="{{ category }}" >{{category}}</option>
 </select>

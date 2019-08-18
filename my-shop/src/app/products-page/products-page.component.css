@@ -19,17 +19,6 @@
     font-weight: bold;
 }
 
-.product-list__product-details{
-    width: 500px;
-    margin: auto;
-    padding: 30px;
-    font-weight: bold;
-}
-
-.hidden{
-    display: none;
-}
-
 .header{
     text-shadow: 5px 3px #175dad;
     color: #042b50;

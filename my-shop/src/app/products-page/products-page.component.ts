@@ -1,20 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import Product from '../../assets/static/product.json';
 import Category from '../../assets/static/category.json';
+import { IProduct, IProductCategory } from '../../assets/models/index';
 
-export interface IProduct{
-  CategoryId: string;
-  Image: string;
-  BigImage: string;
-  Title: string;
-  Price: string;
-  Description: string;
-}
-
-export interface IProductCategory{
-  id: string;
-  Title: string;
-}
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
@@ -22,11 +10,11 @@ export interface IProductCategory{
 })
 export class ProductsPageComponent implements OnInit {
 
-  productsData: IProduct[] = Product;
-  productsShown: IProduct[] = Product;
-  categoryData: IProductCategory[] = Category;
-  deatailsPageShown: boolean = false;
-  chosenProduct: IProduct = Product[0];
+  productsData: IProduct[];
+  categoryData: IProductCategory[];
+  productsShown: IProduct[];
+  categories: string[] = ["All", "Smart Phones", "Smart Phone Accessories", "External Hard-Drives"];
+  @Output() chosenProduct = new EventEmitter<IProduct>();
 
   constructor() { }
 
@@ -42,15 +30,13 @@ export class ProductsPageComponent implements OnInit {
   }
 
   showDetailsPage(e){
-    this.chosenProduct = this.productsData.find(p => p.Title === e.srcElement.alt)
-    this.deatailsPageShown = !this.deatailsPageShown;
-  }
-
-  showProductsPage(){
-    this.deatailsPageShown = !this.deatailsPageShown;
+    this.chosenProduct.emit(this.productsData.find(p => p.Title === e.srcElement.alt));
   }
 
   ngOnInit() {
+    this.productsData = Product;
+    this.categoryData = Category;
+    this.productsShown = Product;
   }
 
 }

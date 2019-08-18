@@ -8,7 +8,6 @@
     left: 9px;
     top: 9px;
     border: 1px solid #000;
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
     background-color: #0652b4;
@@ -18,6 +17,9 @@
     text-align: center;
     width: 100%;
     height: 40px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     font-size: x-large;
     transition: opacity 0.5s ease-in;
 }

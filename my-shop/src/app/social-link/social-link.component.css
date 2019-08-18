@@ -1,0 +1,14 @@
+.social-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.social-links__social-link{
+    margin-left: 10px;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+}
