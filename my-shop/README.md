@@ -1,5 +1,5 @@
 # MyShop
-First Exercise with components, inputs, outputs
+Second Exercise with hooks, animations, projection
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
