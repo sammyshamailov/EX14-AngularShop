@@ -12,4 +12,4 @@ export interface IProduct{
     Title: string;
   }
 
-  export enum MenuItems {Home = 'Home', About = 'About', Products = 'Products', Contact = 'Contact'}
+  export enum MenuItems {Home = 'Home', Cart = 'Cart', About = 'About', Products = 'Products', Contact = 'Contact'}

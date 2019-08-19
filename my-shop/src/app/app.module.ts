@@ -12,6 +12,7 @@ import { ContactPageComponent } from './components/contact-page/contact-page.com
 import { CategoryChoiceComponent } from './components/category-choice/category-choice.component';
 import { SocialLinkComponent } from './components/social-link/social-link.component';
 import { ProductComponent } from './components/product/product.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductComponent } from './components/product/product.component';
     ContactPageComponent,
     CategoryChoiceComponent,
     SocialLinkComponent,
-    ProductComponent
+    ProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

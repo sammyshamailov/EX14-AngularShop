@@ -1,24 +1,25 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import Product from '../../../assets/static/product.json';
-import Category from '../../../assets/static/category.json';
 import { IProduct, IProductCategory } from '../../../assets/models/index';
+import { DataService } from 'src/app/services/data.service.js';
 
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
-  styleUrls: ['./products-page.component.css']
+  styleUrls: ['./products-page.component.css'],
+  providers: [DataService]
 })
 export class ProductsPageComponent implements OnInit {
 
-  productsData: IProduct[];
-  categoryData: IProductCategory[];
   productsShown: IProduct[];
-  categories: string[] = ["All", "Smart Phones", "Smart Phone Accessories", "External Hard-Drives", "Laptops"];
   @Output() chosenProduct = new EventEmitter<IProduct>();
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
-  showChosenCategory(name){
+  get productsData(): IProduct[] {return this.dataService.getProducts()};
+  get categoryData(): IProductCategory[] {return this.dataService.getCategories()};
+  get categories(): string[] {return this.dataService.getCategoriesName()};
+
+  showChosenCategory(name: string){
     this.productsShown = [];
     if(name !== "All"){
       let categoryId: string = this.categoryData.find(p => p.Title === name).id;
@@ -34,9 +35,7 @@ export class ProductsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productsData = Product;
-    this.categoryData = Category;
-    this.productsShown = Product;
+    this.productsShown = this.productsData;
   }
 
 }

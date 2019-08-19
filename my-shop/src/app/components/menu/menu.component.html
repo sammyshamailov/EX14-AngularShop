@@ -1,6 +1,7 @@
 <ul [class]="isVisible? 'menu' : 'hidden'" [@slide] (click)="menuItemClicked($event)" >
-    <li class="menu__item"><a href="#">{{ menuItems.Home }}</a></li>
+    <!-- <li class="menu__item"><a href="#">{{ menuItems.Home }}</a></li>
     <li class="menu__item"><a href="#">{{ menuItems.About }}</a></li>
     <li class="menu__item"><a href="#">{{ menuItems.Products }}</a></li>
-    <li class="menu__item"><a href="#">{{ menuItems.Contact }}</a></li>
+    <li class="menu__item"><a href="#">{{ menuItems.Contact }}</a></li> -->
+    <li class="menu__item" *ngFor="let item of menuItems"><a href="#">{{ item }}</a></li>
 </ul>

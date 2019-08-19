@@ -20,8 +20,9 @@ export class MenuComponent implements OnInit {
 
   @Input() isVisible: boolean;
   @Output() chosenPage = new EventEmitter<string>();
-  menuItems = MenuItems;
+  // menuItems = MenuItems;
   get status (): string { return this.isVisible ? ' active': ' inactive'};
+  get menuItems(): string[] {return Object.values(MenuItems)};
 
   constructor() { }
 

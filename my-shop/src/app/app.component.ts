@@ -28,6 +28,8 @@ export class AppComponent implements OnInit {
   showChosenPage(e:string){
     this.chosenPage = e;
     this.isVisible = !this.isVisible;
+    if(this.deatailsPageShown)
+      this.deatailsPageShown = !this.deatailsPageShown;
   }
 
   showDetailsPage(product: IProduct){
