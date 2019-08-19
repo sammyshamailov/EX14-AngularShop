@@ -23,9 +23,8 @@ export class DataService {
     let categories: IProductCategory[] = this.getCategories();
     categoriesName.push("All");
     for (let i = 0; i < categories.length; i++){
-      let category = categories[i];
-      if(!categoriesName.find(p => p === category.Title)){
-        categoriesName.push(category.Title);
+      if(!categoriesName.find(p => p === categories[i].Title)){
+        categoriesName.push(categories[i].Title);
       }
     }
     return categoriesName;
