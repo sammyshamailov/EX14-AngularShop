@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import Product from '../../assets/static/product.json';
 import Category from '../../assets/static/category.json';
-import { IProduct, IProductCategory } from '../../assets/models/index';
+import { IProduct, IProductCategory } from '../../../assets/models/index';
 
 @Component({
   selector: 'app-products-page',
