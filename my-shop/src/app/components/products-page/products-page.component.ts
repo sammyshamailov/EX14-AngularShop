@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import Product from '../../assets/static/product.json';
-import Category from '../../assets/static/category.json';
+import Product from '../../../assets/static/product.json';
+import Category from '../../../assets/static/category.json';
 import { IProduct, IProductCategory } from '../../../assets/models/index';
 
 @Component({
@@ -13,7 +13,7 @@ export class ProductsPageComponent implements OnInit {
   productsData: IProduct[];
   categoryData: IProductCategory[];
   productsShown: IProduct[];
-  categories: string[] = ["All", "Smart Phones", "Smart Phone Accessories", "External Hard-Drives"];
+  categories: string[] = ["All", "Smart Phones", "Smart Phone Accessories", "External Hard-Drives", "Laptops"];
   @Output() chosenProduct = new EventEmitter<IProduct>();
 
   constructor() { }

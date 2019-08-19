@@ -1,8 +1,17 @@
 .product-list__product-details{
-    width: 500px;
     margin: auto;
     padding: 30px;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 500px;
+    flex-wrap: wrap;
+    font-weight: bold;
+    text-align: center;
+}
+
+.details-paragraph{
+    font-size: x-large;
 }
 
 .back-button{
