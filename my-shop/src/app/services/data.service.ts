@@ -21,7 +21,6 @@ export class DataService {
   getCategoriesName(): string[]{
     let categoriesName: string[] = [];
     let categories: IProductCategory[] = this.getCategories();
-    console.log("entered");
     categoriesName.push("All");
     for (let i = 0; i < categories.length; i++){
       let category = categories[i];

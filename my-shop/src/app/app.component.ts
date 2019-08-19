@@ -1,33 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations'
-import { IProduct } from '../assets/models/index';
-import Product from '../assets/static/product.json';
-import { MenuItems } from '../assets/models/index';
+import { trigger, state, style, transition, animate } from '@angular/animations'
+import { IProduct, MenuItems } from '../assets/models/index';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [trigger("fade", [
+  providers: [DataService],
+  animations: [
+    trigger("fade", [
     state("void", style({ opacity: 0 })),
     transition("void => *", [animate("0.5s ease-in-out")])
-    ])]
+    ]),
+    trigger('slideInOut', [
+      state('in', style({
+        transform: 'translate3d(0, 0, 0)'
+      })),
+      state('out', style({
+        transform: 'translate3d(-100%, 0, 0)'
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
 
-  isVisible: boolean = false;;
   chosenPage: string;
   deatailsPageShown: boolean = false;
   chosenProduct: IProduct;
-  menuItems = MenuItems;;
+  menuItems = MenuItems;
+  menuState: string = 'out';
+
+  constructor(private dataService: DataService) { }
 
   updateVisibility(){
-    this.isVisible = !this.isVisible;
+    this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
   showChosenPage(e:string){
     this.chosenPage = e;
-    this.isVisible = !this.isVisible;
+    this.menuState = this.menuState === 'out' ? 'in' : 'out';
     if(this.deatailsPageShown)
       this.deatailsPageShown = !this.deatailsPageShown;
   }
@@ -42,6 +56,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.chosenProduct = (Product as IProduct[])[0];
+    this.chosenProduct = this.dataService.getProducts()[0];
   }
 }

@@ -1,7 +1,8 @@
 <app-header (isVisible)="updateVisibility($event)"></app-header>
-<app-menu (chosenPage)="showChosenPage($event)" [isVisible]="isVisible"></app-menu>
+<app-menu (chosenPage)="showChosenPage($event)" [@slideInOut]='menuState'></app-menu>
 <div [ngSwitch]="chosenPage" >
     <app-home-page [@fade] *ngSwitchCase="menuItems.Home"></app-home-page>
+    <app-cart [@fade] *ngSwitchCase="menuItems.Cart"></app-cart>
     <app-about [@fade] *ngSwitchCase="menuItems.About"></app-about>
     <app-products-page [@fade] *ngSwitchCase="menuItems.Products" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-products-page>
     <app-contact-page [@fade] *ngSwitchCase="menuItems.Contact"></app-contact-page>

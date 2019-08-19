@@ -6,22 +6,11 @@ import { MenuItems } from '../../../assets/models/index';
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
-  animations: [
-    trigger('slide', [
-      state('out', style({ width: '*' })),
-      transition('* => void', [
-        style({width: '*'}),
-        animate(1000, style({width: 0}))
-      ])
-    ])
-  ]
+  animations: []
 })
 export class MenuComponent implements OnInit {
 
-  @Input() isVisible: boolean;
   @Output() chosenPage = new EventEmitter<string>();
-  // menuItems = MenuItems;
-  get status (): string { return this.isVisible ? ' active': ' inactive'};
   get menuItems(): string[] {return Object.values(MenuItems)};
 
   constructor() { }
