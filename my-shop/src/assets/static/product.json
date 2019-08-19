@@ -4,63 +4,63 @@
             "Image": "https://img.ksp.co.il/allimg/lrg53327.jpg",
             "BigImage": "https://img.ksp.co.il/item/53327/b_2.jpg",
             "Title": " Iphone XS-Max ",
-            "Price": "1300$",
-            "Description": "IOS, 256GB ROM, Super Amoled 6.5Inch Screen, Double 12MP Rear Camera, 7MP Front Camera"
+            "Price": "1300",
+            "Description": "IOS\n256GB ROM\nSuper Amoled 6.5Inch Screen\nDouble 12MP Rear Camera\n7MP Front Camera"
         },
         {
             "CategoryId": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg66473.jpg",
             "BigImage": "https://img.ksp.co.il/item/66473/b_1.jpg",
             "Title": " Xiaomi Mi 9T ",
-            "Price": "400$",
-            "Description": "Android 9, 128GB ROM, Amoled 6.39Inch Screen, 48+8+13MP Rear Camera, 20MP Front Camera"
+            "Price": "400",
+            "Description": "Android 9\n128GB ROM\nAmoled 6.39Inch Screen\n48+8+13MP Rear Camera\n20MP Front Camera"
         },
         {
             "CategoryId": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg63312.jpg",
             "BigImage": "https://img.ksp.co.il/item/62018/b_2.jpg",
             "Title": " Xiaomi Mi 9 ",
-            "Price": "450$$",
-            "Description": "Android 9, 128GB ROM, Super Amoled 6.39Inch Screen, 48+16+12MP Rear Camera, 20MP Front Camera"
+            "Price": "450",
+            "Description": "Android 9\n128GB ROM\nSuper Amoled 6.39Inch Screen\n48+16+12MP Rear Camera\n20MP Front Camera"
         },
         {
             "CategoryId": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg63157.jpg",
             "BigImage": "https://img.ksp.co.il/item/63157/b_3.jpg",
             "Title": " Samsung A70 ",
-            "Price": "450$",
-            "Description": "Android 9, 128GB ROM, Super Amoled 6.7Inch Screen, 32+8+5MP Rear Camera, 32MP Front Camera"
+            "Price": "450",
+            "Description": "Android 9\n128GB ROM\nSuper Amoled 6.7Inch Screen\n32+8+5MP Rear Camera\n32MP Front Camera"
         },
         {
             "CategoryId": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg52948.jpg",
             "BigImage": "https://img.ksp.co.il/item/52948/b_1.jpg",
             "Title": " Samsung Note 9 ",
-            "Price": "1000$",
-            "Description": "Android 9, 128GB ROM, Super Amoled 6.4Inch Screen, Double 12MP Rear Camera, 8MP Front Camera"
+            "Price": "1000",
+            "Description": "Android 9\n128GB ROM\nSuper Amoled 6.4Inch Screen\nDouble 12MP Rear Camera\n8MP Front Camera"
         },
         {
             "CategoryId": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg67458.jpg",
             "BigImage": "https://img.ksp.co.il/item/67458/b_11.jpg",
             "Title": " Huawei Y9 Prime ",
-            "Price": "300$",
-            "Description": "Android 9, 128GB ROM, LTPS IPS LCD 6.59Inch Screen, 16+8+2MP Rear Camera, 16MP Front Camera"
+            "Price": "300",
+            "Description": "Android 9\n128GB ROM\nLTPS IPS LCD 6.59Inch Screen\n16+8+2MP Rear Camera\n16MP Front Camera"
         },
         {
             "CategoryId": "5fbabefa-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg60062.jpg",
             "BigImage": "https://img.ksp.co.il/item/60062/b_1.jpg",
             "Title": " Xiaomi Redmi Note 7 ",
-            "Price": "300$",
-            "Description": "Android 9, 64GB ROM, Amoled 6.4Inch Screen, 48+12+8MP Rear Camera, 13MP Front Camera"
+            "Price": "300",
+            "Description": "Android 9\n64GB ROM\nAmoled 6.4Inch Screen\n48+12+8MP Rear Camera\n13MP Front Camera"
         },
         {
             "CategoryId": "5fbac166-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg53538.jpg",
             "BigImage": "https://img.ksp.co.il/item/53538/b_1.jpg",
             "Title": " Iphone XS-Max Case ",
-            "Price": "10$",
+            "Price": "10",
             "Description": "Transperent TPU Case"
         },
         {
@@ -68,7 +68,7 @@
             "Image": "https://img.ksp.co.il/allimg/lrg53554.jpg",
             "BigImage": "https://img.ksp.co.il/item/53554/b_1.jpg",
             "Title": " Iphone XS-Max Screen Protector ",
-            "Price": "10$",
+            "Price": "10",
             "Description": "Front Glass Screen Protector"
         },
         {
@@ -76,7 +76,7 @@
             "Image": "https://img.ksp.co.il/allimg/lrg65774.jpg",
             "BigImage": "https://img.ksp.co.il/item/65774/b_1.jpg",
             "Title": " Xiaomi Mi 9T Case ",
-            "Price": "10$",
+            "Price": "10",
             "Description": "Transperent TPU Case"
         },
         {
@@ -84,7 +84,7 @@
             "Image": "https://img.ksp.co.il/allimg/lrg65775.jpg",
             "BigImage": "https://img.ksp.co.il/item/65775/b_2.jpg",
             "Title": " Xiaomi Mi 9T Screen Protector ",
-            "Price": "10$",
+            "Price": "10",
             "Description": "Front Glass Screen Protector"
         },
         {
@@ -92,16 +92,24 @@
             "Image": "https://img.ksp.co.il/allimg/lrg47463.jpg",
             "BigImage": "https://img.ksp.co.il/item/47463/b_1.jpg",
             "Title": " Transcend Slim StoreJet ",
-            "Price": "90$",
-            "Description": "500GB, 2.5Inch, HDD, USB3.0"
+            "Price": "90",
+            "Description": "500GB\n2.5Inch\nHDD\nUSB3.0"
         },
         {
             "CategoryId": "5fbac2ba-ba1d-11e9-a2a3-2a2ae2dbcce4",
             "Image": "https://img.ksp.co.il/allimg/lrg54202.jpg",
             "BigImage": "https://img.ksp.co.il/item/54202/b_7.jpg",
             "Title": " Pioneer APS-XS02 ",
-            "Price": "100$",
-            "Description": "240GB, 2.5Inch, SSD, USB Type-C"
+            "Price": "100",
+            "Description": "240GB\n2.5Inch\nSSD\nUSB Type-C"
+        },
+        {
+            "CategoryId": "5fbac2ff-ba1d-11e9-a2a3-2a2ae2dbcce4",
+            "Image": "https://img.ksp.co.il/allimg/lrg57221.jpg",
+            "BigImage": "https://img.ksp.co.il/item/57221/b_6.jpg",
+            "Title": " Lenovo IdeaPad 330-15IKBR ",
+            "Price": "1000",
+            "Description": "i7-8550U Quad Core\n15.6Inch\n512GB SSD\n8GB DDR4 RAM\nNo Windows Installed"
         }
         
 ]
