@@ -7,7 +7,7 @@ import { CartService, IProductState } from 'src/app/services/cart.service';
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css'],
-  providers: [DataService, CartService]
+  providers: []
 })
 export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
@@ -35,13 +35,9 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
     this.chosenProduct.emit(this.productsData.find(p => p.Title === e.srcElement.alt));
   }
 
-  getProductStatus(title: string): boolean {
-    return this.cartService.getProductState(title);
-  }
-
   changeProductState(event){
     let button: ElementRef =  this.buttons.find(button => button.nativeElement.value === event.target.value);
-    let status: boolean = this.getProductStatus(button.nativeElement.value);
+    let status: boolean = this.cartService.getProductState(button.nativeElement.value);
     if(status){
       this.cartService.removeFromCart(button.nativeElement.value);
       button.nativeElement.innerHTML = 'add';

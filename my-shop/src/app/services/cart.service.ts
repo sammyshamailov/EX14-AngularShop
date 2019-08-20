@@ -13,10 +13,24 @@ export interface IProductState {
 export class CartService {
 
   private productsState: IProductState[] = [];
-  get productsStates(): IProductState[] {return this.productsState};
 
   constructor(private dataService: DataService) 
   {
+    console.log("entered constructor");
+    let products: IProduct[] = this.dataService.getProducts();
+    for(let i = 0; i < products.length; i++){
+      this.productsState.push({
+        Title: products[i].Title, 
+        inCart: false
+      });
+    }
+  }
+
+  getProductsState(): IProductState[]{
+    return this.productsState;
+  }
+
+  init(){
     let products: IProduct[] = this.dataService.getProducts();
     for(let i = 0; i < products.length; i++){
       this.productsState.push({
