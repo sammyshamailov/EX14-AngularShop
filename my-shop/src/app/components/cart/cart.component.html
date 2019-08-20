@@ -1,1 +1,11 @@
-<p>cart works!</p>
+<span class="header">Your Cart</span>
+<div class="product-list">
+    <div *ngFor="let product of cartProducts" class="product-list__product">
+        <button #btn value='{{ product.Title }}' (click)='removeFromCart($event.target.value)'>Remove</button>
+        <span>{{product.Title}}</span>
+        <div class="product-list__product-image">
+            <img src='{{product.Image}}' alt='{{product.Title}}' (click)="showDetailsPage($event.srcElement.alt)">
+        </div>
+        <span>Price: {{product.Price}}$</span>
+    </div>
+</div>

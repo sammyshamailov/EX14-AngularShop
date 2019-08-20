@@ -4,10 +4,10 @@
 </div>
 <div class="product-list">
     <div *ngFor="let product of productsShown" class="product-list__product">
-        <button #btn value='{{ product.Title }}' (click)='changeProductState($event)'></button>
+        <button #btn value='{{ product.Title }}' (click)='changeProductState($event.target.value)'></button>
         <span>{{product.Title}}</span>
         <div class="product-list__product-image">
-            <img src='{{product.Image}}' alt='{{product.Title}}' (click)="showDetailsPage($event)">
+            <img src='{{product.Image}}' alt='{{product.Title}}' (click)="showDetailsPage($event.srcElement.alt)">
         </div>
         <span>Price: {{product.Price}}$</span>
     </div>

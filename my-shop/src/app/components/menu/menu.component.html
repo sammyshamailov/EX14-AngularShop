@@ -1,3 +1,6 @@
-<ul (click)="menuItemClicked($event)">
-    <li *ngFor="let item of menuItems" class="menu__item"><a href="#">{{ item }}</a></li>
+<ul (click)="menuItemClicked($event.target.innerText)">
+    <li *ngFor="let item of menuItems" class="menu__item">
+        <a *ngIf=" item !== 'Cart'; else cart" href="#">{{ item }}</a>
+        <ng-template #cart><a href="#">{{ item }} ({{ cartAmount }})</a></ng-template>
+    </li>
 </ul>

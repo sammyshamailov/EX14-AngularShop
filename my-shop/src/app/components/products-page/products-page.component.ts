@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { IProduct, IProductCategory } from '../../../assets/models/index';
 import { DataService } from 'src/app/services/data.service.js';
-import { CartService, IProductState } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-products-page',
@@ -31,20 +31,20 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
     }
   }
 
-  showDetailsPage(e){
-    this.chosenProduct.emit(this.productsData.find(p => p.Title === e.srcElement.alt));
+  showDetailsPage(productTitle: String){
+    this.chosenProduct.emit(this.productsData.find(p => p.Title === productTitle));
   }
 
-  changeProductState(event){
-    let button: ElementRef =  this.buttons.find(button => button.nativeElement.value === event.target.value);
+  changeProductState(productTitle: String){
+    let button: ElementRef =  this.buttons.find(button => button.nativeElement.value === productTitle);
     let status: boolean = this.cartService.getProductState(button.nativeElement.value);
     if(status){
       this.cartService.removeFromCart(button.nativeElement.value);
-      button.nativeElement.innerHTML = 'add';
+      button.nativeElement.innerHTML = 'Add';
     }
     else{
       this.cartService.addToCart(button.nativeElement.value);
-      button.nativeElement.innerHTML = 'remove';
+      button.nativeElement.innerHTML = 'Remove';
     }
   }
 
@@ -53,11 +53,11 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   ngAfterViewInit(){
-    this.buttons.forEach(button => button.nativeElement.innerHTML = this.cartService.getProductState(button.nativeElement.value)? 'remove': 'add');
+    this.buttons.forEach(button => button.nativeElement.innerHTML = this.cartService.getProductState(button.nativeElement.value)? 'Remove': 'Add');
   }
 
   ngAfterViewChecked() {
-    this.buttons.forEach(button => button.nativeElement.innerHTML = this.cartService.getProductState(button.nativeElement.value)? 'remove': 'add');
+    this.buttons.forEach(button => button.nativeElement.innerHTML = this.cartService.getProductState(button.nativeElement.value)? 'Remove': 'Add');
   }
 
 }

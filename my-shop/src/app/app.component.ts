@@ -28,7 +28,7 @@ import { CartService } from './services/cart.service';
 })
 export class AppComponent implements OnInit {
 
-  chosenPage: string;
+  chosenPage: String;
   deatailsPageShown: boolean = false;
   chosenProduct: IProduct;
   menuItems = MenuItems;
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
-  showChosenPage(e:string){
+  showChosenPage(e:String){
     this.chosenPage = e;
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
     if(this.deatailsPageShown)
