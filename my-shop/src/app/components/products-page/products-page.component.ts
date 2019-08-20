@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, ElementRef, AfterViewInit, AfterViewChecked, Renderer2 } from '@angular/core';
 import { IProduct, IProductCategory } from '../../../assets/models/index';
 import { DataService } from 'src/app/services/data.service.js';
 import { CartService } from 'src/app/services/cart.service';
@@ -18,7 +18,7 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
   get categoryData(): IProductCategory[] {return this.dataService.getCategories()};
   get categories(): string[] {return this.dataService.getCategoriesName()};
 
-  constructor(private dataService: DataService, private cartService: CartService) { }
+  constructor(private dataService: DataService, private cartService: CartService, private renderer: Renderer2) { }
 
   showChosenCategory(name: string){
     this.productsShown = [];
@@ -40,11 +40,11 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
     let status: boolean = this.cartService.getProductState(button.nativeElement.value);
     if(status){
       this.cartService.removeFromCart(button.nativeElement.value);
-      button.nativeElement.innerHTML = 'Add';
+      button.nativeElement.style.backgroundImage = "url('../../../assets/icons/buy.svg')";
     }
     else{
       this.cartService.addToCart(button.nativeElement.value);
-      button.nativeElement.innerHTML = 'Remove';
+      button.nativeElement.style.backgroundImage = "url('../../../assets/icons/remove.svg')";
     }
   }
 
@@ -53,11 +53,15 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   ngAfterViewInit(){
-    this.buttons.forEach(button => button.nativeElement.innerHTML = this.cartService.getProductState(button.nativeElement.value)? 'Remove': 'Add');
+    this.buttons.forEach(button => this.cartService.getProductState(button.nativeElement.value) 
+    ? this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/remove.svg')")
+    : this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/buy.svg')"));
   }
 
   ngAfterViewChecked() {
-    this.buttons.forEach(button => button.nativeElement.innerHTML = this.cartService.getProductState(button.nativeElement.value)? 'Remove': 'Add');
+    this.buttons.forEach(button => this.cartService.getProductState(button.nativeElement.value) 
+    ? this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/remove.svg')")
+    : this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/buy.svg')"));
   }
 
 }

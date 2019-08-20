@@ -16,4 +16,15 @@
 
 .back-button{
     margin: 25px;
+    width: 50px;
+    height: 50px;
+    background-image: url('../../../assets/icons/back.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.product-list__product_button{
+    
+    margin: 5px;
 }
