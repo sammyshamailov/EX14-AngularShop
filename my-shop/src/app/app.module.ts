@@ -13,6 +13,7 @@ import { CategoryChoiceComponent } from './components/category-choice/category-c
 import { SocialLinkComponent } from './components/social-link/social-link.component';
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CartComponent } from './components/cart/cart.component';
     CategoryChoiceComponent,
     SocialLinkComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
