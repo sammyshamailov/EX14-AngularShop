@@ -7,8 +7,6 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class CartService {
-
-  // private productsInCart: IProduct[] = [];
   private carts: IProduct[][] = [];
   private currentUserCart: IProduct[] = [];
   set currentCart(cartPlace: number){

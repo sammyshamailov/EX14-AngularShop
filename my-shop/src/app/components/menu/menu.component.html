@@ -1,6 +1,10 @@
 <ul (click)="menuItemClicked($event.target.innerText)">
-    <li *ngFor="let item of menuItems" class="menu__item">
-        <a *ngIf=" item !== 'Cart'; else cart" href="#">{{ item }}</a>
-        <ng-template #cart><a href="#">{{ item }} ({{ cartAmount }})</a></ng-template>
-    </li>
+    <li class="menu__item"><a href="#">{{ menuItems.Home }}</a></li>
+    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.Cart }} ({{ cartAmount }})</a></li>
+    <li class="menu__item"><a href="#">{{ menuItems.Products }}</a></li>
+    <li class="menu__item" [hidden]="isLogged"><a href="#">{{ menuItems.LogIn }}</a></li>
+    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.LogOut }}</a></li>
+    <li class="menu__item" [hidden]="!isAdmin"><a href="#">{{ menuItems.Admin }}</a></li>
+    <li class="menu__item"><a href="#">{{ menuItems.About }}</a></li>
+    <li class="menu__item"><a href="#">{{ menuItems.Contact }}</a></li>
 </ul>

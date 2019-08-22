@@ -18,15 +18,16 @@ export class UserService {
   private currentUser: User;
   get numOfUsers(): number {return Users.length};
   get isLoggedIn(): boolean {return this.isLogged};
-  get isAdmin(): boolean {return this.currentUser.isAdmin};
+  get isAdmin(): boolean {return this.currentUser? this.currentUser.isAdmin: false;};
+  get cartPlace(): number {return this.currentUser.cartPlace};
 
-  constructor(private cartService: CartService) {}
+  constructor() {}
 
   logIn(username: string, password: string): boolean {
     this.currentUser = this.users.find(p => p.Username === username && p.Password === password);
     if(this.currentUser){
       this.isLogged = true;
-      this.cartService.currentCart = this.currentUser.cartPlace;
+      // this.cartService.currentCart = this.currentUser.cartPlace;
       return true;
     }
     return false;

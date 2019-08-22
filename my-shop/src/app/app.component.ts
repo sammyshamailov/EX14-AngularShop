@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { IProduct, MenuItems } from '../assets/models/index';
 import { DataService } from './services/data.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -32,15 +33,25 @@ export class AppComponent implements OnInit {
   menuItems = MenuItems;
   menuState: string = 'out';
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private userService: UserService) { }
 
   updateVisibility(){
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
-  showChosenPage(e:String){
-    this.chosenPage = e;
-    this.menuState = this.menuState === 'out' ? 'in' : 'out';
+  showChosenPage(chosenPage:String){
+    if(chosenPage === this.menuItems.LogOut){
+      this.userService.logOut();
+      this.chosenPage = this.menuItems.Home;
+      this.menuState = this.menuState === 'out' ? 'in' : 'out';
+    }
+    else if(chosenPage === "goHome"){
+      this.chosenPage = this.menuItems.Home;
+    }
+    else{
+      this.chosenPage = chosenPage;
+      this.menuState = this.menuState === 'out' ? 'in' : 'out';
+    }
     if(this.deatailsPageShown)
       this.deatailsPageShown = !this.deatailsPageShown;
   }

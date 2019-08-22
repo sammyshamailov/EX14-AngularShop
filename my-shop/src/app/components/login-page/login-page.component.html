@@ -1,1 +1,6 @@
-<p>login-page works!</p>
+<span class="header">Log In</span>
+<form #contactForm="ngForm" class="login-form" (ngSubmit)="logIn(); contactForm.reset();">
+    Username: <input name="Username" type="text" placeholder="your username" [(ngModel)]="username" required/>
+    Password: <input name="Password" type="password" placeholder="your password" [(ngModel)]="password" required />
+    <button type="button" (click)="logIn()" [disabled]="!contactForm.form.valid">LogIn</button>
+</form>
