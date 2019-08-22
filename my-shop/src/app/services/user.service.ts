@@ -5,6 +5,7 @@ interface User{
   Username: string;
   Password: string;
   isAdmin: boolean;
+  cartPlace: number;
 }
 
 @Injectable({
