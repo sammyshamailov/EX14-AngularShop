@@ -26,8 +26,8 @@ export class UserService {
   logIn(username: string, password: string): boolean {
     this.currentUser = this.users.find(p => p.Username === username && p.Password === password);
     if(this.currentUser){
+      console.log(this.cartPlace);
       this.isLogged = true;
-      // this.cartService.currentCart = this.currentUser.cartPlace;
       return true;
     }
     return false;
