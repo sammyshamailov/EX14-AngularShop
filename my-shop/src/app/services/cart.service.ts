@@ -36,6 +36,6 @@ export class CartService {
   }
 
   removeFromCart(title: string) {
-    this.currentUserCart.splice(this.productsInCart.findIndex(p => p.Title === title), 1);
+    this.currentUserCart.splice(this.currentUserCart.findIndex(p => p.Title === title), 1);
   }
 }

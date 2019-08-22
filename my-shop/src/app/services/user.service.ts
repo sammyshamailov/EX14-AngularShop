@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import Users from '../../assets/static/user.json'
+import { CartService } from './cart.service.js';
 
 interface User{
   Username: string;
@@ -19,14 +20,20 @@ export class UserService {
   get isLoggedIn(): boolean {return this.isLogged};
   get isAdmin(): boolean {return this.currentUser.isAdmin};
 
-  constructor() { }
+  constructor(private cartService: CartService) {}
 
   logIn(username: string, password: string): boolean {
     this.currentUser = this.users.find(p => p.Username === username && p.Password === password);
     if(this.currentUser){
       this.isLogged = true;
+      this.cartService.currentCart = this.currentUser.cartPlace;
       return true;
     }
     return false;
+  }
+
+  logOut(): void {
+    this.isLogged = false;
+    this.currentUser = null;
   }
 }
