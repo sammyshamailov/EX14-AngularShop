@@ -3,7 +3,7 @@
 <div [ngSwitch]="chosenPage" >
     <app-home-page [@fade] *ngSwitchCase="menuItems.Home"></app-home-page>
     <app-cart [@fade] *ngSwitchCase="menuItems.Cart" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-cart>
-    <app-about [@fade] *ngSwitchCase="menuItems.About"></app-about>
+    <app-about-page [@fade] *ngSwitchCase="menuItems.About"></app-about-page>
     <app-products-page [@fade] *ngSwitchCase="menuItems.Products" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-products-page>
     <app-contact-page [@fade] *ngSwitchCase="menuItems.Contact"></app-contact-page>
     <app-home-page [@fade] *ngSwitchDefault></app-home-page>

@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { IProduct, MenuItems } from '../assets/models/index';
 import { DataService } from './services/data.service';
-import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [DataService, CartService],
   animations: [
     trigger("fade", [
     state("void", style({ opacity: 0 })),

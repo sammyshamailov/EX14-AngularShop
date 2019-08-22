@@ -42,7 +42,7 @@
     border-radius: 50%;
     transition: width 0.3s;
     background-color: transparent;
-    margin: 5px;
+    margin: auto;
 }
 
 .product-list__product_button:hover{
