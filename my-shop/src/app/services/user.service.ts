@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Users from '../../assets/static/user.json';
+import Users from '../../assets/static/user.json'
 
 interface User{
   Username: string;

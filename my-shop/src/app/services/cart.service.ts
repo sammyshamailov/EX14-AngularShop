@@ -8,9 +8,12 @@ import { UserService } from './user.service';
 })
 export class CartService {
 
-  private productsInCart: IProduct[] = [];
+  // private productsInCart: IProduct[] = [];
   private carts: IProduct[][] = [];
-  private currentCart: IProduct[] = [];
+  private currentUserCart: IProduct[] = [];
+  set currentCart(cartPlace: number){
+    this.currentUserCart = this.carts[cartPlace];
+  }
 
   constructor(
     private dataService: DataService,
@@ -21,18 +24,18 @@ export class CartService {
   }
 
   getProducts(): IProduct[] {
-    return this.productsInCart;
+    return this.currentUserCart;
   }
 
   getProductState(title: string): boolean {
-    return this.productsInCart.find(p => p.Title === title) ? true : false;
+    return this.currentUserCart.find(p => p.Title === title) ? true : false;
   }
 
   addToCart(title: string) {
-    this.productsInCart.push(this.dataService.getProducts().find(p => p.Title === title));
+    this.currentUserCart.push(this.dataService.getProducts().find(p => p.Title === title));
   }
 
   removeFromCart(title: string) {
-    this.productsInCart.splice(this.productsInCart.findIndex(p => p.Title === title), 1);
+    this.currentUserCart.splice(this.productsInCart.findIndex(p => p.Title === title), 1);
   }
 }
