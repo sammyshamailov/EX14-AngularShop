@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import Users from '../../assets/static/user.json'
-import { CartService } from './cart.service.js';
 
 interface User{
   Username: string;

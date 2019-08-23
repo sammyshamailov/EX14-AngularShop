@@ -1,12 +1,12 @@
 <app-header (isVisible)="updateVisibility($event)"></app-header>
 <app-menu (chosenPage)="showChosenPage($event)" [@slideInOut]='menuState'></app-menu>
-<div [ngSwitch]="chosenPage" >
-    <app-home-page [@fade] *ngSwitchCase="menuItems.Home"></app-home-page>
-    <app-cart [@fade] *ngSwitchCase="menuItems.Cart" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-cart>
-    <app-about-page [@fade] *ngSwitchCase="menuItems.About"></app-about-page>
-    <app-products-page [@fade] *ngSwitchCase="menuItems.Products" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-products-page>
-    <app-contact-page [@fade] *ngSwitchCase="menuItems.Contact"></app-contact-page>
-    <app-login-page (backToHome)="showChosenPage($event)" [@fade] *ngSwitchCase="menuItems.LogIn"></app-login-page>
-    <app-home-page [@fade] *ngSwitchDefault></app-home-page>
+<div [ngSwitch]="chosenPage" [@fade]="chosenPage" >
+    <app-home-page *ngSwitchCase="menuItems.Home"></app-home-page>
+    <app-cart *ngSwitchCase="menuItems.Cart" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-cart>
+    <app-about-page *ngSwitchCase="menuItems.About"></app-about-page>
+    <app-products-page *ngSwitchCase="menuItems.Products" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-products-page>
+    <app-contact-page *ngSwitchCase="menuItems.Contact"></app-contact-page>
+    <app-login-page *ngSwitchCase="menuItems.LogIn" (backToHome)="showChosenPage($event)" ></app-login-page>
+    <app-home-page *ngSwitchDefault></app-home-page>
 </div>
 <app-product [hidden]='!deatailsPageShown' (deatailsPageShown)="hideDetailsPage($event)" [chosenProduct]="chosenProduct"></app-product>

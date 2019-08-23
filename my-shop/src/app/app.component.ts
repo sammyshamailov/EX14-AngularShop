@@ -10,8 +10,9 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.css'],
   animations: [
     trigger("fade", [
-    state("void", style({ opacity: 0 })),
-    transition("void => *", [animate("0.5s ease-in-out")])
+      transition("* => *", [
+        style({ opacity: 0 }), 
+        animate("0.2s 0.4s ease-in")])
     ]),
     trigger('slideInOut', [
       state('in', style({
