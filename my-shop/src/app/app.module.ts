@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { FormsModule} from '@angular/forms'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -15,6 +16,7 @@ import { SocialLinkComponent } from './components/social-link/social-link.compon
 import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { EditPageComponent } from './components/edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,14 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     SocialLinkComponent,
     ProductComponent,
     CartComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    EditPageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

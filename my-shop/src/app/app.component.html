@@ -7,6 +7,7 @@
     <app-products-page *ngSwitchCase="menuItems.Products" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-products-page>
     <app-contact-page *ngSwitchCase="menuItems.Contact"></app-contact-page>
     <app-login-page *ngSwitchCase="menuItems.LogIn" (backToHome)="showChosenPage($event)" ></app-login-page>
+    <app-edit-page *ngSwitchCase="menuItems.Admin"></app-edit-page>
     <app-home-page *ngSwitchDefault></app-home-page>
 </div>
 <app-product [hidden]='!deatailsPageShown' (deatailsPageShown)="hideDetailsPage($event)" [chosenProduct]="chosenProduct"></app-product>

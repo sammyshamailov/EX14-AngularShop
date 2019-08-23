@@ -19,8 +19,11 @@
     border-radius: 15%;
     background-color: #4897e2;
     color: #ffffff;
+    width: 100px;
     text-align: center;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 
 }
 

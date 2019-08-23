@@ -1,5 +1,5 @@
 <span class="header">Log In</span>
-<form #contactForm="ngForm" class="login-form" (ngSubmit)="logIn(); contactForm.reset();">
+<form class="login-form" (ngSubmit)="logIn(); contactForm.reset();" #contactForm="ngForm">
     Username: <input name="Username" type="text" placeholder="your username" [(ngModel)]="username" required/>
     Password: <input name="Password" type="password" placeholder="your password" [(ngModel)]="password" required />
     <button type="button" class="login-form__login-btn" (click)="logIn()" [disabled]="!contactForm.form.valid">Log In</button>
