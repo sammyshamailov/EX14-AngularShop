@@ -1,0 +1,13 @@
+<span class="header">Add/Edit Product</span>
+<form [formGroup]="editForm" class="edit-form">
+    Category:
+    <select formControlName="Category">
+        <option *ngFor="let category of categoriesNames" value="{{ category }}">{{category}}</option>
+    </select>
+    Image URL: <input type="text" formControlName="Image">
+    Big Image URL: <input type="text" formControlName="BigImage">
+    Title: <input type="text" formControlName="Title">
+    Price: <input type="number" formControlName="Price">
+    Description: <textarea name="description" formControlName="Description"></textarea>
+    <button type="submit" (click)="revert()">Add/Edit</button>
+</form>
