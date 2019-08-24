@@ -7,15 +7,22 @@ import { IProduct, IProductCategory } from '../../assets/models/index';
   providedIn: 'root'
 })
 export class DataService {
+  products: IProduct[] = [];
 
-  constructor() { }
+  constructor() { 
+    this.products = Product;
+  }
 
   getProducts(): IProduct[]{
-    return Product as IProduct[];
+    return this.products;
   }
 
   getCategories(): IProductCategory[]{
     return Category as IProductCategory[];
+  }
+
+  getProductCategory(categoryId: string): string {
+    return this.getCategories().find(p => p.id === categoryId).Title;
   }
 
   getCategoriesName(): string[]{
@@ -28,5 +35,22 @@ export class DataService {
       }
     }
     return categoriesName;
+  }
+
+  writeToFile(product: IProduct){
+    let productIndex: number = this.products.findIndex(p => p.Title === product.Title);
+    if(productIndex){
+      this.products[productIndex] = product;
+    }
+    else{
+      this.products.push(product);
+    }
+    // writeFile('../../assets/static/product.json', JSON.stringify(products), (err) =>{
+    //   if(err){
+    //     console.log(err);
+    //     return;
+    //   };
+    //   console.log("write completed");
+    // });
   }
 }

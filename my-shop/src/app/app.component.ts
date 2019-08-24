@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   chosenProduct: IProduct;
   menuItems = MenuItems;
   menuState: string = 'out';
+  editProduct: IProduct;
 
   constructor(private dataService: DataService, private userService: UserService) { }
 
@@ -60,6 +61,11 @@ export class AppComponent implements OnInit {
   showDetailsPage(product: IProduct){
     this.chosenProduct = product;
     this.deatailsPageShown = !this.deatailsPageShown;
+  }
+
+  showEditPage(product: IProduct){
+    this.editProduct = product;
+    this.chosenPage = this.menuItems.Admin;
   }
 
   hideDetailsPage(){

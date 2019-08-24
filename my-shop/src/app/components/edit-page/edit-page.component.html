@@ -1,5 +1,5 @@
 <span class="header">Add/Edit Product</span>
-<form [formGroup]="editForm" class="edit-form">
+<form [formGroup]="editForm" (ngSubmit)="onSubmit(); revert();" class="edit-form">
     Category:
     <select formControlName="Category">
         <option *ngFor="let category of categoriesNames" value="{{ category }}">{{category}}</option>
@@ -9,5 +9,5 @@
     Title: <input type="text" formControlName="Title">
     Price: <input type="number" formControlName="Price">
     Description: <textarea name="description" formControlName="Description"></textarea>
-    <button type="submit" (click)="revert()">Add/Edit</button>
+    <button type="submit" [disabled]="!editForm.valid">Add/Edit</button>
 </form>

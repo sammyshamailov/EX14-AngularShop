@@ -14,6 +14,7 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
 
   productsShown: IProduct[];
   @Output() chosenProduct = new EventEmitter<IProduct>();
+  @Output() editProduct = new EventEmitter<IProduct>();
   @ViewChildren('btn') buttons: QueryList<ElementRef>;
   get productsData(): IProduct[] { return this.dataService.getProducts() };
   get categoryData(): IProductCategory[] { return this.dataService.getCategories() };
@@ -41,6 +42,10 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
 
   showDetailsPage(productTitle: String) {
     this.chosenProduct.emit(this.productsData.find(p => p.Title === productTitle));
+  }
+
+  goToEditProduct(productTitle: String) {
+    this.editProduct.emit(this.productsData.find(p => p.Title === productTitle));
   }
 
   changeProductState(productTitle: String) {
