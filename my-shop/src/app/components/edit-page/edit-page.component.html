@@ -11,3 +11,14 @@
     Description: <textarea name="description" formControlName="Description"></textarea>
     <button type="submit" [disabled]="!editForm.valid">Add/Edit</button>
 </form>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" [style.display]="popupHidden? 'none': 'block'">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="closePopup()">&times;</span>
+        <p>Product was Added/Edited successfully</p>
+    </div>
+
+</div>

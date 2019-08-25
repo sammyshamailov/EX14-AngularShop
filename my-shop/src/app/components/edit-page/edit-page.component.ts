@@ -11,6 +11,7 @@ import { IProduct } from 'src/assets/models';
 export class EditPageComponent implements OnInit, OnChanges {
 
   private editForm: FormGroup;
+  popupHidden: boolean = true;
   get categories(): string[] { return this.dataService.getCategoriesName() };
   categoriesNames: string[];
   @Input() editProduct: IProduct;
@@ -52,6 +53,11 @@ export class EditPageComponent implements OnInit, OnChanges {
     product.Description = formModel.Description;
     product.CategoryId = this.dataService.getCategoryId(formModel.Category);
     this.dataService.writeToFile(product);
+    this.popupHidden = false;
+  }
+
+  closePopup(){
+    this.popupHidden = true;
   }
 
   ngOnInit() {
