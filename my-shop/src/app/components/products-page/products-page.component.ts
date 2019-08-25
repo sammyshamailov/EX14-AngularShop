@@ -16,9 +16,9 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
   @Output() chosenProduct = new EventEmitter<IProduct>();
   @Output() editProduct = new EventEmitter<IProduct>();
   @ViewChildren('btn') buttons: QueryList<ElementRef>;
-  get productsData(): IProduct[] { return this.dataService.getProducts() };
-  get categoryData(): IProductCategory[] { return this.dataService.getCategories() };
-  get categories(): string[] { return this.dataService.getCategoriesName() };
+  get productsData(): IProduct[] { return this.dataService.getProducts(); };
+  get categoryData(): IProductCategory[] { return this.dataService.getCategories(); };
+  get categories(): string[] { return this.dataService.getCategoriesName(); };
   get isLogged(): boolean {return this.userService.isLoggedIn};
   get isAdmin(): boolean {return this.userService.isAdmin};
 

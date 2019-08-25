@@ -42,8 +42,16 @@ export class EditPageComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    const formModel: IProduct = this.editForm.value;
-    console.log(formModel);
+    const formModel = this.editForm.value;
+    const temp = JSON.stringify(this.dataService.getProducts()[0]);
+    let product: IProduct = JSON.parse(temp);
+    product.Title = formModel.Title;
+    product.Price = formModel.Price as string;
+    product.Image = formModel.Image;
+    product.BigImage = formModel.BigImage;
+    product.Description = formModel.Description;
+    product.CategoryId = this.dataService.getCategoryId(formModel.Category);
+    this.dataService.writeToFile(product);
   }
 
   ngOnInit() {

@@ -25,6 +25,10 @@ export class DataService {
     return this.getCategories().find(p => p.id === categoryId).Title;
   }
 
+  getCategoryId(category: string): string {
+    return this.getCategories().find(p => p.Title === category).id;
+  }
+
   getCategoriesName(): string[]{
     let categoriesName: string[] = [];
     let categories: IProductCategory[] = this.getCategories();
@@ -39,7 +43,7 @@ export class DataService {
 
   writeToFile(product: IProduct){
     let productIndex: number = this.products.findIndex(p => p.Title === product.Title);
-    if(productIndex){
+    if(productIndex !== -1){
       this.products[productIndex] = product;
     }
     else{
