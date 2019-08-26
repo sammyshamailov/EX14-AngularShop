@@ -86,6 +86,10 @@ input, select, textarea {
     cursor: pointer;
 }
 
+textarea{
+    height: 100px;
+}
+
 span{
     color: #ff0000;
 }
