@@ -1,5 +1,5 @@
 # MyShop
-Third Exercise with services, cart.
+Fifth Exercise with pipes.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
