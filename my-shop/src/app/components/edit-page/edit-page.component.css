@@ -63,7 +63,7 @@ input, select, textarea {
 }
   
   /* Modal Content/Box */
-  .modal-content {
+.modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
@@ -72,17 +72,24 @@ input, select, textarea {
 }
   
   /* The Close Button */
-  .close {
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
   
-  .close:hover,
-  .close:focus {
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
-  
+
+span{
+    color: #ff0000;
+}
+
+.hidden{
+    display: none;
+}

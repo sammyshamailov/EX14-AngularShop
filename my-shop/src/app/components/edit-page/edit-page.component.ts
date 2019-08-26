@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { IProduct } from 'src/assets/models';
 
@@ -13,6 +13,21 @@ export class EditPageComponent implements OnInit, OnChanges {
   private editForm: FormGroup;
   popupHidden: boolean = true;
   get categories(): string[] { return this.dataService.getCategoriesName() };
+  get CategoryForm(): AbstractControl {
+    return this.editForm.get('Category');
+  }
+  get ImageForm(): AbstractControl {
+    return this.editForm.get('Image');
+  }
+  get BigImageForm(): AbstractControl {
+    return this.editForm.get('BigImage');
+  }
+  get TitleForm(): AbstractControl {
+    return this.editForm.get('Title');
+  }
+  get PriceForm(): AbstractControl {
+    return this.editForm.get('Price');
+  }
   categoriesNames: string[];
   @Input() editProduct: IProduct;
 
@@ -26,7 +41,7 @@ export class EditPageComponent implements OnInit, OnChanges {
       Image: ['', Validators.required],
       BigImage: ['', Validators.required],
       Title: ['', Validators.required],
-      Price: [0, [Validators.required, Validators.min(1)]],
+      Price: ['', [Validators.required, Validators.min(1)]],
       Description: ''
     });
   }
@@ -44,19 +59,11 @@ export class EditPageComponent implements OnInit, OnChanges {
 
   onSubmit() {
     const formModel = this.editForm.value;
-    const temp = JSON.stringify(this.dataService.getProducts()[0]);
-    let product: IProduct = JSON.parse(temp);
-    product.Title = formModel.Title;
-    product.Price = formModel.Price as string;
-    product.Image = formModel.Image;
-    product.BigImage = formModel.BigImage;
-    product.Description = formModel.Description;
-    product.CategoryId = this.dataService.getCategoryId(formModel.Category);
-    this.dataService.writeToFile(product);
+    this.dataService.writeToList(formModel);
     this.popupHidden = false;
   }
 
-  closePopup(){
+  closePopup() {
     this.popupHidden = true;
   }
 

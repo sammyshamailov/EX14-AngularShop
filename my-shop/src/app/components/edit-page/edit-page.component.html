@@ -4,16 +4,22 @@
     <select formControlName="Category">
         <option *ngFor="let category of categoriesNames" value="{{ category }}">{{category}}</option>
     </select>
+    <span *ngIf="CategoryForm.invalid && CategoryForm.errors.required">Category is required.</span>
     Image URL: <input type="text" formControlName="Image">
+    <span *ngIf="ImageForm.invalid && ImageForm.errors.required">Image URL is required.</span>
     Big Image URL: <input type="text" formControlName="BigImage">
+    <span *ngIf="BigImageForm.invalid && BigImageForm.errors.required">Big Image URL is required.</span>
     Title: <input type="text" formControlName="Title">
+    <span *ngIf="TitleForm.invalid && TitleForm.errors.required">Title is required.</span>
     Price: <input type="number" formControlName="Price">
+    <span *ngIf="PriceForm.invalid && PriceForm.errors.required">Price is required.</span>
+    <span *ngIf="PriceForm.invalid && PriceForm.errors.min">Price must be larger than 0.</span>
     Description: <textarea name="description" formControlName="Description"></textarea>
     <button type="submit" [disabled]="!editForm.valid">Add/Edit</button>
 </form>
 
 <!-- The Modal -->
-<div id="myModal" class="modal" [style.display]="popupHidden? 'none': 'block'">
+<div id="myModal" [class]="popupHidden? 'none': 'modal'">
 
     <!-- Modal content -->
     <div class="modal-content">

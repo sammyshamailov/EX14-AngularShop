@@ -41,7 +41,15 @@ export class DataService {
     return categoriesName;
   }
 
-  writeToFile(product: IProduct){
+  writeToList(productDetails){
+    const temp = JSON.stringify(this.products[0]);
+    let product: IProduct = JSON.parse(temp);
+    product.Title = productDetails.Title;
+    product.Price = productDetails.Price as string;
+    product.Image = productDetails.Image;
+    product.BigImage = productDetails.BigImage;
+    product.Description = productDetails.Description;
+    product.CategoryId = this.getCategoryId(productDetails.Category);
     let productIndex: number = this.products.findIndex(p => p.Title === product.Title);
     if(productIndex !== -1){
       this.products[productIndex] = product;
@@ -49,12 +57,5 @@ export class DataService {
     else{
       this.products.push(product);
     }
-    // writeFile('../../assets/static/product.json', JSON.stringify(products), (err) =>{
-    //   if(err){
-    //     console.log(err);
-    //     return;
-    //   };
-    //   console.log("write completed");
-    // });
   }
 }
