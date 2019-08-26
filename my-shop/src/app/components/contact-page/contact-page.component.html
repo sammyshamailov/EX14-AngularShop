@@ -1,1 +1,12 @@
 <span class="header">Contact Us</span>
+<form class="contact-form" (ngSubmit)="submitContact(); contactForm.reset();" #contactForm="ngForm">
+    Email: <input name="email" type="email" placeholder="your email" [(ngModel)]="email" #emailInput="ngModel" required
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+    <span [hidden]="!emailInput.errors?.required">Email is required</span>
+    <span [hidden]="!emailInput.errors?.pattern">Email should be written in this form: "example@example.com"</span>
+    Subject: <input name="Password" type="text" placeholder="your subject" [(ngModel)]="subject" #subjectInput="ngModel"
+        required />
+    <span [hidden]="!subjectInput.errors?.required">subject is required</span>
+    Message: <textarea name="Password" placeholder="message content" [(ngModel)]="message"></textarea>
+    <button type="submit" class="login-form__login-btn" [disabled]="!contactForm.form.valid">Send</button>
+</form>

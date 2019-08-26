@@ -7,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactPageComponent implements OnInit {
 
+  private email: string;
+  private subject: string;
+  private message: string = "";
+
   constructor() { }
+
+  submitContact(){
+    console.log("Email: ", this.email, "\nSubject: ", this.subject, "\nMessage: ", this.message);
+  }
 
   ngOnInit() {
   }
