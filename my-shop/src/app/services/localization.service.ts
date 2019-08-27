@@ -5,9 +5,9 @@ interface ILanguage {
   "Home": string;
   "Cart": string;
   "Products": string;
-  "LogIn": string;
-  "LogOut": string;
-  "Admin": string;
+  "Log In": string;
+  "Log Out": string;
+  "Add/Edit": string;
   "About": string;
   "Contact": string;
 }
