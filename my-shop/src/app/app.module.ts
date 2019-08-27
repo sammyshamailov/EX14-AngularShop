@@ -17,6 +17,7 @@ import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { EditPageComponent } from './components/edit-page/edit-page.component';
+import { LocalizationPipe } from './pipes/localization.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { EditPageComponent } from './components/edit-page/edit-page.component';
     ProductComponent,
     CartComponent,
     LoginPageComponent,
-    EditPageComponent
+    EditPageComponent,
+    LocalizationPipe
   ],
   imports: [
     BrowserModule,

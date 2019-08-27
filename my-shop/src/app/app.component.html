@@ -1,13 +1,13 @@
 <app-header (isVisible)="updateVisibility($event)"></app-header>
 <app-menu (chosenPage)="showChosenPage($event)" [@slideInOut]='menuState'></app-menu>
 <div [ngSwitch]="chosenPage" [@fade]="chosenPage" >
-    <app-home-page *ngSwitchCase="menuItems.Home"></app-home-page>
-    <app-cart *ngSwitchCase="menuItems.Cart" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-cart>
-    <app-about-page *ngSwitchCase="menuItems.About"></app-about-page>
-    <app-products-page *ngSwitchCase="menuItems.Products" (chosenProduct)="showDetailsPage($event)" (editProduct)="showEditPage($event)" [hidden]='deatailsPageShown'></app-products-page>
-    <app-contact-page *ngSwitchCase="menuItems.Contact"></app-contact-page>
-    <app-login-page *ngSwitchCase="menuItems.LogIn" (backToHome)="showChosenPage($event)" ></app-login-page>
-    <app-edit-page *ngSwitchCase="menuItems.Admin" [editProduct]="editProduct"></app-edit-page>
+    <app-home-page *ngSwitchCase="menuItems.Home | localization"></app-home-page>
+    <app-cart *ngSwitchCase="menuItems.Cart | localization" (chosenProduct)="showDetailsPage($event)" [hidden]='deatailsPageShown'></app-cart>
+    <app-about-page *ngSwitchCase="menuItems.About | localization"></app-about-page>
+    <app-products-page *ngSwitchCase="menuItems.Products | localization" (chosenProduct)="showDetailsPage($event)" (editProduct)="showEditPage($event)" [hidden]='deatailsPageShown'></app-products-page>
+    <app-contact-page *ngSwitchCase="menuItems.Contact | localization"></app-contact-page>
+    <app-login-page *ngSwitchCase="menuItems.LogIn | localization" (backToHome)="showChosenPage($event)" ></app-login-page>
+    <app-edit-page *ngSwitchCase="menuItems.Admin | localization" [editProduct]="editProduct"></app-edit-page>
     <app-home-page *ngSwitchDefault></app-home-page>
 </div>
 <app-product [hidden]='!deatailsPageShown' (deatailsPageShown)="hideDetailsPage($event)" [chosenProduct]="chosenProduct"></app-product>

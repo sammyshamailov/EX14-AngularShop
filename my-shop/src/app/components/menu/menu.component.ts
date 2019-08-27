@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MenuItems } from '../../../assets/models/index';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
+import { LocalizationService } from 'src/app/services/localization.service';
 
 @Component({
   selector: 'app-menu',
@@ -18,16 +19,21 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private localizationService: LocalizationService
+  ) {}
 
   menuItemClicked(menuItem: String) {
-    if (menuItem.includes('Cart')) {
-      this.chosenPage.emit('Cart');
+    if (menuItem.includes(this.localizationService.language.Cart)){
+      this.chosenPage.emit(this.localizationService.language.Cart);
     }
     else {
       this.chosenPage.emit(menuItem);
     }
+  }
+
+  changeLang(chosenLanguage: string) {
+    this.localizationService.changeLang(chosenLanguage);
   }
 
   ngOnInit() {

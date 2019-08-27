@@ -3,6 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { IProduct, MenuItems } from '../assets/models/index';
 import { DataService } from './services/data.service';
 import { UserService } from './services/user.service';
+import { LocalizationService } from './services/localization.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { UserService } from './services/user.service';
   animations: [
     trigger("fade", [
       transition("* => *", [
-        style({ opacity: 0 }), 
+        style({ opacity: 0 }),
         animate("0.2s 0.4s ease-in")])
     ]),
     trigger('slideInOut', [
@@ -35,44 +36,46 @@ export class AppComponent implements OnInit {
   menuState: string = 'out';
   editProduct: IProduct;
 
-  constructor(private dataService: DataService, private userService: UserService) { }
+  constructor(
+    private dataService: DataService,
+    private userService: UserService) { }
 
-  updateVisibility(){
+  updateVisibility() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
-  showChosenPage(chosenPage:String){
-    if(chosenPage === this.menuItems.LogOut){
+  showChosenPage(chosenPage: String) {
+    if (chosenPage === this.menuItems.LogOut) {
       this.userService.logOut();
       this.chosenPage = this.menuItems.Home;
       this.menuState = this.menuState === 'out' ? 'in' : 'out';
     }
-    else if(chosenPage === "goHome"){
+    else if (chosenPage === "goHome") {
       this.chosenPage = this.menuItems.Home;
     }
-    else{
+    else {
       this.chosenPage = chosenPage;
       this.menuState = this.menuState === 'out' ? 'in' : 'out';
     }
-    if(this.deatailsPageShown)
+    if (this.deatailsPageShown)
       this.deatailsPageShown = !this.deatailsPageShown;
   }
 
-  showDetailsPage(product: IProduct){
+  showDetailsPage(product: IProduct) {
     this.chosenProduct = product;
     this.deatailsPageShown = !this.deatailsPageShown;
   }
 
-  showEditPage(product: IProduct){
+  showEditPage(product: IProduct) {
     this.editProduct = product;
     this.chosenPage = this.menuItems.Admin;
   }
 
-  hideDetailsPage(){
+  hideDetailsPage() {
     this.deatailsPageShown = !this.deatailsPageShown;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.chosenProduct = this.dataService.getProducts()[0];
   }
 }
