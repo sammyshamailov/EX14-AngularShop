@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   menuItems = MenuItems;
   menuState: string = 'out';
   editProduct: IProduct;
+  chosenLang: String = "EN";
 
   constructor(
     private dataService: DataService,
@@ -50,15 +51,16 @@ export class AppComponent implements OnInit {
       this.chosenPage = this.menuItems.Home;
       this.menuState = this.menuState === 'out' ? 'in' : 'out';
     }
-    else if (chosenPage === "goHome") {
-      this.chosenPage = this.menuItems.Home;
-    }
     else {
       this.chosenPage = chosenPage;
       this.menuState = this.menuState === 'out' ? 'in' : 'out';
     }
     if (this.deatailsPageShown)
       this.deatailsPageShown = !this.deatailsPageShown;
+  }
+
+  changeLang(langauge: string){
+    this.chosenLang = langauge;
   }
 
   showDetailsPage(product: IProduct) {

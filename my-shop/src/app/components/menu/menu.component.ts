@@ -12,6 +12,8 @@ import { LocalizationService } from 'src/app/services/localization.service';
 export class MenuComponent implements OnInit {
 
   @Output() chosenPage = new EventEmitter<String>();
+  @Output() chosenLang = new EventEmitter<String>();
+  language: string = "EN";
   menuItems = MenuItems;
   get cartAmount(): number { return this.cartService.getProducts().length };
   get isLogged(): boolean { return this.userService.isLoggedIn };
@@ -27,13 +29,18 @@ export class MenuComponent implements OnInit {
     if (menuItem.includes(this.localizationService.language.Cart)){
       this.chosenPage.emit(this.localizationService.language.Cart);
     }
+    else if (menuItem === "Log Out" || menuItem === "Выйти от системы" || menuItem === "התנתק" || menuItem === "Cerrar Sesión"){
+      this.chosenPage.emit(this.menuItems.LogOut);
+    }
     else {
       this.chosenPage.emit(menuItem);
     }
   }
 
-  changeLang(chosenLanguage: string) {
-    this.localizationService.changeLang(chosenLanguage);
+  changeLang(chosenLang: string) {
+    this.language = chosenLang;
+    this.localizationService.changeLang(this.language);
+    this.chosenLang.emit(this.language);
   }
 
   ngOnInit() {

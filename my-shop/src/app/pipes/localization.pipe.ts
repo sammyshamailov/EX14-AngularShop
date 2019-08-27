@@ -2,15 +2,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { LocalizationService } from '../services/localization.service';
 
 @Pipe({
-  name: 'localization',
-  pure: false
+  name: 'localization'
 })
 export class LocalizationPipe implements PipeTransform {
 
   constructor(private localizationService: LocalizationService){}
 
-  transform(value: any, ...args: any[]): any {
-    return this.localizationService.language[value];
+  transform(value: string, type: string): string {
+    return this.localizationService.getTranslation(value, type);
   }
 
 }

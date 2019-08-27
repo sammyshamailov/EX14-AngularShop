@@ -16,25 +16,16 @@ interface ILanguage {
   providedIn: 'root'
 })
 export class LocalizationService {
-  private currentLang: ILanguage;
-  get language(){ return this.currentLang };
+  private currentLang: ILanguage = languagesData.EN;
+  get language() { return this.currentLang };
 
-  constructor() {
-    this.currentLang = languagesData.EN;
+  constructor() {}
+
+  changeLang(lang: string){
+    this.currentLang = languagesData[lang];
   }
 
-  changeLang(lang: string) {
-    this.currentLang = null;
-    console.log("enterd changeLang: ", lang);
-    if (lang === "EN")
-      this.currentLang = languagesData.EN;
-    else if (lang === "ES")
-      this.currentLang = languagesData.ES;
-    else if (lang === "RU")
-      this.currentLang = languagesData.RU;
-    else{
-      this.currentLang = languagesData.HE;
-    }
-    console.log(this.currentLang);
+  getTranslation(word: string, lang: string): string {
+      return this.currentLang[word];
   }
 }

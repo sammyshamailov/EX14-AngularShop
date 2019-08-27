@@ -38,19 +38,15 @@ ul a{
 }
 
 .languages{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    bottom: 0;
+    margin: auto;
+    width: fit-content;
 }
 
 .languages__language{
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-left: 3px;
+    margin-right: 3px;
     width: 30px;
     height: 30px;
-    margin-top: auto;
-    flex-basis: 1;
 }
 
 .languages__language:hover{

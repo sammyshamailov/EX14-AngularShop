@@ -1,13 +1,13 @@
 <ul (click)="menuItemClicked($event.target.innerText)">
-    <li class="menu__item"><a href="#">{{ menuItems.Home | localization }}</a></li>
-    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.Cart | localization }}
+    <li class="menu__item"><a href="#">{{ menuItems.Home | localization: language }}</a></li>
+    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.Cart | localization: language }}
             ({{ cartAmount }})</a></li>
-    <li class="menu__item"><a href="#">{{ menuItems.Products | localization }}</a></li>
-    <li class="menu__item" [hidden]="isLogged"><a href="#">{{ menuItems.LogIn | localization }}</a></li>
-    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.LogOut | localization }}</a></li>
-    <li class="menu__item" [hidden]="!isAdmin"><a href="#">{{ menuItems.Admin | localization }}</a></li>
-    <li class="menu__item"><a href="#">{{ menuItems.About | localization }}</a></li>
-    <li class="menu__item"><a href="#">{{ menuItems.Contact | localization }}</a></li>
+    <li class="menu__item"><a href="#">{{ menuItems.Products | localization: language }}</a></li>
+    <li class="menu__item" [hidden]="isLogged"><a href="#">{{ menuItems.LogIn | localization: language }}</a></li>
+    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.LogOut | localization: language }}</a></li>
+    <li class="menu__item" [hidden]="!isAdmin"><a href="#">{{ menuItems.Admin | localization: language }}</a></li>
+    <li class="menu__item"><a href="#">{{ menuItems.About | localization: language }}</a></li>
+    <li class="menu__item"><a href="#">{{ menuItems.Contact | localization: language }}</a></li>
 </ul>
 
 <div class="languages">
