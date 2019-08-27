@@ -1,0 +1,42 @@
+{
+    "EN":{
+        "Home": "Home",
+        "Cart": "Cart",
+        "Products": "Products",
+        "Log In": "Log In",
+        "Log Out": "Log Out",
+        "Add/Edit": "Add/Edit",
+        "About": "About",
+        "Contact": "Contact"
+    },
+    "RU":{
+        "Home": "Главная",
+        "Cart": "корзина",
+        "Products": "товары",
+        "Log In": "войти в систему",
+        "Log Out": "Выйти от системы",
+        "Add/Edit": "добавить / редактировать",
+        "About": "насчет нас",
+        "Contact": "контакт"
+    },
+    "HE":{
+        "Home": "בית",
+        "Cart": "עגלת קניות",
+        "Products": "מוצרים",
+        "Log In": "התחבר",
+        "Log Out": "התנתק",
+        "Add/Edit": "להוסיף/לערוך",
+        "About": "אודות",
+        "Contact": "יצירת קשר"
+    },
+    "ES":{
+        "Home": "Página de Inicio",
+        "Cart": "Carro",
+        "Products": "Productos",
+        "Log In": "Iniciar Sesión",
+        "Log Out": "Cerrar Sesión",
+        "Add/Edit": "Agregar/ Editar",
+        "About": "Sobre Nosotros",
+        "Contact": "Contacto"
+    }
+}
