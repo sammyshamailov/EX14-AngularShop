@@ -12,22 +12,12 @@ export class EditPageComponent implements OnInit, OnChanges {
 
   private editForm: FormGroup;
   popupHidden: boolean = true;
-  get categories(): string[] { return this.dataService.getCategoriesName() };
-  get CategoryForm(): AbstractControl {
-    return this.editForm.get('Category');
-  }
-  get ImageForm(): AbstractControl {
-    return this.editForm.get('Image');
-  }
-  get BigImageForm(): AbstractControl {
-    return this.editForm.get('BigImage');
-  }
-  get TitleForm(): AbstractControl {
-    return this.editForm.get('Title');
-  }
-  get PriceForm(): AbstractControl {
-    return this.editForm.get('Price');
-  }
+  get categories(): string[] { return this.dataService.getCategoriesName(); };
+  get CategoryForm(): AbstractControl { return this.editForm.get('Category'); };
+  get ImageForm(): AbstractControl { return this.editForm.get('Image'); };
+  get BigImageForm(): AbstractControl { return this.editForm.get('BigImage'); };
+  get TitleForm(): AbstractControl { return this.editForm.get('Title'); };
+  get PriceForm(): AbstractControl { return this.editForm.get('Price'); };
   categoriesNames: string[];
   @Input() editProduct: IProduct;
 
@@ -70,9 +60,6 @@ export class EditPageComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.categoriesNames = this.categories;
     this.categoriesNames.splice(this.categoriesNames.findIndex(p => p === "All"), 1);
-  }
-
-  ngOnChanges() {
     if (this.editProduct) {
       this.editForm.setValue({
         Category: this.dataService.getProductCategory(this.editProduct.CategoryId),
@@ -83,6 +70,9 @@ export class EditPageComponent implements OnInit, OnChanges {
         Description: this.editProduct.Description
       });
     }
+  }
+
+  ngOnChanges() {
   }
 
 }

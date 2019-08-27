@@ -39,13 +39,15 @@ export class AppComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private localizationService: LocalizationService) { }
 
   updateVisibility() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
   showChosenPage(chosenPage: String) {
+    this.editProduct = null;
     if (chosenPage === this.menuItems.LogOut) {
       this.userService.logOut();
       this.chosenPage = this.menuItems.Home;
@@ -70,7 +72,7 @@ export class AppComponent implements OnInit {
 
   showEditPage(product: IProduct) {
     this.editProduct = product;
-    this.chosenPage = this.menuItems.Admin;
+    this.chosenPage = this.localizationService.getTranslation(this.menuItems.Admin, '');
   }
 
   hideDetailsPage() {
