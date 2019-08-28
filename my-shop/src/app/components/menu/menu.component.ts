@@ -12,12 +12,11 @@ import { LocalizationService } from 'src/app/services/localization.service';
 export class MenuComponent implements OnInit {
 
   @Output() chosenPage = new EventEmitter<String>();
-  @Output() chosenLang = new EventEmitter<String>();
-  language: string = "EN";
   menuItems = MenuItems;
   get cartAmount(): number { return this.cartService.getProducts().length };
   get isLogged(): boolean { return this.userService.isLoggedIn };
   get isAdmin(): boolean { return this.userService.isAdmin };
+  get currLanguage(): string { return this.localizationService.currLanguage };
 
   constructor(
     private cartService: CartService,
@@ -26,12 +25,12 @@ export class MenuComponent implements OnInit {
   ) { }
 
   menuItemClicked(menuItem: String) {
-    if (menuItem.includes(this.localizationService.language["Cart"])) {
-      this.chosenPage.emit(this.localizationService.language["Cart"]);
+    if (menuItem.includes(this.localizationService.getWord(this.menuItems.Cart))) {
+      this.chosenPage.emit(this.localizationService.getWord(this.menuItems.Cart));
     }
-    else if (menuItem === this.localizationService.language["Log Out"]) {
+    else if (menuItem === this.localizationService.getWord(this.menuItems.LogOut)) {
       this.userService.logOut();
-      this.chosenPage.emit(this.menuItems.Home);
+      this.chosenPage.emit(this.localizationService.getWord(this.menuItems.Home));
     }
     else {
       this.chosenPage.emit(menuItem);
@@ -39,9 +38,7 @@ export class MenuComponent implements OnInit {
   }
 
   changeLang(chosenLang: string) {
-    this.language = chosenLang;
-    this.localizationService.changeLang(this.language);
-    this.chosenLang.emit(this.language);
+    this.localizationService.changeLang(chosenLang);
   }
 
   ngOnInit() {

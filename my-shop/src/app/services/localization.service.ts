@@ -16,16 +16,20 @@ interface ILanguage {
   providedIn: 'root'
 })
 export class LocalizationService {
-  private currentLang: ILanguage = languagesData.EN;
-  get language() { return this.currentLang };
+  private currentLang: string = "EN";
+  get currLanguage() { return this.currentLang; };
 
-  constructor() {}
+  constructor() { }
 
-  changeLang(lang: string){
-    this.currentLang = languagesData[lang];
+  changeLang(lang: string) {
+    this.currentLang = lang;
+  }
+
+  getWord(word: string): string { 
+    return languagesData[this.currentLang][word]; 
   }
 
   getTranslation(word: string, lang: string): string {
-      return this.currentLang[word];
+    return languagesData[lang][word];
   }
 }

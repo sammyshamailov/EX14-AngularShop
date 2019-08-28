@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   menuItems = MenuItems;
   menuState: string = 'out';
   editProduct: IProduct;
-  chosenLang: String = "EN";
+  get currLanguage(): string { return this.localizationService.currLanguage };
 
   constructor(
     private dataService: DataService,
@@ -52,10 +52,6 @@ export class AppComponent implements OnInit {
       this.deatailsPageShown = !this.deatailsPageShown;
   }
 
-  changeLang(langauge: string) {
-    this.chosenLang = langauge;
-  }
-
   showDetailsPage(product: IProduct) {
     this.chosenProduct = product;
     this.deatailsPageShown = !this.deatailsPageShown;
@@ -63,7 +59,7 @@ export class AppComponent implements OnInit {
 
   showEditPage(product: IProduct) {
     this.editProduct = product;
-    this.chosenPage = this.localizationService.language["Add/Edit"];
+    this.chosenPage = this.localizationService.getWord(this.menuItems.Admin);
   }
 
   hideDetailsPage() {

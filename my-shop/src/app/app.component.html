@@ -1,17 +1,17 @@
 <app-header (isVisible)="updateVisibility($event)"></app-header>
-<app-menu (chosenPage)="showChosenPage($event)" [@slideInOut]='menuState' (chosenLang)="changeLang($event)"></app-menu>
+<app-menu (chosenPage)="showChosenPage($event)" [@slideInOut]='menuState'></app-menu>
 <div [ngSwitch]="chosenPage" [@fade]="chosenPage">
-    <app-home-page *ngSwitchCase="menuItems.Home | localization: chosenLang"></app-home-page>
-    <app-cart *ngSwitchCase="menuItems.Cart | localization: chosenLang" (chosenProduct)="showDetailsPage($event)"
+    <app-home-page *ngSwitchCase="menuItems.Home | localization: currLanguage"></app-home-page>
+    <app-cart *ngSwitchCase="menuItems.Cart | localization: currLanguage" (chosenProduct)="showDetailsPage($event)"
         [hidden]='deatailsPageShown'></app-cart>
-    <app-about-page *ngSwitchCase="menuItems.About | localization: chosenLang"></app-about-page>
-    <app-products-page *ngSwitchCase="menuItems.Products | localization: chosenLang"
+    <app-about-page *ngSwitchCase="menuItems.About | localization: currLanguage"></app-about-page>
+    <app-products-page *ngSwitchCase="menuItems.Products | localization: currLanguage"
         (chosenProduct)="showDetailsPage($event)" (editProduct)="showEditPage($event)" [hidden]='deatailsPageShown'>
     </app-products-page>
-    <app-contact-page *ngSwitchCase="menuItems.Contact | localization: chosenLang"></app-contact-page>
-    <app-login-page *ngSwitchCase="menuItems.LogIn | localization: chosenLang" (backToHome)="showChosenPage($event)">
+    <app-contact-page *ngSwitchCase="menuItems.Contact | localization: currLanguage"></app-contact-page>
+    <app-login-page *ngSwitchCase="menuItems.LogIn | localization: currLanguage" (backToHome)="showChosenPage($event)">
     </app-login-page>
-    <app-edit-page *ngSwitchCase="menuItems.Admin | localization: chosenLang" [editProduct]="editProduct">
+    <app-edit-page *ngSwitchCase="menuItems.Admin | localization: currLanguage" [editProduct]="editProduct">
     </app-edit-page>
     <app-home-page *ngSwitchDefault></app-home-page>
 </div>
