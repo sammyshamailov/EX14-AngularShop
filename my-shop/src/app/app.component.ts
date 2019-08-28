@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { IProduct, MenuItems } from '../assets/models/index';
 import { DataService } from './services/data.service';
-import { UserService } from './services/user.service';
 import { LocalizationService } from './services/localization.service';
 
 @Component({
@@ -39,7 +38,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private userService: UserService,
     private localizationService: LocalizationService) { }
 
   updateVisibility() {
@@ -48,20 +46,13 @@ export class AppComponent implements OnInit {
 
   showChosenPage(chosenPage: String) {
     this.editProduct = null;
-    if (chosenPage === this.menuItems.LogOut) {
-      this.userService.logOut();
-      this.chosenPage = this.menuItems.Home;
-      this.menuState = this.menuState === 'out' ? 'in' : 'out';
-    }
-    else {
-      this.chosenPage = chosenPage;
-      this.menuState = this.menuState === 'out' ? 'in' : 'out';
-    }
+    this.chosenPage = chosenPage;
+    this.menuState = this.menuState === 'out' ? 'in' : 'out';
     if (this.deatailsPageShown)
       this.deatailsPageShown = !this.deatailsPageShown;
   }
 
-  changeLang(langauge: string){
+  changeLang(langauge: string) {
     this.chosenLang = langauge;
   }
 
@@ -72,7 +63,7 @@ export class AppComponent implements OnInit {
 
   showEditPage(product: IProduct) {
     this.editProduct = product;
-    this.chosenPage = this.localizationService.getTranslation(this.menuItems.Admin, '');
+    this.chosenPage = this.localizationService.language["Add/Edit"];
   }
 
   hideDetailsPage() {

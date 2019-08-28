@@ -23,14 +23,15 @@ export class MenuComponent implements OnInit {
     private cartService: CartService,
     private userService: UserService,
     private localizationService: LocalizationService
-  ) {}
+  ) { }
 
   menuItemClicked(menuItem: String) {
-    if (menuItem.includes(this.localizationService.language.Cart)){
-      this.chosenPage.emit(this.localizationService.language.Cart);
+    if (menuItem.includes(this.localizationService.language["Cart"])) {
+      this.chosenPage.emit(this.localizationService.language["Cart"]);
     }
-    else if (menuItem === "Log Out" || menuItem === "Выйти от системы" || menuItem === "התנתק" || menuItem === "Cerrar Sesión"){
-      this.chosenPage.emit(this.menuItems.LogOut);
+    else if (menuItem === this.localizationService.language["Log Out"]) {
+      this.userService.logOut();
+      this.chosenPage.emit(this.menuItems.Home);
     }
     else {
       this.chosenPage.emit(menuItem);

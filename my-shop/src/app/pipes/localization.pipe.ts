@@ -8,8 +8,8 @@ export class LocalizationPipe implements PipeTransform {
 
   constructor(private localizationService: LocalizationService){}
 
-  transform(value: string, type: string): string {
-    return this.localizationService.getTranslation(value, type);
+  transform(word: string, lang: string): string {
+    return this.localizationService.getTranslation(word, lang);
   }
 
 }
