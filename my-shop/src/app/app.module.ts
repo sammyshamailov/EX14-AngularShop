@@ -18,6 +18,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { EditPageComponent } from './components/edit-page/edit-page.component';
 import { LocalizationPipe } from './pipes/localization.pipe';
+import { PermissionDirective } from './directives/permission.directive';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LocalizationPipe } from './pipes/localization.pipe';
     CartComponent,
     LoginPageComponent,
     EditPageComponent,
-    LocalizationPipe
+    LocalizationPipe,
+    PermissionDirective
   ],
   imports: [
     BrowserModule,

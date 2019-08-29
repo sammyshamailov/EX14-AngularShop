@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-contact-page',
@@ -13,8 +13,12 @@ export class ContactPageComponent implements OnInit {
 
   constructor() { }
 
-  submitContact(){
+  submitContact() {
     console.log("Email: ", this.email, "\nSubject: ", this.subject, "\nMessage: ", this.message);
+  }
+
+  printChoice(message: string){
+    console.log(message);
   }
 
   ngOnInit() {
