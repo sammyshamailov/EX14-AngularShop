@@ -1,6 +1,6 @@
 # EX14-AngularShop
 
-master contains fifth exercise
+master contains sixth exercise
 
 ## details
 
