@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { IProduct } from 'src/assets/models';
@@ -8,18 +8,18 @@ import { IProduct } from 'src/assets/models';
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.css']
 })
-export class EditPageComponent implements OnInit, OnChanges {
+export class EditPageComponent implements OnInit {
 
   private editForm: FormGroup;
-  popupHidden: boolean = true;
+  private popupHidden: boolean = true;
+  private categoriesNames: string[];
+  private editProduct: IProduct;
   get categories(): string[] { return this.dataService.getCategoriesName(); };
   get CategoryForm(): AbstractControl { return this.editForm.get('Category'); };
   get ImageForm(): AbstractControl { return this.editForm.get('Image'); };
   get BigImageForm(): AbstractControl { return this.editForm.get('BigImage'); };
   get TitleForm(): AbstractControl { return this.editForm.get('Title'); };
   get PriceForm(): AbstractControl { return this.editForm.get('Price'); };
-  categoriesNames: string[];
-  @Input() editProduct: IProduct;
 
 
   constructor(
@@ -60,7 +60,8 @@ export class EditPageComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.categoriesNames = this.categories;
     this.categoriesNames.splice(this.categoriesNames.findIndex(p => p === "All"), 1);
-    if (this.editProduct) {
+    if (this.dataService.getToEdit()) {
+      this.editProduct = this.dataService.getProduct(this.dataService.getProductForEdit());
       this.editForm.setValue({
         Category: this.dataService.getProductCategory(this.editProduct.CategoryId),
         Image: this.editProduct.Image,
@@ -69,10 +70,7 @@ export class EditPageComponent implements OnInit, OnChanges {
         Price: this.editProduct.Price,
         Description: this.editProduct.Description
       });
+      this.dataService.setToEdit();
     }
   }
-
-  ngOnChanges() {
-  }
-
 }

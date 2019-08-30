@@ -7,10 +7,20 @@ import { IProduct, IProductCategory } from '../../assets/models/index';
   providedIn: 'root'
 })
 export class DataService {
-  products: IProduct[] = [];
+  private products: IProduct[] = [];
+  private editProduct: boolean = false;
+  private productToEdit: string;
+  setToEdit(){ this.editProduct = !this.editProduct; };
+  getToEdit(){ return this.editProduct;  };
+  setProductForEdit(title: string) { this.productToEdit = title; };
+  getProductForEdit() { return this.productToEdit; };
 
   constructor() { 
     this.products = Product;
+  }
+
+  getProduct(title: string): IProduct{
+    return this.products.find(p => p.Title === title);
   }
 
   getProducts(): IProduct[]{

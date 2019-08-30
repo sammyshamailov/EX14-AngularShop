@@ -24,16 +24,12 @@ export class MenuComponent implements OnInit {
     private localizationService: LocalizationService
   ) { }
 
-  menuItemClicked(menuItem: String) {
-    if (menuItem.includes(this.localizationService.getWord(this.menuItems.Cart))) {
-      this.chosenPage.emit(this.localizationService.getWord(this.menuItems.Cart));
-    }
-    else if (menuItem === this.localizationService.getWord(this.menuItems.LogOut)) {
-      this.userService.logOut();
-      this.chosenPage.emit(this.localizationService.getWord(this.menuItems.Home));
+  menuItemClicked(menuItem) {
+    if (menuItem.srcElement.title === this.menuItems.LogOut) {
+      this.chosenPage.emit(this.menuItems.LogOut);
     }
     else {
-      this.chosenPage.emit(menuItem);
+      this.chosenPage.emit('');
     }
   }
 

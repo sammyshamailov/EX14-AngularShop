@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { IProduct, MenuItems } from '../assets/models/index';
 import { DataService } from './services/data.service';
-import { LocalizationService } from './services/localization.service';
+import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -28,45 +29,26 @@ import { LocalizationService } from './services/localization.service';
 })
 export class AppComponent implements OnInit {
 
-  chosenPage: String;
-  deatailsPageShown: boolean = false;
-  chosenProduct: IProduct;
   menuItems = MenuItems;
   menuState: string = 'out';
-  editProduct: IProduct;
-  get currLanguage(): string { return this.localizationService.currLanguage };
 
   constructor(
-    private dataService: DataService,
-    private localizationService: LocalizationService) { }
+    private userService: UserService,
+    private router: Router) { }
 
   updateVisibility() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
   showChosenPage(chosenPage: String) {
-    this.editProduct = null;
-    this.chosenPage = chosenPage;
+    if(chosenPage === this.menuItems.LogOut){
+      this.userService.logOut();
+      this.router.navigate(['/home']);
+    }
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
-    if (this.deatailsPageShown)
-      this.deatailsPageShown = !this.deatailsPageShown;
-  }
-
-  showDetailsPage(product: IProduct) {
-    this.chosenProduct = product;
-    this.deatailsPageShown = !this.deatailsPageShown;
-  }
-
-  showEditPage(product: IProduct) {
-    this.editProduct = product;
-    this.chosenPage = this.localizationService.getWord(this.menuItems.Admin);
-  }
-
-  hideDetailsPage() {
-    this.deatailsPageShown = !this.deatailsPageShown;
   }
 
   ngOnInit() {
-    this.chosenProduct = this.dataService.getProducts()[0];
+
   }
 }

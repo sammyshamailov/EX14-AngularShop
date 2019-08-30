@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IProduct } from '../../../assets/models/index';
+import { DataService } from 'src/app/services/data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -8,16 +10,19 @@ import { IProduct } from '../../../assets/models/index';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() chosenProduct: IProduct;
-  @Output() deatailsPageShown = new EventEmitter<boolean>();
+  chosenProduct: IProduct;
 
-  constructor() { }
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-  hideDetailsPage(){
-    this.deatailsPageShown.emit();
+  hideDetailsPage() {
+    this.router.navigate(['../products']);
   }
 
   ngOnInit() {
+    this.chosenProduct = this.dataService.getProduct(this.route.snapshot.paramMap.get(('title')));
   }
 
 }

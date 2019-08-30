@@ -5,7 +5,7 @@
 }
 
 :host{
-    background-color: #0652b4;
+    background-color: #b4c7e0;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -23,18 +23,20 @@ ul li{
     height: 40px;
     list-style-type: none;
     font-size: x-large;
+    font-weight: bold;
     transition: opacity 0.5s ease-in;
+    text-decoration: none;
     margin-left: 10px;
     margin-top: 5px;
 }
 
 li:hover{
     opacity: 0.5;
+    cursor: pointer;
 }
 
-ul a{
-    text-decoration: none;
-    color: #fff;
+.active-route-class{
+    color: #ee3a0d;
 }
 
 .languages{

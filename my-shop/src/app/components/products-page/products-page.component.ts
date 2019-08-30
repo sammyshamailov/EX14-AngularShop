@@ -1,32 +1,31 @@
 import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, ElementRef, AfterViewInit, AfterViewChecked, Renderer2 } from '@angular/core';
 import { IProduct, IProductCategory } from '../../../assets/models/index';
-import { DataService } from 'src/app/services/data.service.js';
+import { DataService } from 'src/app/services/data.service';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
-  styleUrls: ['./products-page.component.css'],
-  providers: []
+  styleUrls: ['./products-page.component.css']
 })
 export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   productsShown: IProduct[];
-  @Output() chosenProduct = new EventEmitter<IProduct>();
-  @Output() editProduct = new EventEmitter<IProduct>();
   @ViewChildren('btn') buttons: QueryList<ElementRef>;
   get productsData(): IProduct[] { return this.dataService.getProducts(); };
   get categoryData(): IProductCategory[] { return this.dataService.getCategories(); };
   get categories(): string[] { return this.dataService.getCategoriesName(); };
-  get isLogged(): boolean {return this.userService.isLoggedIn};
-  get isAdmin(): boolean {return this.userService.isAdmin};
+  get isLogged(): boolean { return this.userService.isLoggedIn };
+  get isAdmin(): boolean { return this.userService.isAdmin };
 
   constructor(
     private dataService: DataService,
     private cartService: CartService,
     private userService: UserService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private router: Router
   ) { }
 
   showChosenCategory(name: string) {
@@ -41,11 +40,17 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   showDetailsPage(productTitle: String) {
-    this.chosenProduct.emit(this.productsData.find(p => p.Title === productTitle));
+    this.router.navigate(['/product', productTitle]);
   }
 
-  goToEditProduct(productTitle: String) {
-    this.editProduct.emit(this.productsData.find(p => p.Title === productTitle));
+  goToEditProduct(productTitle: string) {
+    this.dataService.setToEdit();
+    this.dataService.setProductForEdit(productTitle)
+    this.router.navigate(['/add-edit']);
+  }
+
+  getProductState(productTitle: string): boolean {
+    return this.cartService.getProductState(productTitle);
   }
 
   changeProductState(productTitle: String) {

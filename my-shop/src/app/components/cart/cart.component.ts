@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { IProduct } from 'src/assets/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -9,17 +10,18 @@ import { IProduct } from 'src/assets/models';
 })
 export class CartComponent implements OnInit {
 
-  get cartProducts(): IProduct[] {return this.cartService.getProducts()};
-  @Output() chosenProduct = new EventEmitter<IProduct>();
+  get cartProducts(): IProduct[] { return this.cartService.getProducts() };
 
-  constructor(private cartService: CartService) { }
+  constructor(
+    private cartService: CartService,
+    private router: Router) { }
 
-  removeFromCart(productTitle: string){
+  removeFromCart(productTitle: string) {
     this.cartService.removeFromCart(productTitle);
   }
 
-  showDetailsPage(productTitle: String){
-    this.chosenProduct.emit(this.cartProducts.find(p => p.Title === productTitle));
+  showDetailsPage(productTitle: String) {
+    this.router.navigate(['/product', productTitle]);
   }
 
   ngOnInit() {

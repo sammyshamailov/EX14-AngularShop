@@ -12,8 +12,8 @@ export class CategoryChoiceComponent implements OnInit {
 
   constructor() { }
 
-  showChosenCategory(e){
-    this.chosenCategory.emit(e.target.value);
+  showChosenCategory(categoryName: string){
+    this.chosenCategory.emit(categoryName);
   }
 
   ngOnInit() {

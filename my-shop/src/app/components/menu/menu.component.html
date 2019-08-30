@@ -1,18 +1,32 @@
-<ul (click)="menuItemClicked($event.target.innerText)">
-    <li class="menu__item"><a href="#">{{ menuItems.Home | localization: currLanguage }}</a></li>
-    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.Cart | localization: currLanguage }}
-            ({{ cartAmount }})</a></li>
-    <li class="menu__item"><a href="#">{{ menuItems.Products | localization: currLanguage }}</a></li>
-    <li class="menu__item" [hidden]="isLogged"><a href="#">{{ menuItems.LogIn | localization: currLanguage }}</a></li>
-    <li class="menu__item" [hidden]="!isLogged"><a href="#">{{ menuItems.LogOut | localization: currLanguage }}</a></li>
-    <li class="menu__item" [hidden]="!isAdmin"><a href="#">{{ menuItems.Admin | localization: currLanguage }}</a></li>
-    <li class="menu__item"><a href="#">{{ menuItems.About | localization: currLanguage }}</a></li>
-    <li class="menu__item"><a href="#">{{ menuItems.Contact | localization: currLanguage }}</a></li>
+<ul (click)="menuItemClicked($event)">
+        <li class="menu__item" routerLink='/home' routerLinkActive='active-route-class'
+                [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Home | localization: currLanguage }}</li>
+        <li class="menu__item" routerLink='/cart' routerLinkActive='active-route-class'
+                [routerLinkActiveOptions]='{exact: true}' [hidden]="!isLogged">
+                {{ menuItems.Cart | localization: currLanguage }}
+                ({{ cartAmount }})</li>
+        <li class="menu__item" routerLink='/products' routerLinkActive='active-route-class'
+                [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Products | localization: currLanguage }}</li>
+        <li class="menu__item" routerLink='/log-in' routerLinkActive='active-route-class'
+                [routerLinkActiveOptions]='{exact: true}' [hidden]="isLogged">
+                {{ menuItems.LogIn | localization: currLanguage }}</li>
+        <li class="menu__item" [hidden]="!isLogged" title="{{ menuItems.LogOut }}">
+                {{ menuItems.LogOut | localization: currLanguage }}</li>
+        <li class="menu__item" routerLink='/add-edit' routerLinkActive='active-route-class'
+                [routerLinkActiveOptions]='{exact: true}' [hidden]="!isAdmin">
+                {{ menuItems.Admin | localization: currLanguage }}</li>
+        <li class="menu__item" routerLink='/about' routerLinkActive='active-route-class'
+                [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.About | localization: currLanguage }}</li>
+        <li class="menu__item" routerLink='/contact' routerLinkActive='active-route-class'
+                [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Contact | localization: currLanguage }}</li>
 </ul>
 
 <div class="languages">
-    <img alt="HE" class="languages__language" src="assets/icons/israel.png" (click)="changeLang($event.srcElement.alt)">
-    <img alt="EN" class="languages__language" src="assets/icons/us.png" (click)="changeLang($event.srcElement.alt)">
-    <img alt="ES" class="languages__language" src="assets/icons/spain.png" (click)="changeLang($event.srcElement.alt)">
-    <img alt="RU" class="languages__language" src="assets/icons/russia.png" (click)="changeLang($event.srcElement.alt)">
+        <img alt="HE" class="languages__language" src="assets/icons/israel.png"
+                (click)="changeLang($event.srcElement.alt)">
+        <img alt="EN" class="languages__language" src="assets/icons/us.png" (click)="changeLang($event.srcElement.alt)">
+        <img alt="ES" class="languages__language" src="assets/icons/spain.png"
+                (click)="changeLang($event.srcElement.alt)">
+        <img alt="RU" class="languages__language" src="assets/icons/russia.png"
+                (click)="changeLang($event.srcElement.alt)">
 </div>
