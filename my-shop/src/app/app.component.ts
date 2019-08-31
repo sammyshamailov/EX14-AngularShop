@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
-import { IProduct, MenuItems } from '../assets/models/index';
-import { DataService } from './services/data.service';
+import { MenuItems } from '../assets/models/index';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 
@@ -49,6 +48,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 }

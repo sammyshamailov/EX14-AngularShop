@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, ElementRef, AfterViewInit, AfterViewChecked, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct, IProductCategory } from '../../../assets/models/index';
 import { DataService } from 'src/app/services/data.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -10,10 +10,9 @@ import { Router } from '@angular/router';
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css']
 })
-export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class ProductsPageComponent implements OnInit {
 
   productsShown: IProduct[];
-  @ViewChildren('btn') buttons: QueryList<ElementRef>;
   get productsData(): IProduct[] { return this.dataService.getProducts(); };
   get categoryData(): IProductCategory[] { return this.dataService.getCategories(); };
   get categories(): string[] { return this.dataService.getCategoriesName(); };
@@ -24,9 +23,17 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
     private dataService: DataService,
     private cartService: CartService,
     private userService: UserService,
-    private renderer: Renderer2,
     private router: Router
   ) { }
+
+  setMyStyles(title: string) {
+    let styles = {
+      'background-image': this.cartService.getProductState(title) ?
+        "url('../../../assets/icons/remove.svg')" :
+        "url('../../../assets/icons/buy.svg')"
+    };
+    return styles;
+  }
 
   showChosenCategory(name: string) {
     this.productsShown = [];
@@ -49,37 +56,17 @@ export class ProductsPageComponent implements OnInit, AfterViewInit, AfterViewCh
     this.router.navigate(['/add-edit']);
   }
 
-  getProductState(productTitle: string): boolean {
-    return this.cartService.getProductState(productTitle);
-  }
-
-  changeProductState(productTitle: String) {
-    let button: ElementRef = this.buttons.find(button => button.nativeElement.value === productTitle);
-    let status: boolean = this.cartService.getProductState(button.nativeElement.value);
-    if (status) {
-      this.cartService.removeFromCart(button.nativeElement.value);
-      button.nativeElement.style.backgroundImage = "url('../../../assets/icons/buy.svg')";
+  changeProductState(productTitle: string) {
+    if (this.cartService.getProductState(productTitle)) {
+      this.cartService.removeFromCart(productTitle);
     }
     else {
-      this.cartService.addToCart(button.nativeElement.value);
-      button.nativeElement.style.backgroundImage = "url('../../../assets/icons/remove.svg')";
+      this.cartService.addToCart(productTitle);
     }
   }
 
   ngOnInit() {
     this.productsShown = this.productsData;
-  }
-
-  ngAfterViewInit() {
-    this.buttons.forEach(button => this.cartService.getProductState(button.nativeElement.value)
-      ? this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/remove.svg')")
-      : this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/buy.svg')"));
-  }
-
-  ngAfterViewChecked() {
-    this.buttons.forEach(button => this.cartService.getProductState(button.nativeElement.value)
-      ? this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/remove.svg')")
-      : this.renderer.setStyle(button.nativeElement, "background-image", "url('../../../assets/icons/buy.svg')"));
   }
 
 }

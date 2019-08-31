@@ -20,6 +20,7 @@ export class EditPageComponent implements OnInit {
   get BigImageForm(): AbstractControl { return this.editForm.get('BigImage'); };
   get TitleForm(): AbstractControl { return this.editForm.get('Title'); };
   get PriceForm(): AbstractControl { return this.editForm.get('Price'); };
+  get isDirty(): boolean { return this.editForm.dirty };
 
 
   constructor(

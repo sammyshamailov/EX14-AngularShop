@@ -5,7 +5,7 @@
 <div class="product-list">
     <div *ngFor="let product of productsShown" class="product-list__product">
         <div class="flex">
-            <button #btn [hidden]="!isLogged" class="product-list__product_button" value='{{ product.Title }}'
+            <button [ngStyle]='setMyStyles(product.Title)' [hidden]="!isLogged" class="product-list__product_button" value='{{ product.Title }}'
                 (click)='changeProductState($event.target.value)'></button>
             <button [hidden]="!isAdmin" class="product-list__product_edit-button" value='{{ product.Title }}'
                 (click)='goToEditProduct($event.target.value)'></button>

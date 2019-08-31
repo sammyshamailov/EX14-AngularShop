@@ -10,6 +10,8 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { EditPageComponent } from './components/edit-page/edit-page.component';
 import { LoggedGuard } from './guards/logged.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { OutFromFormGuard } from './guards/out-from-form.guard';
+import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
 
 
 //This is my case 
@@ -26,9 +28,9 @@ const routes: Routes = [
     },
     { path: 'product/:title', component: ProductComponent },
     { path: 'log-in', component: LoginPageComponent },
-    { path: 'add-edit', component: EditPageComponent, canActivate: [AdminGuard] },
+    { path: 'add-edit', component: EditPageComponent, canActivate: [AdminGuard], canDeactivate: [OutFromFormGuard] },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: '**', component: HomePageComponent }
+    { path: '**', component: ErrorNotFoundComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+span{
+    font-size: 300px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+}
+
+.not-found-content{
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin: auto;
+}
+
+.ultimate-question{
+    width: fit-content;
+    margin: auto;
+    font-size: x-large;
+}
+
+.forty-two-image{
+    display: flex;
+    justify-content: center;
+    flex: 0 0 50px;
+    margin: auto;
+    width: 50px;
+}
+
+.forty-two-image:hover{
+    cursor: pointer;
+}

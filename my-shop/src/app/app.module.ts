@@ -20,6 +20,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { EditPageComponent } from './components/edit-page/edit-page.component';
 import { LocalizationPipe } from './pipes/localization.pipe';
 import { PermissionDirective } from './directives/permission.directive';
+import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PermissionDirective } from './directives/permission.directive';
     LoginPageComponent,
     EditPageComponent,
     LocalizationPipe,
-    PermissionDirective
+    PermissionDirective,
+    ErrorNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,6 @@ import { PermissionDirective } from './directives/permission.directive';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

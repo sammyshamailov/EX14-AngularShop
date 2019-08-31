@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { CartService } from 'src/app/services/cart.service';
-import { MenuItems } from 'src/assets/models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,8 +11,6 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   private username: string;
   private password: string;
-  // @Output() backToHome = new EventEmitter<String>();
-  // menuItems = MenuItems
 
   constructor(
     private userService: UserService,
@@ -23,7 +20,6 @@ export class LoginPageComponent implements OnInit {
   logIn() {
     if (this.userService.logIn(this.username, this.password)) {
       this.cartService.currentCart = this.userService.cartPlace;
-      // this.backToHome.emit(this.menuItems.Home);
       this.router.navigate(['/home']);
     }
     else {

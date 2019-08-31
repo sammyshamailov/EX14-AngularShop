@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../assets/models/index';
 import { DataService } from 'src/app/services/data.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -14,15 +15,17 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private location: Location) { }
 
   hideDetailsPage() {
-    this.router.navigate(['../products']);
+    this.location.back();
   }
 
   ngOnInit() {
-    this.chosenProduct = this.dataService.getProduct(this.route.snapshot.paramMap.get(('title')));
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.chosenProduct = this.dataService.getProduct(params.get('title'));
+    });
   }
 
 }
