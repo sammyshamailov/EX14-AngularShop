@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../assets/models/index';
 import { DataService } from 'src/app/services/data.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -16,10 +16,11 @@ export class ProductComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location,
+    private router: Router) { }
 
   hideDetailsPage() {
-    this.location.back();
+    this.router.routerState.snapshot.url.includes('cart') ? this.router.navigate(['/cart']) : this.location.back();
   }
 
   ngOnInit() {
