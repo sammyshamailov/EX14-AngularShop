@@ -8,6 +8,6 @@
         required />
     <span [hidden]="!subjectInput.errors?.required">subject is required</span>
     Message: <textarea name="Password" placeholder="message content" [(ngModel)]="message"></textarea>
-    <button appPermission="Are You Sure?" (confirmation)='printChoice($event)' type="submit" class="login-form__login-btn"
-        [disabled]="!contactForm.form.valid">Send</button>
+    <button appPermission="Are You Sure?" (confirmation)='printChoice($event)' type="submit"
+        class="login-form__login-btn" [disabled]="!contactForm.form.valid">Send</button>
 </form>

@@ -16,21 +16,21 @@ import { ErrorNotFoundComponent } from './components/error-not-found/error-not-f
 
 //This is my case 
 const routes: Routes = [
-    { path: 'home', component: HomePageComponent },
-    { path: 'about', component: AboutPageComponent },
-    { path: 'contact', component: ContactPageComponent },
-    { path: 'products', component: ProductsPageComponent },
+    { path: 'home', component: HomePageComponent, data: { animation: 'Home' } },
+    { path: 'about', component: AboutPageComponent, data: { animation: 'About' } },
+    { path: 'contact', component: ContactPageComponent, data: { animation: 'Contact' } },
+    { path: 'products', component: ProductsPageComponent, data: { animation: 'Products' } },
     {
         path: 'cart', component: CartComponent, canActivate: [LoggedGuard],
         children: [{
-            path: 'product/:title', component: ProductComponent
+            path: 'product/:title', component: ProductComponent, data: { animation: 'Product' }
         }]
     },
-    { path: 'product/:title', component: ProductComponent },
-    { path: 'log-in', component: LoginPageComponent },
-    { path: 'add-edit', component: EditPageComponent, canActivate: [AdminGuard], canDeactivate: [OutFromFormGuard] },
+    { path: 'product/:title', component: ProductComponent, data: { animation: 'Product' } },
+    { path: 'log-in', component: LoginPageComponent, data: { animation: 'LogIn' } },
+    { path: 'add-edit', component: EditPageComponent, canActivate: [AdminGuard], canDeactivate: [OutFromFormGuard], data: { animation: 'Admin' } },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: '**', component: ErrorNotFoundComponent }
+    { path: '**', component: ErrorNotFoundComponent, data: { animation: 'NotFound' } }
 ];
 
 @NgModule({

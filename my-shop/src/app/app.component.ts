@@ -1,19 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MenuItems } from '../assets/models/index';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { UserService } from './services/user.service';
+import { slider } from './route-animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
-    trigger("fade", [
-      transition("* => *", [
-        style({ opacity: 0 }),
-        animate("0.2s 0.4s ease-in")])
-    ]),
     trigger('slideInOut', [
       state('in', style({
         transform: 'translate3d(0, 0, 0)'
@@ -23,7 +19,8 @@ import { UserService } from './services/user.service';
       })),
       transition('in => out', animate('400ms ease-in-out')),
       transition('out => in', animate('400ms ease-in-out'))
-    ])
+    ]),
+    slider,
   ]
 })
 export class AppComponent implements OnInit {
@@ -35,12 +32,16 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private router: Router) { }
 
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
   updateVisibility() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
   showChosenPage(chosenPage: String) {
-    if(chosenPage === this.menuItems.LogOut){
+    if (chosenPage === this.menuItems.LogOut) {
       this.userService.logOut();
       this.router.navigate(['/home']);
     }
