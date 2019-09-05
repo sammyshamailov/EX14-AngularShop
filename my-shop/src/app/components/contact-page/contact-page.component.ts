@@ -7,9 +7,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ContactPageComponent implements OnInit {
 
-  private email: string;
-  private subject: string;
-  private message: string = "";
+  email: string;
+  subject: string;
+  message: string = "";
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class ContactPageComponent implements OnInit {
     console.log("Email: ", this.email, "\nSubject: ", this.subject, "\nMessage: ", this.message);
   }
 
-  printChoice(message: string){
+  printChoice(message: string) {
     console.log(message);
   }
 

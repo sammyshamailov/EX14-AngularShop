@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  private username: string;
-  private password: string;
+  username: string;
+  password: string;
 
   constructor(
     private userService: UserService,
