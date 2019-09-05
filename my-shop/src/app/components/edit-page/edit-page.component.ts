@@ -10,10 +10,10 @@ import { IProduct } from 'src/assets/models';
 })
 export class EditPageComponent implements OnInit {
 
-  private editForm: FormGroup;
-  private popupHidden: boolean = true;
-  private categoriesNames: string[];
-  private editProduct: IProduct;
+  editForm: FormGroup;
+  popupHidden: boolean = true;
+  categoriesNames: string[];
+  editProduct: IProduct;
   get categories(): string[] { return this.dataService.getCategoriesName(); };
   get CategoryForm(): AbstractControl { return this.editForm.get('Category'); };
   get ImageForm(): AbstractControl { return this.editForm.get('Image'); };
