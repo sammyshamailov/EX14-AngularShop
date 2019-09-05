@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
-  updateVisibility() {
+  updateVisibility(event) {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
