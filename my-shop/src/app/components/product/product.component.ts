@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IProduct } from '../../../assets/models/index';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
 
   chosenProduct: IProduct;
 
@@ -27,6 +27,10 @@ export class ProductComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.chosenProduct = this.dataService.getProduct(params.get('title'));
     });
+  }
+
+  ngOnDestroy(){
+    this.chosenProduct = null;
   }
 
 }
