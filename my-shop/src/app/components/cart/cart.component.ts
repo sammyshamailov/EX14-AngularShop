@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { IProduct } from 'src/assets/models';
 import { Router, ActivatedRoute } from '@angular/router';
