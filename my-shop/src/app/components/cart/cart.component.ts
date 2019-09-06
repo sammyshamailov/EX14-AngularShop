@@ -19,13 +19,14 @@ export class CartComponent implements OnInit {
 
   removeFromCart(productTitle: string) {
     this.cartService.removeFromCart(productTitle);
-    if(this.activatedRoute.children){
+    if(this.cartService.cartProduct === productTitle){
       this.router.navigate(['/cart'], {relativeTo: this.activatedRoute});
     }
   }
 
-  showDetails(productTitle: String) {
+  showDetails(productTitle: string) {
     this.router.navigate(['/cart/product', productTitle], {relativeTo: this.activatedRoute});
+    this.cartService.cartProduct = productTitle;
   }
 
   ngOnInit() {

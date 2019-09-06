@@ -9,6 +9,9 @@ import { UserService } from './user.service';
 export class CartService {
   private carts: IProduct[][] = [];
   private currentUserCart: IProduct[] = [];
+  private cartSelectedProduct: string;
+  set cartProduct(title: string) { this.cartSelectedProduct = title };
+  get cartProduct(): string { return this.cartSelectedProduct };
   set currentCart(cartPlace: number){
     this.currentUserCart = this.carts[cartPlace];
   }
