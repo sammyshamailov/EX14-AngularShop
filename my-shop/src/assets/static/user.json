@@ -2,19 +2,16 @@
     {
         "Username": "user1",
         "Password": "user1",
-        "isAdmin": false,
-        "cartPlace": 0
+        "isAdmin": false
     },
     {
         "Username": "user2",
         "Password": "user2",
-        "isAdmin": false,
-        "cartPlace": 1
+        "isAdmin": false
     },
     {
         "Username": "admin",
         "Password": "admin",
-        "isAdmin": true,
-        "cartPlace": 2
+        "isAdmin": true
     }
 ]
