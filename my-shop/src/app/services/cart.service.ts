@@ -3,25 +3,32 @@ import { DataService } from './data.service';
 import { IProduct } from 'src/assets/models';
 import { UserService } from './user.service';
 
+interface ICart {
+  username: IProduct[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private carts: IProduct[][] = [];
+  private carts: ICart[] = [];
   private currentUserCart: IProduct[] = [];
   private cartSelectedProduct: string;
   set cartProduct(title: string) { this.cartSelectedProduct = title };
   get cartProduct(): string { return this.cartSelectedProduct };
-  set currentCart(cartPlace: number){
-    this.currentUserCart = this.carts[cartPlace];
-  }
 
   constructor(
     private dataService: DataService,
     private userService: UserService) {
-    for (let i: number = 0; i < this.userService.numOfUsers; i++) {
-      this.carts[i] = new Array<IProduct>();
+      const userNames: string[] = this.userService.allUsers.map(p => p.Username);
+      for (let i: number = 0; i < this.userService.numOfUsers; i++) {
+        this.carts[userNames[i]] = [];
+      }
+
     }
+
+  currentCart(currentUser: string): void {
+    this.currentUserCart = this.carts[currentUser];
   }
 
   getProducts(): IProduct[] {

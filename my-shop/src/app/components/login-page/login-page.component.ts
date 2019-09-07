@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-login-page',
@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
 
   logIn() {
     if (this.userService.logIn(this.username, this.password)) {
-      this.cartService.currentCart = this.userService.cartPlace;
+      this.cartService.currentCart(this.username);
       this.router.navigate(['/home']);
     }
     else {

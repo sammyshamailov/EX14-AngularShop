@@ -20,7 +20,8 @@ export class UserService {
       ? this.users.find(p => p.Username === localStorage.getItem('user')).isAdmin
       : false ;
   };
-  get cartPlace(): number { return this.users.find(p => p.Username === localStorage.getItem('user')).cartPlace };
+  get allUsers(): User[] { return this.users };
+  get currentUser(): string { return localStorage.getItem('user'); }
 
   constructor() { }
 
