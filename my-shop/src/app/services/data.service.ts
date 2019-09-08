@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import Product from '../../assets/static/product.json';
 import Category from '../../assets/static/category.json';
-import { IProduct, IProductCategory } from '../../assets/models/index';
-
+import { IProduct } from '../../models/iproduct';
+import { IProductCategory } from '../../models/iproduct-category';
 @Injectable({
   providedIn: 'root'
 })

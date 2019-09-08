@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IProduct } from '../../../assets/models/index';
+import { IProduct } from 'src/models/iproduct';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';

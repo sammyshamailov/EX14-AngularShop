@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { IProduct } from 'src/assets/models';
+import { IProduct } from '../../models/iproduct';
 import { UserService } from './user.service';
 
 interface ICart {

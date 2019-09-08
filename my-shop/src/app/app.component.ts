@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
-import { MenuItems } from '../assets/models/index';
+import { MenuItems } from '../models/menu-items';
 import { Router, RouterOutlet } from '@angular/router';
 import { UserService } from './services/user.service';
 import { slider } from './route-animations';

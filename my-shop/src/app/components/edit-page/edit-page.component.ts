@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
-import { IProduct } from 'src/assets/models';
+import { IProduct } from 'src/models/iproduct';
 
 @Component({
   selector: 'app-edit-page',

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MenuItems } from '../../../assets/models/index';
+import { MenuItems } from 'src/models/menu-items';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { LocalizationService } from 'src/app/services/localization.service';
