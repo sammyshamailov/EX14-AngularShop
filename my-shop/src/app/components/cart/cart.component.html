@@ -2,12 +2,12 @@
 <div class="product-list">
     <div *ngFor="let product of cartProducts" class="product-list__product">
         <div>
-            <button class="product-list__product-button" value='{{ product.Title }}' (click)='removeFromCart($event.target.value)'>
+            <button class="product-list__product-button" value='{{ product.Title }}' (click)='removeFromCart(product)'>
             </button>
         </div>
         <span>{{product.Title}}</span>
         <div class="product-list__product-image">
-            <img src='{{product.Image}}' alt='{{product.Title}}' (click)="showDetails($event.srcElement.alt)">
+            <img src='{{product.Image}}' alt='{{product.Title}}' (click)="showDetails(product.id)">
         </div>
         <span>Price: {{product.Price}}$</span>
     </div>

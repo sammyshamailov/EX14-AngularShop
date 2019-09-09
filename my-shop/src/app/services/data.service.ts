@@ -10,17 +10,19 @@ export class DataService {
   private products: IProduct[] = [];
   private editProduct: boolean = false;
   private productToEdit: string;
-  setToEdit(){ this.editProduct = !this.editProduct; };
-  getToEdit(){ return this.editProduct;  };
-  setProductForEdit(title: string) { this.productToEdit = title; };
-  getProductForEdit() { return this.productToEdit; };
+  get productListLength(): number {return this.products.length};
 
   constructor() { 
     this.products = Product;
   }
 
-  getProduct(title: string): IProduct{
-    return this.products.find(p => p.Title === title);
+  setToEdit(): void { this.editProduct = !this.editProduct; };
+  getToEdit(): boolean { return this.editProduct;  };
+  setProductForEdit(productId: string): void { this.productToEdit = productId; };
+  getProductForEdit(): string { return this.productToEdit; };
+
+  getProduct(productId: string): IProduct{
+    return this.products.find(p => p.id === productId);
   }
 
   getProducts(): IProduct[]{
@@ -51,16 +53,8 @@ export class DataService {
     return categoriesName;
   }
 
-  writeToList(productDetails){
-    const temp = JSON.stringify(this.products[0]);
-    let product: IProduct = JSON.parse(temp);
-    product.Title = productDetails.Title;
-    product.Price = productDetails.Price as string;
-    product.Image = productDetails.Image;
-    product.BigImage = productDetails.BigImage;
-    product.Description = productDetails.Description;
-    product.CategoryId = this.getCategoryId(productDetails.Category);
-    let productIndex: number = this.products.findIndex(p => p.Title === product.Title);
+  writeToList(product: IProduct){
+    let productIndex: number = this.products.findIndex(p => p.id === product.id);
     if(productIndex !== -1){
       this.products[productIndex] = product;
     }

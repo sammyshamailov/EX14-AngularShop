@@ -23,10 +23,10 @@ const routes: Routes = [
     {
         path: 'cart', component: CartComponent, canActivate: [LoggedGuard],
         children: [{
-            path: 'product/:title', component: ProductComponent, data: { animation: 'Product' }
+            path: 'product/:id', component: ProductComponent, data: { animation: 'Product' }
         }]
     },
-    { path: 'product/:title', component: ProductComponent, data: { animation: 'Product' } },
+    { path: 'product/:id', component: ProductComponent, data: { animation: 'Product' } },
     { path: 'log-in', component: LoginPageComponent, data: { animation: 'LogIn' } },
     { path: 'add-edit', component: EditPageComponent, canActivate: [AdminGuard], canDeactivate: [OutFromFormGuard], data: { animation: 'Admin' } },
     { path: '', redirectTo: '/home', pathMatch: 'full' },

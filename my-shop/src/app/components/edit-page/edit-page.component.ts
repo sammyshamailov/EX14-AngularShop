@@ -50,7 +50,17 @@ export class EditPageComponent implements OnInit {
 
   onSubmit() {
     const formModel = this.editForm.value;
-    this.dataService.writeToList(formModel);
+    const tempProduct = JSON.stringify(this.dataService.getProducts()[0]);
+    let product: IProduct = JSON.parse(tempProduct);
+    product.Title = ` ${formModel.Title} `;
+    product.Price = formModel.Price as string;
+    product.Image = formModel.Image;
+    product.BigImage = formModel.BigImage;
+    product.Description = formModel.Description;
+    product.CategoryId = this.dataService.getCategoryId(formModel.Category);
+    product.id = this.dataService.getToEdit()? this.editProduct.id: `${this.dataService.productListLength + 1}`;
+    this.dataService.setToEdit();
+    this.dataService.writeToList(product);
     this.popupHidden = false;
   }
 
@@ -67,11 +77,11 @@ export class EditPageComponent implements OnInit {
         Category: this.dataService.getProductCategory(this.editProduct.CategoryId),
         Image: this.editProduct.Image,
         BigImage: this.editProduct.BigImage,
-        Title: this.editProduct.Title,
+        Title: this.editProduct.Title.substring(1,this.editProduct.Title.length-1),
         Price: this.editProduct.Price,
         Description: this.editProduct.Description
       });
-      this.dataService.setToEdit();
+      this.editForm.markAsDirty();
     }
   }
 }

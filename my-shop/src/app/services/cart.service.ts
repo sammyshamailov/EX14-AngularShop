@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DataService } from './data.service';
 import { IProduct } from '../../models/iproduct';
 import { UserService } from './user.service';
 
@@ -14,11 +13,10 @@ export class CartService {
   private carts: ICart[] = [];
   private currentUserCart: IProduct[] = [];
   private cartSelectedProduct: string;
-  set cartProduct(title: string) { this.cartSelectedProduct = title };
+  set cartProduct(productId: string) { this.cartSelectedProduct = productId };
   get cartProduct(): string { return this.cartSelectedProduct };
 
   constructor(
-    private dataService: DataService,
     private userService: UserService) {
       const userNames: string[] = this.userService.allUsers.map(p => p.Username);
       for (let i: number = 0; i < this.userService.numOfUsers; i++) {
@@ -35,15 +33,15 @@ export class CartService {
     return this.currentUserCart;
   }
 
-  getProductState(title: string): boolean {
-    return this.currentUserCart.find(p => p.Title === title) ? true : false;
+  getProductState(product: IProduct): boolean {
+    return this.currentUserCart.find(p => p.id === product.id) ? true : false;
   }
 
-  addToCart(title: string) {
-    this.currentUserCart.push(this.dataService.getProducts().find(p => p.Title === title));
+  addToCart(product: IProduct) {
+    this.currentUserCart.push(product);
   }
 
-  removeFromCart(title: string) {
-    this.currentUserCart.splice(this.currentUserCart.findIndex(p => p.Title === title), 1);
+  removeFromCart(product: IProduct) {
+    this.currentUserCart.splice(this.currentUserCart.findIndex(p => p.id === product.id), 1);
   }
 }

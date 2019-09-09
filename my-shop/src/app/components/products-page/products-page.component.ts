@@ -27,9 +27,9 @@ export class ProductsPageComponent implements OnInit {
     private router: Router
   ) { }
 
-  setMyStyles(title: string) {
+  setMyStyles(product: IProduct) {
     let styles = {
-      'background-image': this.cartService.getProductState(title) ?
+      'background-image': this.cartService.getProductState(product) ?
         "url('../../../assets/icons/remove.svg')" :
         "url('../../../assets/icons/buy.svg')"
     };
@@ -47,22 +47,22 @@ export class ProductsPageComponent implements OnInit {
     }
   }
 
-  showDetailsPage(productTitle: String) {
-    this.router.navigate(['/product', productTitle]);
+  showDetailsPage(productId: String) {
+    this.router.navigate(['/product', productId]);
   }
 
-  goToEditProduct(productTitle: string) {
+  goToEditProduct(productId: string) {
     this.dataService.setToEdit();
-    this.dataService.setProductForEdit(productTitle)
+    this.dataService.setProductForEdit(productId)
     this.router.navigate(['/add-edit']);
   }
 
-  changeProductState(productTitle: string) {
-    if (this.cartService.getProductState(productTitle)) {
-      this.cartService.removeFromCart(productTitle);
+  changeProductState(product: IProduct) {
+    if (this.cartService.getProductState(product)) {
+      this.cartService.removeFromCart(product);
     }
     else {
-      this.cartService.addToCart(productTitle);
+      this.cartService.addToCart(product);
     }
   }
 
