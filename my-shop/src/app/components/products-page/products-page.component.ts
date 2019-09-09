@@ -62,6 +62,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
    }
 
   ngOnDestroy(){
+    //sending fictive category to show default all
     this.dataService.setCategory({id:'All', Title:'All'});
   }
 

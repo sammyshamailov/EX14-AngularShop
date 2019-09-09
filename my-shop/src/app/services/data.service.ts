@@ -155,7 +155,6 @@ export class DataService {
   }
 
   getCategory(categoryId: string): IProductCategory {
-    // return this.getCategories().find(p => p.Title === category).id;
     return this._categories.value.find(category => category.id === categoryId);
   }
 }
