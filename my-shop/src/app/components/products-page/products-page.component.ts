@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IProduct } from '../../../models/iproduct';
-import { IProductCategory } from '../../../models/iproduct-category';
 import { DataService } from 'src/app/services/data.service';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IProductCategory } from 'src/models/iproduct-category';
 
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css']
 })
-export class ProductsPageComponent implements OnInit {
+export class ProductsPageComponent implements OnInit, OnDestroy {
 
-  productsShown: IProduct[];
-  get productsData(): IProduct[] { return this.dataService.getProducts(); };
-  get categoryData(): IProductCategory[] { return this.dataService.getCategories(); };
-  get categories(): string[] { return this.dataService.getCategoriesName(); };
+  // get categories(): string[] { return this.dataService.getCategoriesName(); };
   get isLogged(): boolean { return this.userService.isLoggedIn };
   get isAdmin(): boolean { return this.userService.isAdmin };
+  products$: Observable<IProduct[]>;
+  categories$: Observable<IProductCategory[]>;
 
   constructor(
     private dataService: DataService,
@@ -36,24 +36,14 @@ export class ProductsPageComponent implements OnInit {
     return styles;
   }
 
-  showChosenCategory(name: string) {
-    this.productsShown = [];
-    if (name !== "All") {
-      let categoryId: string = this.categoryData.find(p => p.Title === name).id;
-      this.productsShown = this.productsData.filter(p => p.CategoryId === categoryId);
-    }
-    else {
-      this.productsShown = this.productsData;
-    }
+  showDetailsPage(product: IProduct) {
+    this.dataService.productToShow = product;
+    this.router.navigate(['/product', product.Title]);
   }
 
-  showDetailsPage(productId: String) {
-    this.router.navigate(['/product', productId]);
-  }
-
-  goToEditProduct(productId: string) {
+  goToEditProduct(product: IProduct) {
     this.dataService.setToEdit();
-    this.dataService.setProductForEdit(productId)
+    this.dataService.setProductForEdit(product)
     this.router.navigate(['/add-edit']);
   }
 
@@ -67,7 +57,12 @@ export class ProductsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productsShown = this.productsData;
+    this.products$ = this.dataService.productsObserv;
+    this.categories$ = this.dataService.categoriesObserv;
+   }
+
+  ngOnDestroy(){
+    this.dataService.setCategory({id:'All', Title:'All'});
   }
 
 }

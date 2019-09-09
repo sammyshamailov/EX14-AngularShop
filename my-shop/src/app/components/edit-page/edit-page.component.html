@@ -2,7 +2,9 @@
 <form [formGroup]="editForm" (ngSubmit)="onSubmit(); revert();" class="edit-form">
     Category:
     <select formControlName="Category">
-        <option *ngFor="let category of categoriesNames" value="{{ category }}">{{category}}</option>
+        <ng-container *ngFor="let category of (categories$ | async)">
+            <option *ngIf="category.Title !== 'All'" [ngValue]="category">{{ category.Title }}</option>
+        </ng-container>
     </select>
     <span *ngIf="CategoryForm.invalid && CategoryForm.errors.required">Category is required.</span>
     Image URL: <input type="text" formControlName="Image">

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { IProduct } from 'src/models/iproduct';
+import { Observable } from 'rxjs';
+import { IProductCategory } from 'src/models/iproduct-category';
 
 @Component({
   selector: 'app-edit-page',
@@ -12,9 +14,9 @@ export class EditPageComponent implements OnInit {
 
   editForm: FormGroup;
   popupHidden: boolean = true;
-  categoriesNames: string[];
   editProduct: IProduct;
-  get categories(): string[] { return this.dataService.getCategoriesName(); };
+  categories$: Observable<IProductCategory[]>;
+
   get CategoryForm(): AbstractControl { return this.editForm.get('Category'); };
   get ImageForm(): AbstractControl { return this.editForm.get('Image'); };
   get BigImageForm(): AbstractControl { return this.editForm.get('BigImage'); };
@@ -50,15 +52,15 @@ export class EditPageComponent implements OnInit {
 
   onSubmit() {
     const formModel = this.editForm.value;
-    const tempProduct = JSON.stringify(this.dataService.getProducts()[0]);
-    let product: IProduct = JSON.parse(tempProduct);
-    product.Title = ` ${formModel.Title} `;
-    product.Price = formModel.Price as string;
-    product.Image = formModel.Image;
-    product.BigImage = formModel.BigImage;
-    product.Description = formModel.Description;
-    product.CategoryId = this.dataService.getCategoryId(formModel.Category);
-    product.id = this.dataService.getToEdit()? this.editProduct.id: `${this.dataService.productListLength + 1}`;
+    const product: IProduct = {
+      Title: ` ${formModel.Title} `,
+      Price: formModel.Price as string,
+      Image: formModel.Image,
+      BigImage: formModel.BigImage,
+      Description: formModel.Description,
+      CategoryId: formModel.Category.id,
+      id: this.dataService.getToEdit() ? this.editProduct.id : `${this.dataService.productListLength + 1}`
+    };
     this.dataService.setToEdit();
     this.dataService.writeToList(product);
     this.popupHidden = false;
@@ -69,15 +71,14 @@ export class EditPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categoriesNames = this.categories;
-    this.categoriesNames.splice(this.categoriesNames.findIndex(p => p === "All"), 1);
+    this.categories$ = this.dataService.categoriesObserv;
     if (this.dataService.getToEdit()) {
-      this.editProduct = this.dataService.getProduct(this.dataService.getProductForEdit());
+      this.editProduct = this.dataService.getProductForEdit();
       this.editForm.setValue({
-        Category: this.dataService.getProductCategory(this.editProduct.CategoryId),
+        Category: this.dataService.getCategory(this.editProduct.CategoryId),
         Image: this.editProduct.Image,
         BigImage: this.editProduct.BigImage,
-        Title: this.editProduct.Title.substring(1,this.editProduct.Title.length-1),
+        Title: this.editProduct.Title.substring(1, this.editProduct.Title.length - 1),
         Price: this.editProduct.Price,
         Description: this.editProduct.Description
       });

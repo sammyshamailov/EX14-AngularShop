@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -18,9 +19,11 @@ import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { EditPageComponent } from './components/edit-page/edit-page.component';
+import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
+
 import { LocalizationPipe } from './pipes/localization.pipe';
 import { PermissionDirective } from './directives/permission.directive';
-import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import { ErrorNotFoundComponent } from './components/error-not-found/error-not-f
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
