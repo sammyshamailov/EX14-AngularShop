@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import Category from '../../assets/static/category.json';
 import { IProduct } from '../../models/iproduct';
 import { IProductCategory } from '../../models/iproduct-category';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -21,21 +20,38 @@ export class DataService {
   private productToEdit: IProduct;
   private chosenCategory: string = 'All';
   private productShow: IProduct;
+  private latestId: number;
 
+  /**
+   * Sets a product that was chosen for details.
+   */
   set productToShow(product: IProduct) {
     this.productShow = product;
   };
+
+  /**
+   * returns a product that was chosen for details.
+   */
   get productToShow(): IProduct {
     return this.productShow;
   };
+
+  /**
+   * returns the current category that was chosen by the user.
+   */
   get category(): string {
     return this.chosenCategory;
   };
-  get productListLength(): number {
-    return this.products.length;
+
+  /**
+   * returns new id for new product generated with the last product id.
+   */
+  get newProductId(): number {
+    return ++this.latestId;
   };
 
   constructor(private http: HttpClient) {
+    console.log('entered constructor');
     this.loadProducts();
     this.loadCategories();
   }
@@ -61,7 +77,10 @@ export class DataService {
    */
   private loadProducts() {
     this.getProductsPromise()
-      .then((o) => { this._products.next(o); });
+      .then((o) => { 
+        this._products.next(o);
+        this.latestId = o.length
+       });
   }
 
   /**
@@ -154,6 +173,11 @@ export class DataService {
     this._products.next(this.products);
   }
 
+  /**
+   * Gets category with the desired id and returns it.
+   * @param categoryId the id of the desired category.
+   * @returns the category object that has the same id .
+   */
   getCategory(categoryId: string): IProductCategory {
     return this._categories.value.find(category => category.id === categoryId);
   }

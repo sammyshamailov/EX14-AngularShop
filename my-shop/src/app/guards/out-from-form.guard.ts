@@ -19,7 +19,9 @@ export class OutFromFormGuard implements CanDeactivate<EditPageComponent> {
   ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
     if(component.isDirty){
       if(confirm("Are You Sure?")){
-        this.dataService.setToEdit();
+        if(this.dataService.getToEdit()){
+          this.dataService.setToEdit();
+        }
         return true;
       }
       return false;

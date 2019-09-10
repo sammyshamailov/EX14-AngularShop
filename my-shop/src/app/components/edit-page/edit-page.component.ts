@@ -52,16 +52,18 @@ export class EditPageComponent implements OnInit {
 
   onSubmit() {
     const formModel = this.editForm.value;
-    const product: IProduct = {
+    let product: IProduct = {
       Title: ` ${formModel.Title} `,
       Price: formModel.Price as string,
       Image: formModel.Image,
       BigImage: formModel.BigImage,
       Description: formModel.Description,
       CategoryId: formModel.Category.id,
-      id: this.dataService.getToEdit() ? this.editProduct.id : `${this.dataService.productListLength + 1}`
+      id: this.dataService.getToEdit() ? this.editProduct.id : (this.dataService.newProductId).toString()
     };
-    this.dataService.setToEdit();
+    if(this.dataService.getToEdit()){
+      this.dataService.setToEdit();
+    }
     this.dataService.writeToList(product);
     this.popupHidden = false;
   }
