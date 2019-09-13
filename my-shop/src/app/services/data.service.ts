@@ -62,8 +62,7 @@ export class DataService {
   getProductsPromise(): Promise<IProduct[]> {
     return this.http.get('../../assets/static/product.json')
       .pipe(
-        map(json => json as IProduct[]),
-        share()
+        map(json => json as IProduct[])
       )
       .toPromise()
       .catch(error => Promise.reject('error'));
@@ -89,8 +88,7 @@ export class DataService {
   getCategoriesPromise(): Promise<IProductCategory[]> {
     return this.http.get('../../assets/static/category.json')
       .pipe(
-        map(json => json as IProductCategory[]),
-        share()
+        map(json => json as IProductCategory[])
       )
       .toPromise()
       .catch(error => Promise.reject('error'));
