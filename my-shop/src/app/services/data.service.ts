@@ -51,7 +51,6 @@ export class DataService {
   };
 
   constructor(private http: HttpClient) {
-    console.log('entered constructor');
     this.loadProducts();
     this.loadCategories();
   }
@@ -64,7 +63,6 @@ export class DataService {
     return this.http.get('../../assets/static/product.json')
       .pipe(
         map(json => json as IProduct[]),
-        map(products => this.products = products),
         share()
       )
       .toPromise()
@@ -78,8 +76,9 @@ export class DataService {
   private loadProducts() {
     this.getProductsPromise()
       .then((o) => { 
+        this.products = o;
         this._products.next(o);
-        this.latestId = o.length
+        this.latestId = o.length;
        });
   }
 

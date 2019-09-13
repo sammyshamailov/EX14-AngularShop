@@ -18,7 +18,7 @@ export class CartService {
 
   constructor(
     private userService: UserService) {
-      const userNames: string[] = this.userService.allUsers.map(p => p.Username);
+      const userNames: string[] = this.userService.allUsers;
       for (let i: number = 0; i < this.userService.numOfUsers; i++) {
         this.carts[userNames[i]] = [];
       }

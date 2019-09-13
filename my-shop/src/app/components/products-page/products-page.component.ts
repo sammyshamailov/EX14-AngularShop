@@ -5,7 +5,9 @@ import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators'
 import { IProductCategory } from 'src/models/iproduct-category';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-products-page',
@@ -19,6 +21,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   get isAdmin(): boolean { return this.userService.isAdmin };
   products$: Observable<IProduct[]>;
   categories$: Observable<IProductCategory[]>;
+  curentUser$: Observable<User>;
 
   constructor(
     private dataService: DataService,
@@ -59,6 +62,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.products$ = this.dataService.productsObserv;
     this.categories$ = this.dataService.categoriesObserv;
+    this.curentUser$ = this.userService.usersObserv;
    }
 
   ngOnDestroy(){

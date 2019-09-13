@@ -1,8 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { MenuItems } from 'src/models/menu-items';
+import { User } from '../../../models/user';
+
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { LocalizationService } from 'src/app/services/localization.service';
+
 
 @Component({
   selector: 'app-menu',
@@ -13,9 +18,8 @@ export class MenuComponent implements OnInit {
 
   @Output() chosenPage = new EventEmitter<String>();
   menuItems = MenuItems;
+  curentUser$: Observable<User>;
   get cartAmount(): number { return this.cartService.getProducts().length };
-  get isLogged(): boolean { return this.userService.isLoggedIn };
-  get isAdmin(): boolean { return this.userService.isAdmin };
   get currLanguage(): string { return this.localizationService.currLanguage };
 
   constructor(
@@ -38,6 +42,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.curentUser$ = this.userService.usersObserv;
   }
 
 }
