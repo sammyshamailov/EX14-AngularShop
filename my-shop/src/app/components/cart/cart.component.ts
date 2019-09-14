@@ -3,6 +3,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { IProduct } from 'src/models/iproduct';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -10,9 +11,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-
-  get cartProducts(): IProduct[] { return this.cartService.getProducts() };
-
+  cartProducts$: Observable<IProduct[]>;
+  
   constructor(
     private cartService: CartService,
     private dataService: DataService,
@@ -33,6 +33,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cartProducts$ = this.cartService.cart;
   }
 
 }

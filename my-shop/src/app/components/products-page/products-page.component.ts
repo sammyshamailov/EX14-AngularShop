@@ -5,7 +5,6 @@ import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { share } from 'rxjs/operators'
 import { IProductCategory } from 'src/models/iproduct-category';
 import { User } from '../../../models/user';
 
@@ -16,9 +15,6 @@ import { User } from '../../../models/user';
 })
 export class ProductsPageComponent implements OnInit, OnDestroy {
 
-  // get categories(): string[] { return this.dataService.getCategoriesName(); };
-  get isLogged(): boolean { return this.userService.isLoggedIn };
-  get isAdmin(): boolean { return this.userService.isAdmin };
   products$: Observable<IProduct[]>;
   categories$: Observable<IProductCategory[]>;
   curentUser$: Observable<User>;

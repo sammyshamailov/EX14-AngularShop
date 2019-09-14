@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, share, shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { User } from '../../models/user';
 
 @Injectable({
@@ -12,27 +12,22 @@ export class UserService {
   private _currentUser = new BehaviorSubject(null);
   public readonly usersObserv: Observable<User> = this._currentUser.asObservable().pipe(shareReplay(1));
   private users: User[];
+
   private usernames: string[];
+  get allUsers(): string[] { return this.usernames };
 
   private userListLength: number;
   get numOfUsers(): number { return this.userListLength };
 
   get isLoggedIn(): boolean { return localStorage.getItem('user') ? true : false; };
-  get isAdmin(): boolean {
-    return localStorage.getItem('user')
-      ? this.users.find(p => p.Username === localStorage.getItem('user')).isAdmin
-      : false ;
-  };
-  get allUsers(): string[] { return this.usernames };
-  
 
   constructor(private http: HttpClient) {
     this.loadUsers();
    }
 
   /**
-   * Gets the products data and changes it accordingly.
-   * @returns promise representation of the products list.
+   * Gets the users data and changes it accordingly.
+   * @returns promise representation of the users list.
    */
   getUserPromise(): Promise<User[]> {
     return this.http.get('../../assets/static/user.json')
@@ -44,7 +39,7 @@ export class UserService {
   }
 
   /**
-   * Loads products into the BehaviorSubject variable.
+   * Loads users into the the private list variable.
    */
   private loadUsers() {
     this.getUserPromise()
@@ -57,6 +52,12 @@ export class UserService {
        });
   }
 
+  /**
+   * function for logging in to the system.
+   * @param username the username typed in form.
+   * @param password the password typed in form.
+   * @returns true if details are correct.
+   */
   logIn(username: string, password: string): boolean {
     let user = this.users.find(p => p.Username === username && p.Password === password);
     if (user) {
@@ -67,6 +68,9 @@ export class UserService {
     return false;
   }
 
+  /**
+   * Logs out from the system.
+   */
   logOut(): void {
     localStorage.removeItem('user');
     this._currentUser.next(null);

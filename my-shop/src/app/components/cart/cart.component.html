@@ -1,6 +1,6 @@
 <span class="header">Your Cart</span>
 <div class="product-list">
-    <div *ngFor="let product of cartProducts" class="product-list__product">
+    <div *ngFor="let product of (cartProducts$ | async)" class="product-list__product">
         <div>
             <button class="product-list__product-button" value='{{ product.Title }}' (click)='removeFromCart(product)'>
             </button>

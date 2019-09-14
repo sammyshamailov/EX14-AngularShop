@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map, shareReplay, delay } from 'rxjs/operators';
 
 import { MenuItems } from 'src/models/menu-items';
 import { User } from '../../../models/user';
@@ -7,6 +8,7 @@ import { User } from '../../../models/user';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { LocalizationService } from 'src/app/services/localization.service';
+import { IProduct } from 'src/models/iproduct';
 
 
 @Component({
@@ -18,9 +20,11 @@ export class MenuComponent implements OnInit {
 
   @Output() chosenPage = new EventEmitter<String>();
   menuItems = MenuItems;
-  curentUser$: Observable<User>;
-  get cartAmount(): number { return this.cartService.getProducts().length };
+  currentUser$: Observable<User>;
+  currentCart$: Observable<IProduct[]>;
+  temp;
   get currLanguage(): string { return this.localizationService.currLanguage };
+  cartAmount: number;
 
   constructor(
     private cartService: CartService,
@@ -42,7 +46,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.curentUser$ = this.userService.usersObserv;
+    this.currentUser$ = this.userService.usersObserv;
+    this.temp = this.cartService.cart.subscribe(p => this.cartAmount = p.length);
   }
-
 }

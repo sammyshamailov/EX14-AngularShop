@@ -2,17 +2,17 @@
         <li class="menu__item" routerLink='/home' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Home | localization: currLanguage }}</li>
         <li class="menu__item" routerLink='/cart' routerLinkActive='active-route-class'
-                [routerLinkActiveOptions]='{exact: true}' *ngIf="(curentUser$ | async)">
+                [routerLinkActiveOptions]='{exact: true}' *ngIf="(currentUser$ | async)">
                 {{ menuItems.Cart | localization: currLanguage }}
                 ({{ cartAmount }})</li>
         <li class="menu__item" routerLink='/products' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Products | localization: currLanguage }}</li>
         <li class="menu__item" routerLink='/log-in' routerLinkActive='active-route-class'
-                [routerLinkActiveOptions]='{exact: true}' *ngIf="!(curentUser$ | async)">
+                [routerLinkActiveOptions]='{exact: true}' *ngIf="!(currentUser$ | async)">
                 {{ menuItems.LogIn | localization: currLanguage }}</li>
-        <li class="menu__item" *ngIf="(curentUser$ | async)" title="{{ menuItems.LogOut }}">
+        <li class="menu__item" *ngIf="(currentUser$ | async)" title="{{ menuItems.LogOut }}">
                 {{ menuItems.LogOut | localization: currLanguage }}</li>
-        <ng-container *ngIf="(curentUser$ | async) as user">
+        <ng-container *ngIf="(currentUser$ | async) as user">
                 <li class="menu__item" routerLink='/add-edit' routerLinkActive='active-route-class'
                         [routerLinkActiveOptions]='{exact: true}'
                         *ngIf="user.isAdmin">
