@@ -16,8 +16,6 @@ export class HeaderComponent implements OnInit {
     this.visible = !this.visible;
   }
 
-  
-
   ngOnInit() {
   }
 

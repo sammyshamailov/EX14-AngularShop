@@ -1,26 +1,26 @@
-<ul (click)="menuItemClicked($event)">
-        <li class="menu__item" routerLink='/home' routerLinkActive='active-route-class'
+<ul (click)="menuItemClicked($event.srcElement.title)">
+        <li title="{{ menuItems.Home }}" class="menu__item" routerLink='/home' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Home | localization: currLanguage }}</li>
-        <li class="menu__item" routerLink='/cart' routerLinkActive='active-route-class'
+        <li title="{{ menuItems.Cart }}" class="menu__item" routerLink='/cart' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}' *ngIf="(currentUser$ | async)">
                 {{ menuItems.Cart | localization: currLanguage }}
-                ({{ cartAmount }})</li>
-        <li class="menu__item" routerLink='/products' routerLinkActive='active-route-class'
+                ({{ (currentCart$ | async).length }})</li>
+        <li title="{{ menuItems.Products }}" class="menu__item" routerLink='/products' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Products | localization: currLanguage }}</li>
-        <li class="menu__item" routerLink='/log-in' routerLinkActive='active-route-class'
+        <li title="{{ menuItems.LogIn }}" class="menu__item" routerLink='/log-in' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}' *ngIf="!(currentUser$ | async)">
                 {{ menuItems.LogIn | localization: currLanguage }}</li>
-        <li class="menu__item" *ngIf="(currentUser$ | async)" title="{{ menuItems.LogOut }}">
+        <li title="{{ menuItems.LogOut }}" class="menu__item" *ngIf="(currentUser$ | async)" title="{{ menuItems.LogOut }}">
                 {{ menuItems.LogOut | localization: currLanguage }}</li>
         <ng-container *ngIf="(currentUser$ | async) as user">
-                <li class="menu__item" routerLink='/add-edit' routerLinkActive='active-route-class'
+                <li title="{{ menuItems.Admin }}" class="menu__item" routerLink='/add-edit' routerLinkActive='active-route-class'
                         [routerLinkActiveOptions]='{exact: true}'
                         *ngIf="user.isAdmin">
                         {{ menuItems.Admin | localization: currLanguage }}</li>
         </ng-container>
-        <li class="menu__item" routerLink='/about' routerLinkActive='active-route-class'
+        <li title="{{ menuItems.About }}" class="menu__item" routerLink='/about' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.About | localization: currLanguage }}</li>
-        <li class="menu__item" routerLink='/contact' routerLinkActive='active-route-class'
+        <li title="{{ menuItems.Contact }}" class="menu__item" routerLink='/contact' routerLinkActive='active-route-class'
                 [routerLinkActiveOptions]='{exact: true}'>{{ menuItems.Contact | localization: currLanguage }}</li>
 </ul>
 

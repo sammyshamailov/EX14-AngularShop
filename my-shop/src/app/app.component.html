@@ -1,5 +1,5 @@
-<app-header (isVisible)="updateVisibility($event)"></app-header>
-<app-menu (chosenPage)="showChosenPage($event)" [@slideInOut]='menuState'></app-menu>
+<app-header (isVisible)="updateVisibility()"></app-header>
+<app-menu (chosenPage)="updateVisibility()" [@slideInOut]='menuState'></app-menu>
 
 <div [@routeAnimations]="prepareRoute(outlet)" >
   <router-outlet #outlet="outlet"></router-outlet>

@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class CartComponent implements OnInit {
   cartProducts$: Observable<IProduct[]>;
-  
+
   constructor(
     private cartService: CartService,
     private dataService: DataService,

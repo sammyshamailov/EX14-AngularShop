@@ -3,7 +3,7 @@ import { IProduct } from '../../models/iproduct';
 import { IProductCategory } from '../../models/iproduct-category';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, share } from 'rxjs/operators';
+import { map, shareReplay, share } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })

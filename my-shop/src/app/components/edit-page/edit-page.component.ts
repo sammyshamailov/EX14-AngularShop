@@ -16,6 +16,7 @@ export class EditPageComponent implements OnInit {
   popupHidden: boolean = true;
   editProduct: IProduct;
   categories$: Observable<IProductCategory[]>;
+  editProductCategory: IProductCategory;
 
   get CategoryForm(): AbstractControl { return this.editForm.get('Category'); };
   get ImageForm(): AbstractControl { return this.editForm.get('Image'); };
@@ -61,7 +62,7 @@ export class EditPageComponent implements OnInit {
       CategoryId: formModel.Category.id,
       id: this.dataService.getToEdit() ? this.editProduct.id : (this.dataService.newProductId).toString()
     };
-    if(this.dataService.getToEdit()){
+    if (this.dataService.getToEdit()) {
       this.dataService.setToEdit();
     }
     this.dataService.writeToList(product);
@@ -75,9 +76,16 @@ export class EditPageComponent implements OnInit {
   ngOnInit() {
     this.categories$ = this.dataService.categoriesObserv;
     if (this.dataService.getToEdit()) {
+      this.dataService.categoriesObserv.subscribe(
+        categories => {
+          // this.editProductCategory = categories.find(category => category.id === this.editProduct.CategoryId);
+          this.editForm.patchValue({
+            Category: categories.find(category => category.id === this.editProduct.CategoryId)
+          });
+      });
       this.editProduct = this.dataService.getProductForEdit();
-      this.editForm.setValue({
-        Category: this.dataService.getCategory(this.editProduct.CategoryId),
+      this.editForm.patchValue({
+        // Category: this.editProductCategory.Title,
         Image: this.editProduct.Image,
         BigImage: this.editProduct.BigImage,
         Title: this.editProduct.Title.substring(1, this.editProduct.Title.length - 1),

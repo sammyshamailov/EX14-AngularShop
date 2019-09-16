@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MenuItems } from '../models/menu-items';
-import { Router, RouterOutlet } from '@angular/router';
-import { UserService } from './services/user.service';
+import { RouterOutlet } from '@angular/router';
 import { slider } from './route-animations';
 
 @Component({
@@ -28,23 +27,13 @@ export class AppComponent implements OnInit {
   menuItems = MenuItems;
   menuState: string = 'out';
 
-  constructor(
-    private userService: UserService,
-    private router: Router) {}
+  constructor() {}
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
-  updateVisibility(event) {
-    this.menuState = this.menuState === 'out' ? 'in' : 'out';
-  }
-
-  showChosenPage(chosenPage: String) {
-    if (chosenPage === this.menuItems.LogOut) {
-      this.userService.logOut();
-      this.router.navigate(['/home']);
-    }
+  updateVisibility() {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 

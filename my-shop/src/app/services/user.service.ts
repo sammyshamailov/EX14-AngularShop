@@ -13,12 +13,6 @@ export class UserService {
   public readonly usersObserv: Observable<User> = this._currentUser.asObservable().pipe(shareReplay(1));
   private users: User[];
 
-  private usernames: string[];
-  get allUsers(): string[] { return this.usernames };
-
-  private userListLength: number;
-  get numOfUsers(): number { return this.userListLength };
-
   get isLoggedIn(): boolean { return localStorage.getItem('user') ? true : false; };
 
   constructor(private http: HttpClient) {
@@ -29,7 +23,7 @@ export class UserService {
    * Gets the users data and changes it accordingly.
    * @returns promise representation of the users list.
    */
-  getUserPromise(): Promise<User[]> {
+  public getUserPromise(): Promise<User[]> {
     return this.http.get('../../assets/static/user.json')
       .pipe(
         map(json => json as User[]),
@@ -41,12 +35,10 @@ export class UserService {
   /**
    * Loads users into the the private list variable.
    */
-  private loadUsers() {
+  private loadUsers(): void {
     this.getUserPromise()
       .then((users) => { 
         this.users = users;
-        this.userListLength = users.length;
-        this.usernames = users.map(user => user.Username);
         let username = localStorage.getItem('user');
         username? this._currentUser.next(this.users.find(o => o.Username === username)): this._currentUser.next(null);
        });
@@ -58,7 +50,7 @@ export class UserService {
    * @param password the password typed in form.
    * @returns true if details are correct.
    */
-  logIn(username: string, password: string): boolean {
+  public logIn(username: string, password: string): boolean {
     let user = this.users.find(p => p.Username === username && p.Password === password);
     if (user) {
       localStorage.setItem('user', username);
@@ -71,7 +63,7 @@ export class UserService {
   /**
    * Logs out from the system.
    */
-  logOut(): void {
+  public logOut(): void {
     localStorage.removeItem('user');
     this._currentUser.next(null);
   }
