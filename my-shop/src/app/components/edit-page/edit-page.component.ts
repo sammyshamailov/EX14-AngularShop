@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
-import { IProduct } from 'src/models/iproduct';
 import { Observable } from 'rxjs';
-import { IProductCategory } from 'src/models/iproduct-category';
+
+import { DataService } from '../../services/data.service'
+
+import { IProductCategory } from '../../../models/iproduct-category';
+import { IProduct } from '../../../models/iproduct';
 
 @Component({
   selector: 'app-edit-page',
@@ -18,13 +20,12 @@ export class EditPageComponent implements OnInit {
   categories$: Observable<IProductCategory[]>;
   editProductCategory: IProductCategory;
 
-  get CategoryForm(): AbstractControl { return this.editForm.get('Category'); };
-  get ImageForm(): AbstractControl { return this.editForm.get('Image'); };
-  get BigImageForm(): AbstractControl { return this.editForm.get('BigImage'); };
-  get TitleForm(): AbstractControl { return this.editForm.get('Title'); };
-  get PriceForm(): AbstractControl { return this.editForm.get('Price'); };
+  get CategoryForm(): AbstractControl { return this.editForm.get('Category') };
+  get ImageForm(): AbstractControl { return this.editForm.get('Image') };
+  get BigImageForm(): AbstractControl { return this.editForm.get('BigImage') };
+  get TitleForm(): AbstractControl { return this.editForm.get('Title') };
+  get PriceForm(): AbstractControl { return this.editForm.get('Price') };
   get isDirty(): boolean { return this.editForm.dirty };
-
 
   constructor(
     fb: FormBuilder,
@@ -78,9 +79,9 @@ export class EditPageComponent implements OnInit {
     if (this.dataService.getToEdit()) {
       this.dataService.categoriesObserv.subscribe(
         categories => {
-          // this.editProductCategory = categories.find(category => category.id === this.editProduct.CategoryId);
+          let temp = categories.find(category => category.id === this.editProduct.CategoryId);
           this.editForm.patchValue({
-            Category: categories.find(category => category.id === this.editProduct.CategoryId)
+            Category: temp
           });
       });
       this.editProduct = this.dataService.getProductForEdit();
