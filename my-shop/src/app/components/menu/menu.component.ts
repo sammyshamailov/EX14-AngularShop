@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { MenuItems } from 'src/models/menu-items';
 import { User } from '../../../models/user';
@@ -8,7 +9,6 @@ import { IProduct } from 'src/models/iproduct';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { LocalizationService } from 'src/app/services/localization.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -30,6 +30,11 @@ export class MenuComponent implements OnInit {
     private router: Router
   ) { }
 
+  /**
+   * function that emits when an item on menu is clicked.
+   * It emits an output for app component for menu sliding.
+   * @param menuItem a string representation of menu item.
+   */
   menuItemClicked(menuItem: string): void {
     if (menuItem === this.menuItems.LogOut) {
       this.userService.logOut();
@@ -38,6 +43,11 @@ export class MenuComponent implements OnInit {
     this.chosenPage.emit('');
   }
 
+  /**
+   * function that emits when an language item is clicked.
+   * It sends the requested lang to the service.
+   * @param chosenLang a string representation of language.
+   */
   changeLang(chosenLang: string): void {
     this.localizationService.changeLang(chosenLang);
   }

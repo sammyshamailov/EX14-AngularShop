@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IProduct } from '../../models/iproduct';
-import { IProductCategory } from '../../models/iproduct-category';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, shareReplay, share } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+
+import { IProduct } from '../../models/iproduct';
+import { IProductCategory } from '../../models/iproduct-category';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,7 @@ export class DataService {
 
   private _categories = new BehaviorSubject([]);
   public readonly categoriesObserv: Observable<IProductCategory[]> = this._categories.asObservable();
-  
+
   private editProduct: boolean = false;
   private productToEdit: IProduct;
   private chosenCategory: string = 'All';
@@ -68,17 +70,16 @@ export class DataService {
       .catch(error => Promise.reject('error'));
   }
 
-
   /**
    * Loads products into the BehaviorSubject variable.
    */
   private loadProducts() {
     this.getProductsPromise()
-      .then((o) => { 
+      .then((o) => {
         this.products = o;
         this._products.next(o);
         this.latestId = o.length;
-       });
+      });
   }
 
   /**
@@ -94,17 +95,15 @@ export class DataService {
       .catch(error => Promise.reject('error'));
   }
 
-
   /**
    * Loads categories into the BehaviorSubject variable.
    */
   private loadCategories() {
     this.getCategoriesPromise()
-      .then((o) => { 
-        this._categories.next(o); 
+      .then((o) => {
+        this._categories.next(o);
       });
   }
-
 
   /**
    * Sets the current category that was chosen by user.
@@ -121,7 +120,6 @@ export class DataService {
     }
     this._products.next(shownProducts);
   }
-
 
   /**
    * Sets the state for editing an product to true.
@@ -176,6 +174,11 @@ export class DataService {
    * @returns the category object that has the same id .
    */
   getCategory(categoryId: string): IProductCategory {
-    return this._categories.value.find(category => category.id === categoryId);
+    let returnedCategory: IProductCategory;
+    this.categoriesObserv.subscribe(
+      categories => {
+        returnedCategory = categories.find(category => category.id === categoryId)
+      });
+      return returnedCategory;
   }
 }

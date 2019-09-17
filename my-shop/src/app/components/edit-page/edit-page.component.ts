@@ -20,6 +20,7 @@ export class EditPageComponent implements OnInit {
   categories$: Observable<IProductCategory[]>;
   editProductCategory: IProductCategory;
 
+  //getters for the form controls.
   get CategoryForm(): AbstractControl { return this.editForm.get('Category') };
   get ImageForm(): AbstractControl { return this.editForm.get('Image') };
   get BigImageForm(): AbstractControl { return this.editForm.get('BigImage') };
@@ -41,6 +42,9 @@ export class EditPageComponent implements OnInit {
     });
   }
 
+  /**
+   * Resets the form to initial state.
+   */
   revert(): void {
     this.editForm.reset({
       Category: '',
@@ -52,7 +56,7 @@ export class EditPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const formModel = this.editForm.value;
     let product: IProduct = {
       Title: ` ${formModel.Title} `,
@@ -70,30 +74,22 @@ export class EditPageComponent implements OnInit {
     this.popupHidden = false;
   }
 
-  closePopup() {
+  closePopup(): void {
     this.popupHidden = true;
   }
 
   ngOnInit() {
     this.categories$ = this.dataService.categoriesObserv;
-    if (this.dataService.getToEdit()) {
-      this.dataService.categoriesObserv.subscribe(
-        categories => {
-          let temp = categories.find(category => category.id === this.editProduct.CategoryId);
-          this.editForm.patchValue({
-            Category: temp
-          });
-      });
-      this.editProduct = this.dataService.getProductForEdit();
-      this.editForm.patchValue({
-        // Category: this.editProductCategory.Title,
-        Image: this.editProduct.Image,
-        BigImage: this.editProduct.BigImage,
-        Title: this.editProduct.Title.substring(1, this.editProduct.Title.length - 1),
-        Price: this.editProduct.Price,
-        Description: this.editProduct.Description
-      });
-      this.editForm.markAsDirty();
-    }
+    this.editProduct = this.dataService.getProductForEdit();
+    this.editForm.setValue({
+      Category: this.dataService.getCategory(this.editProduct.CategoryId),
+      Image: this.editProduct.Image,
+      BigImage: this.editProduct.BigImage,
+      Title: this.editProduct.Title.substring(1, this.editProduct.Title.length - 1),
+      Price: this.editProduct.Price,
+      Description: this.editProduct.Description
+    });
+    this.editForm.markAsDirty();
   }
 }
+
