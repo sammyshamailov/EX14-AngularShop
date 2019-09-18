@@ -61,7 +61,7 @@ export class DataService {
    * Gets the products data and changes it accordingly.
    * @returns promise representation of the products list.
    */
-  getProductsPromise(): Promise<IProduct[]> {
+  private getProductsPromise(): Promise<IProduct[]> {
     return this.http.get('../../assets/static/product.json')
       .pipe(
         map(json => json as IProduct[])
@@ -86,7 +86,7 @@ export class DataService {
    * Gets the categories data and changes it accordingly.
    * @returns promise representation of the categories list.
    */
-  getCategoriesPromise(): Promise<IProductCategory[]> {
+  private getCategoriesPromise(): Promise<IProductCategory[]> {
     return this.http.get('../../assets/static/category.json')
       .pipe(
         map(json => json as IProductCategory[])
@@ -109,7 +109,7 @@ export class DataService {
    * Sets the current category that was chosen by user.
    * @param categoryName chosen category from dropdown box.
    */
-  setCategory(category: IProductCategory) {
+  public setCategory(category: IProductCategory) {
     this.chosenCategory = category.Title;
     let shownProducts: IProduct[] = [];
     if (category.Title !== 'All') {
@@ -125,7 +125,7 @@ export class DataService {
    * Sets the state for editing an product to true.
    * this add/edit page knows if the user wants to edit or add new product.
    */
-  setToEdit(): void {
+  public setToEdit(): void {
     this.editProduct = !this.editProduct;
   }
 
@@ -133,7 +133,7 @@ export class DataService {
    * Gets the state of editing an product.
    * @returns true if the user clicked on edit button.
    */
-  getToEdit(): boolean {
+  public getToEdit(): boolean {
     return this.editProduct;
   }
 
@@ -141,7 +141,7 @@ export class DataService {
    * Sets product for editing mode.
    * @param product this is the product that was selected for edit.
    */
-  setProductForEdit(product: IProduct): void {
+  public setProductForEdit(product: IProduct): void {
     this.productToEdit = product;
   }
 
@@ -149,7 +149,7 @@ export class DataService {
    * Gets product for editing mode.
    * @returns the product that needs to be edited.
    */
-  getProductForEdit(): IProduct {
+  public getProductForEdit(): IProduct {
     return this.productToEdit;
   }
 
@@ -157,7 +157,7 @@ export class DataService {
    * Writes to the products list.
    * @param product the product that was added/edited
    */
-  writeToList(product: IProduct) {
+  public writeToList(product: IProduct) {
     let productIndex: number = this.products.findIndex(p => p.id === product.id);
     if (productIndex !== -1) {
       this.products[productIndex] = product;
@@ -173,7 +173,7 @@ export class DataService {
    * @param categoryId the id of the desired category.
    * @returns the category object that has the same id .
    */
-  getCategory(categoryId: string): IProductCategory {
+  public getCategory(categoryId: string): IProductCategory {
     let returnedCategory: IProductCategory;
     this.categoriesObserv.subscribe(
       categories => {

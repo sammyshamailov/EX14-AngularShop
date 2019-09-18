@@ -5,7 +5,7 @@
 <div class="product-list">
     <div *ngFor="let product of (products$ | async)" class="product-list__product">
         <div class="flex" *ngIf="(curentUser$ | async) as user">
-            <button [ngStyle]='setMyStyles(product)' *ngIf="user" class="product-list__product_button"
+            <button [ngStyle]='setMyStyles(product)' class="product-list__product_button"
                 value='{{ product.Title }}' (click)='changeProductState(product)'></button>
             <button *ngIf="user.isAdmin" class="product-list__product_edit-button" value='{{ product.Title }}'
                 (click)='goToEditProduct(product)'></button>

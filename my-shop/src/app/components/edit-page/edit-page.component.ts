@@ -56,6 +56,9 @@ export class EditPageComponent implements OnInit {
     });
   }
 
+  /**
+   * function for sending the edited or new product to the service.
+   */
   onSubmit(): void {
     const formModel = this.editForm.value;
     let product: IProduct = {
@@ -67,6 +70,7 @@ export class EditPageComponent implements OnInit {
       CategoryId: formModel.Category.id,
       id: this.dataService.getToEdit() ? this.editProduct.id : (this.dataService.newProductId).toString()
     };
+    //enter when the admin submitted an product edit.
     if (this.dataService.getToEdit()) {
       this.dataService.setToEdit();
     }
@@ -74,22 +78,28 @@ export class EditPageComponent implements OnInit {
     this.popupHidden = false;
   }
 
+  /**
+   * Closes popup when X pressed.
+   */
   closePopup(): void {
     this.popupHidden = true;
   }
 
   ngOnInit() {
     this.categories$ = this.dataService.categoriesObserv;
-    this.editProduct = this.dataService.getProductForEdit();
-    this.editForm.setValue({
-      Category: this.dataService.getCategory(this.editProduct.CategoryId),
-      Image: this.editProduct.Image,
-      BigImage: this.editProduct.BigImage,
-      Title: this.editProduct.Title.substring(1, this.editProduct.Title.length - 1),
-      Price: this.editProduct.Price,
-      Description: this.editProduct.Description
-    });
-    this.editForm.markAsDirty();
+    //enter when the admin wants to edit a product.
+    if (this.dataService.getToEdit()) {
+      this.editProduct = this.dataService.getProductForEdit();
+      this.editForm.setValue({
+        Category: this.dataService.getCategory(this.editProduct.CategoryId),
+        Image: this.editProduct.Image,
+        BigImage: this.editProduct.BigImage,
+        Title: this.editProduct.Title.substring(1, this.editProduct.Title.length - 1),
+        Price: this.editProduct.Price,
+        Description: this.editProduct.Description
+      });
+      this.editForm.markAsDirty();
+    }
   }
 }
 

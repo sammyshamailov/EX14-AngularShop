@@ -1,12 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IProduct } from '../../../models/iproduct';
-import { DataService } from 'src/app/services/data.service';
-import { CartService } from 'src/app/services/cart.service';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IProductCategory } from 'src/models/iproduct-category';
+
+import { IProduct } from '../../../models/iproduct';
+import { IProductCategory } from '../../../models/iproduct-category';
 import { User } from '../../../models/user';
+
+import { DataService } from '../../services/data.service';
+import { CartService } from '../../services/cart.service';
+import { UserService } from '../../services/user.service';
+
+
 
 @Component({
   selector: 'app-products-page',
@@ -26,6 +30,11 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
+  /**
+   * Sets my styles
+   * @param product 
+   * @returns  
+   */
   setMyStyles(product: IProduct) {
     let styles = {
       'background-image': this.cartService.getProductState(product) ?

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
-import { IProduct } from 'src/models/iproduct';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
 import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { CartService } from '../../services/cart.service';
+import { DataService } from '../../services/data.service';
+
+import { IProduct } from '../../../models/iproduct';
+
+
 
 @Component({
   selector: 'app-cart',
@@ -19,14 +23,24 @@ export class CartComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
-  removeFromCart(product: IProduct) {
+  /**
+   * Removes the requested product from the cart.
+   * @param product the requested product.
+   */
+  removeFromCart(product: IProduct): void {
     this.cartService.removeFromCart(product);
+    //enter when the removed product was displayed in details page.
     if(this.cartService.cartProduct === product.id){
       this.router.navigate(['/cart'], {relativeTo: this.activatedRoute});
     }
   }
 
-  showDetails(product: IProduct) {
+  /**
+   * Shows details of selected product.
+   * When product is clicked, the function emits and goes to product component.
+   * @param product  the selected product.
+   */
+  showDetails(product: IProduct): void {
     this.dataService.productToShow = product;
     this.router.navigate(['/cart/product', product.Title], {relativeTo: this.activatedRoute});
     this.cartService.cartProduct = product.id;
