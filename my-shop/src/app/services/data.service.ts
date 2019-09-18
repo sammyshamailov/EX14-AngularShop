@@ -157,7 +157,7 @@ export class DataService {
    * Writes to the products list.
    * @param product the product that was added/edited
    */
-  public writeToList(product: IProduct) {
+  public writeToList(product: IProduct): void {
     let productIndex: number = this.products.findIndex(p => p.id === product.id);
     if (productIndex !== -1) {
       this.products[productIndex] = product;

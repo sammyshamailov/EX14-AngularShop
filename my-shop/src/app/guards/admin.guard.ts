@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+
 import { UserService } from '../services/user.service';
+
 import { User } from '../../models/user';
-import { map, first, take } from 'rxjs/operators';
 
 
 @Injectable({
@@ -31,19 +32,5 @@ export class AdminGuard implements CanActivate {
         resolve(true);
       });
     })
-
-    // let isAdmin: boolean;
-    // return new Promise((resolve, reject) => {
-    //   this.userService.usersObserv.toPromise()
-    //     .then(o => {
-    //       isAdmin = o ? o.isAdmin : false;
-    //       if (!isAdmin) {
-    //         this.router.navigate(['/home']);
-    //         resolve(false);
-    //       }
-    //       resolve(true);
-    //     })
-    // })
   }
-
 }

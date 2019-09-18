@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IProduct } from '../../models/iproduct';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+
+import { IProduct } from '../../models/iproduct';
 
 interface ICart {
   username: IProduct[];
@@ -27,7 +28,7 @@ export class CartService {
 
   /**
    * Gets the users data and changes it accordingly.
-   * @returns promise representation of the users list.
+   * @returns Promise representation of the users list.
    */
   private getCartPromise(): Promise<ICart[]> {
     return this.http.get('../../assets/static/cart.json')
@@ -52,11 +53,21 @@ export class CartService {
        });
   }
 
+  /**
+   * Sets the current cart for current logged user.
+   * Called from menu component.
+   * @param currentUser The username of logged user.
+   */
   public currentCart(currentUser: string): void {
     this.currentUserCart = this.carts[currentUser];
     this._cart.next(this.currentUserCart);
   }
 
+  /**
+   * Returns the state of the product in cart.
+   * @param product The selected product from the list.
+   * @returns true if product in cart.
+   */
   public getProductState(product: IProduct): boolean {
     let temp: IProduct[];
     this._cart.subscribe(p => {
@@ -65,11 +76,19 @@ export class CartService {
     return temp.find(p => p.id === product.id) ? true : false;
   }
 
+  /**
+   * Adds product to cart.
+   * @param product The selected product.
+   */
   public addToCart(product: IProduct): void {
     this.currentUserCart.push(product);
     this._cart.next(this.currentUserCart);
   }
 
+  /**
+   * Removes product from cart.
+   * @param product The selected product.
+   */
   public removeFromCart(product: IProduct): void {
     this.currentUserCart.splice(this.currentUserCart.findIndex(p => p.id === product.id), 1);
     this._cart.next(this.currentUserCart);

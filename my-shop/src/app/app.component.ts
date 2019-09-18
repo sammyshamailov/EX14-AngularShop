@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations'
-import { MenuItems } from '../models/menu-items';
 import { RouterOutlet } from '@angular/router';
+
 import { slider } from './route-animations';
+import { trigger, state, style, transition, animate } from '@angular/animations'
+
+import { MenuItems } from '../models/menu-items';
 
 @Component({
   selector: 'app-root',
@@ -29,11 +31,20 @@ export class AppComponent implements OnInit {
 
   constructor() {}
 
+  /**
+   * Returns the current activated route.
+   * @param outlet The root outlet.
+   * @returns The current activated route.
+   */
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
-  updateVisibility() {
+  /**
+   * Updates visibility of menu.
+   * Emits when hamburger/menu item is clicked.
+   */
+  updateVisibility(): void {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 

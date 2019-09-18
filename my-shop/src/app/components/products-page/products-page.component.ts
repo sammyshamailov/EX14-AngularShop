@@ -31,11 +31,11 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   ) { }
 
   /**
-   * Sets my styles
-   * @param product 
-   * @returns  
+   * Function for buy/remove button ngStyle.
+   * @param product a product from the list.
+   * @returns Remove image if in cart, else buy image.
    */
-  setMyStyles(product: IProduct) {
+  setMyStyles(product: IProduct): {'background-image': string} {
     let styles = {
       'background-image': this.cartService.getProductState(product) ?
         "url('../../../assets/icons/remove.svg')" :
@@ -44,24 +44,35 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
     return styles;
   }
 
-  showDetailsPage(product: IProduct) {
+  /**
+   * Sets in dataService the selected product for details
+   * and navigates to product component.
+   * @param product The chosen product.
+   */
+  showDetailsPage(product: IProduct): void {
     this.dataService.productToShow = product;
     this.router.navigate(['/product', product.Title]);
   }
 
-  goToEditProduct(product: IProduct) {
+  /**
+   * Sets in dataService the selected product for edit
+   * and navigates to add/edit component.
+   * @param product The chosen product for edit.
+   */
+  goToEditProduct(product: IProduct): void {
     this.dataService.setToEdit();
     this.dataService.setProductForEdit(product)
     this.router.navigate(['/add-edit']);
   }
 
+  /**
+   * Changes product state (add/remove from cart).
+   * @param product The selected product.
+   */
   changeProductState(product: IProduct) {
-    if (this.cartService.getProductState(product)) {
-      this.cartService.removeFromCart(product);
-    }
-    else {
-      this.cartService.addToCart(product);
-    }
+    this.cartService.getProductState(product)?
+    this.cartService.removeFromCart(product):
+    this.cartService.addToCart(product);
   }
 
   ngOnInit() {
