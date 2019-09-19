@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
-import { IProduct } from 'src/assets/models';
+import { Observable } from 'rxjs';
+
+import { DataService } from '../../services/data.service'
+
+import { IProductCategory } from '../../../models/iproduct-category';
+import { IProduct } from '../../../models/iproduct';
 
 @Component({
   selector: 'app-edit-page',
@@ -12,16 +16,17 @@ export class EditPageComponent implements OnInit {
 
   editForm: FormGroup;
   popupHidden: boolean = true;
-  categoriesNames: string[];
   editProduct: IProduct;
-  get categories(): string[] { return this.dataService.getCategoriesName(); };
-  get CategoryForm(): AbstractControl { return this.editForm.get('Category'); };
-  get ImageForm(): AbstractControl { return this.editForm.get('Image'); };
-  get BigImageForm(): AbstractControl { return this.editForm.get('BigImage'); };
-  get TitleForm(): AbstractControl { return this.editForm.get('Title'); };
-  get PriceForm(): AbstractControl { return this.editForm.get('Price'); };
-  get isDirty(): boolean { return this.editForm.dirty };
+  categories$: Observable<IProductCategory[]>;
+  editProductCategory: IProductCategory;
 
+  //getters for the form controls.
+  get CategoryForm(): AbstractControl { return this.editForm.get('Category') };
+  get ImageForm(): AbstractControl { return this.editForm.get('Image') };
+  get BigImageForm(): AbstractControl { return this.editForm.get('BigImage') };
+  get TitleForm(): AbstractControl { return this.editForm.get('Title') };
+  get PriceForm(): AbstractControl { return this.editForm.get('Price') };
+  get isDirty(): boolean { return this.editForm.dirty };
 
   constructor(
     fb: FormBuilder,
@@ -37,6 +42,9 @@ export class EditPageComponent implements OnInit {
     });
   }
 
+  /**
+   * Resets the form to initial state.
+   */
   revert(): void {
     this.editForm.reset({
       Category: '',
@@ -48,30 +56,50 @@ export class EditPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  /**
+   * function for sending the edited or new product to the service.
+   */
+  onSubmit(): void {
     const formModel = this.editForm.value;
-    this.dataService.writeToList(formModel);
+    let product: IProduct = {
+      Title: ` ${formModel.Title} `,
+      Price: formModel.Price as string,
+      Image: formModel.Image,
+      BigImage: formModel.BigImage,
+      Description: formModel.Description,
+      CategoryId: formModel.Category.id,
+      id: this.dataService.getToEdit() ? this.editProduct.id : (this.dataService.newProductId).toString()
+    };
+    //enter when the admin submitted an product edit.
+    if (this.dataService.getToEdit()) {
+      this.dataService.setToEdit();
+    }
+    this.dataService.writeToList(product);
     this.popupHidden = false;
   }
 
-  closePopup() {
+  /**
+   * Closes popup when X pressed.
+   */
+  closePopup(): void {
     this.popupHidden = true;
   }
 
   ngOnInit() {
-    this.categoriesNames = this.categories;
-    this.categoriesNames.splice(this.categoriesNames.findIndex(p => p === "All"), 1);
+    this.categories$ = this.dataService.categoriesObserv;
+    //enter when the admin wants to edit a product.
     if (this.dataService.getToEdit()) {
-      this.editProduct = this.dataService.getProduct(this.dataService.getProductForEdit());
+      this.editProduct = this.dataService.getProductForEdit();
       this.editForm.setValue({
-        Category: this.dataService.getProductCategory(this.editProduct.CategoryId),
+        Category: this.dataService.getCategory(this.editProduct.CategoryId),
         Image: this.editProduct.Image,
         BigImage: this.editProduct.BigImage,
-        Title: this.editProduct.Title,
+        Title: this.editProduct.Title.substring(1, this.editProduct.Title.length - 1),
         Price: this.editProduct.Price,
         Description: this.editProduct.Description
       });
-      this.dataService.setToEdit();
+      this.editForm.markAsDirty();
     }
   }
 }
+

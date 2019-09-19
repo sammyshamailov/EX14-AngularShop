@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations'
-import { MenuItems } from '../assets/models/index';
-import { Router, RouterOutlet } from '@angular/router';
-import { UserService } from './services/user.service';
+import { RouterOutlet } from '@angular/router';
+
 import { slider } from './route-animations';
+import { trigger, state, style, transition, animate } from '@angular/animations'
+
+import { MenuItems } from '../models/menu-items';
 
 @Component({
   selector: 'app-root',
@@ -28,23 +29,22 @@ export class AppComponent implements OnInit {
   menuItems = MenuItems;
   menuState: string = 'out';
 
-  constructor(
-    private userService: UserService,
-    private router: Router) { }
+  constructor() {}
 
+  /**
+   * Returns the current activated route.
+   * @param outlet The root outlet.
+   * @returns The current activated route.
+   */
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
-  updateVisibility(event) {
-    this.menuState = this.menuState === 'out' ? 'in' : 'out';
-  }
-
-  showChosenPage(chosenPage: String) {
-    if (chosenPage === this.menuItems.LogOut) {
-      this.userService.logOut();
-      this.router.navigate(['/home']);
-    }
+  /**
+   * Updates visibility of menu.
+   * Emits when hamburger/menu item is clicked.
+   */
+  updateVisibility(): void {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 

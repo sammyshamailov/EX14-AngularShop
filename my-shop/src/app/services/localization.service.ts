@@ -21,14 +21,20 @@ export class LocalizationService {
 
   constructor() { }
 
+  /**
+   * Changes current language.
+   * @param lang The selected language.
+   */
   changeLang(lang: string) {
     this.currentLang = lang;
   }
 
-  getWord(word: string): string { 
-    return languagesData[this.currentLang][word]; 
-  }
-
+  /**
+   * Returns translation of word.
+   * @param word The desired word.
+   * @param lang The desired language.
+   * @returns Translation of the word.
+   */
   getTranslation(word: string, lang: string): string {
     return languagesData[lang][word];
   }

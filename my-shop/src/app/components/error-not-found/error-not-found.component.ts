@@ -10,7 +10,10 @@ export class ErrorNotFoundComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  moveToHome(){
+  /**
+   * Navigates to home component when 42 image is clicked.
+   */
+  moveToHome(): void {
     this.router.navigate(['/home']);
   }
 

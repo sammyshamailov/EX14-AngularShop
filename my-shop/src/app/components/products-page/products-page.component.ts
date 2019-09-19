@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { IProduct, IProductCategory } from '../../../assets/models/index';
-import { DataService } from 'src/app/services/data.service';
-import { CartService } from 'src/app/services/cart.service';
-import { UserService } from 'src/app/services/user.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { IProduct } from '../../../models/iproduct';
+import { IProductCategory } from '../../../models/iproduct-category';
+import { User } from '../../../models/user';
+
+import { DataService } from '../../services/data.service';
+import { CartService } from '../../services/cart.service';
+import { UserService } from '../../services/user.service';
+
+
 
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css']
 })
-export class ProductsPageComponent implements OnInit {
+export class ProductsPageComponent implements OnInit, OnDestroy {
 
-  productsShown: IProduct[];
-  get productsData(): IProduct[] { return this.dataService.getProducts(); };
-  get categoryData(): IProductCategory[] { return this.dataService.getCategories(); };
-  get categories(): string[] { return this.dataService.getCategoriesName(); };
-  get isLogged(): boolean { return this.userService.isLoggedIn };
-  get isAdmin(): boolean { return this.userService.isAdmin };
+  products$: Observable<IProduct[]>;
+  categories$: Observable<IProductCategory[]>;
+  curentUser$: Observable<User>;
 
   constructor(
     private dataService: DataService,
@@ -26,47 +30,60 @@ export class ProductsPageComponent implements OnInit {
     private router: Router
   ) { }
 
-  setMyStyles(title: string) {
+  /**
+   * Function for buy/remove button ngStyle.
+   * @param product a product from the list.
+   * @returns Remove image if in cart, else buy image.
+   */
+  setMyStyles(product: IProduct): {'background-image': string} {
     let styles = {
-      'background-image': this.cartService.getProductState(title) ?
+      'background-image': this.cartService.getProductState(product) ?
         "url('../../../assets/icons/remove.svg')" :
         "url('../../../assets/icons/buy.svg')"
     };
     return styles;
   }
 
-  showChosenCategory(name: string) {
-    this.productsShown = [];
-    if (name !== "All") {
-      let categoryId: string = this.categoryData.find(p => p.Title === name).id;
-      this.productsShown = this.productsData.filter(p => p.CategoryId === categoryId);
-    }
-    else {
-      this.productsShown = this.productsData;
-    }
+  /**
+   * Sets in dataService the selected product for details
+   * and navigates to product component.
+   * @param product The chosen product.
+   */
+  showDetailsPage(product: IProduct): void {
+    this.dataService.productToShow = product;
+    this.router.navigate(['/product', product.Title]);
   }
 
-  showDetailsPage(productTitle: String) {
-    this.router.navigate(['/product', productTitle]);
-  }
-
-  goToEditProduct(productTitle: string) {
+  /**
+   * Sets in dataService the selected product for edit
+   * and navigates to add/edit component.
+   * @param product The chosen product for edit.
+   */
+  goToEditProduct(product: IProduct): void {
     this.dataService.setToEdit();
-    this.dataService.setProductForEdit(productTitle)
+    this.dataService.setProductForEdit(product)
     this.router.navigate(['/add-edit']);
   }
 
-  changeProductState(productTitle: string) {
-    if (this.cartService.getProductState(productTitle)) {
-      this.cartService.removeFromCart(productTitle);
-    }
-    else {
-      this.cartService.addToCart(productTitle);
-    }
+  /**
+   * Changes product state (add/remove from cart).
+   * @param product The selected product.
+   */
+  changeProductState(product: IProduct) {
+    this.cartService.getProductState(product)?
+    this.cartService.removeFromCart(product):
+    this.cartService.addToCart(product);
   }
 
   ngOnInit() {
-    this.productsShown = this.productsData;
+    this.products$ = this.dataService.productsObserv;
+    this.categories$ = this.dataService.categoriesObserv;
+    this.curentUser$ = this.userService.usersObserv;
+   }
+
+  ngOnDestroy(){
+    //sending fictive category to show default all
+    this.dataService.setCategory({id:'All', Title:'All'});
   }
 
 }

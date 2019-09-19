@@ -1,4 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { DataService } from 'src/app/services/data.service';
+
+import { IProductCategory } from 'src/models/iproduct-category';
 
 @Component({
   selector: 'app-category-choice',
@@ -7,16 +11,19 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class CategoryChoiceComponent implements OnInit {
 
-  @Output() chosenCategory = new EventEmitter<string>();
-  @Input() categories: string[];
+  @Input() categories: IProductCategory[];
+  get chosenCategory(): string { return this.dataService.category }
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
-  showChosenCategory(categoryName: string){
-    this.chosenCategory.emit(categoryName);
+  /**
+   * The function sends the selected category to the service
+   * and product-list component sets the filtered products.
+   * @param categoryName The selected category.
+   */
+  showChosenCategory(categoryName: string): void {
+    this.dataService.setCategory(this.categories.find(p => p.Title === categoryName));
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }

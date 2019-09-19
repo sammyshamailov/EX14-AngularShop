@@ -1,8 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MenuItems } from '../../../assets/models/index';
-import { CartService } from 'src/app/services/cart.service';
-import { UserService } from 'src/app/services/user.service';
-import { LocalizationService } from 'src/app/services/localization.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { MenuItems } from '../../../models/menu-items';
+import { User } from '../../../models/user';
+import { IProduct } from '../../../models/iproduct';
+
+import { CartService } from '../../services/cart.service';
+import { UserService } from '../../services/user.service';
+import { LocalizationService } from '../../services/localization.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,33 +17,43 @@ import { LocalizationService } from 'src/app/services/localization.service';
 })
 export class MenuComponent implements OnInit {
 
-  @Output() chosenPage = new EventEmitter<String>();
+  @Output() chosenPage = new EventEmitter<string>();
   menuItems = MenuItems;
-  get cartAmount(): number { return this.cartService.getProducts().length };
-  get isLogged(): boolean { return this.userService.isLoggedIn };
-  get isAdmin(): boolean { return this.userService.isAdmin };
+  currentUser$: Observable<User>;
+  currentCart$: Observable<IProduct[]>;
   get currLanguage(): string { return this.localizationService.currLanguage };
 
   constructor(
     private cartService: CartService,
     private userService: UserService,
-    private localizationService: LocalizationService
+    private localizationService: LocalizationService,
+    private router: Router
   ) { }
 
-  menuItemClicked(menuItem) {
-    if (menuItem.srcElement.title === this.menuItems.LogOut) {
-      this.chosenPage.emit(this.menuItems.LogOut);
+  /**
+   * function that emits when an item on menu is clicked.
+   * It emits an output to app component for menu sliding.
+   * @param menuItem a string representation of menu item.
+   */
+  menuItemClicked(menuItem: string): void {
+    if (menuItem === this.menuItems.LogOut) {
+      this.userService.logOut();
+      this.router.navigate(['/home']);
     }
-    else {
-      this.chosenPage.emit('');
-    }
+    this.chosenPage.emit('');
   }
 
-  changeLang(chosenLang: string) {
+  /**
+   * function that emits when an language item is clicked.
+   * It sends the requested lang to the service.
+   * @param chosenLang a string representation of language.
+   */
+  changeLang(chosenLang: string): void {
     this.localizationService.changeLang(chosenLang);
   }
 
   ngOnInit() {
+    this.currentUser$ = this.userService.usersObserv;
+    this.currentCart$ = this.cartService.cart;
   }
-
 }

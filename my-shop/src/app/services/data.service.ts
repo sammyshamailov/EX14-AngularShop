@@ -1,71 +1,186 @@
 import { Injectable } from '@angular/core';
-import Product from '../../assets/static/product.json';
-import Category from '../../assets/static/category.json';
-import { IProduct, IProductCategory } from '../../assets/models/index';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+import { IProduct } from '../../models/iproduct';
+import { IProductCategory } from '../../models/iproduct-category';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
+  private _products = new BehaviorSubject([]);
+  public readonly productsObserv: Observable<IProduct[]> = this._products.asObservable();
   private products: IProduct[] = [];
+
+  private _categories = new BehaviorSubject([]);
+  public readonly categoriesObserv: Observable<IProductCategory[]> = this._categories.asObservable();
+
   private editProduct: boolean = false;
-  private productToEdit: string;
-  setToEdit(){ this.editProduct = !this.editProduct; };
-  getToEdit(){ return this.editProduct;  };
-  setProductForEdit(title: string) { this.productToEdit = title; };
-  getProductForEdit() { return this.productToEdit; };
+  private productToEdit: IProduct;
+  private chosenCategory: string = 'All';
+  private productShow: IProduct;
+  private latestId: number;
 
-  constructor() { 
-    this.products = Product;
+  /**
+   * Sets a product that was chosen for details.
+   */
+  set productToShow(product: IProduct) {
+    this.productShow = product;
+  };
+
+  /**
+   * returns a product that was chosen for details.
+   */
+  get productToShow(): IProduct {
+    return this.productShow;
+  };
+
+  /**
+   * returns the current category that was chosen by the user.
+   */
+  get category(): string {
+    return this.chosenCategory;
+  };
+
+  /**
+   * returns new id for new product generated with the last product id.
+   */
+  get newProductId(): number {
+    return ++this.latestId;
+  };
+
+  constructor(private http: HttpClient, private cartService: CartService) {
+    this.loadProducts();
+    this.loadCategories();
   }
 
-  getProduct(title: string): IProduct{
-    return this.products.find(p => p.Title === title);
+  /**
+   * Gets the products data and changes it accordingly.
+   * @returns promise representation of the products list.
+   */
+  private getProductsPromise(): Promise<IProduct[]> {
+    return this.http.get('../../assets/static/product.json')
+      .pipe(
+        map(json => json as IProduct[])
+      )
+      .toPromise()
+      .catch(error => Promise.reject('error'));
   }
 
-  getProducts(): IProduct[]{
-    return this.products;
+  /**
+   * Loads products into the BehaviorSubject variable.
+   */
+  private loadProducts() {
+    this.getProductsPromise()
+      .then((o) => {
+        this.products = o;
+        this._products.next(o);
+        this.latestId = o.length;
+      });
   }
 
-  getCategories(): IProductCategory[]{
-    return Category as IProductCategory[];
+  /**
+   * Gets the categories data and changes it accordingly.
+   * @returns promise representation of the categories list.
+   */
+  private getCategoriesPromise(): Promise<IProductCategory[]> {
+    return this.http.get('../../assets/static/category.json')
+      .pipe(
+        map(json => json as IProductCategory[])
+      )
+      .toPromise()
+      .catch(error => Promise.reject('error'));
   }
 
-  getProductCategory(categoryId: string): string {
-    return this.getCategories().find(p => p.id === categoryId).Title;
+  /**
+   * Loads categories into the BehaviorSubject variable.
+   */
+  private loadCategories() {
+    this.getCategoriesPromise()
+      .then((o) => {
+        this._categories.next(o);
+      });
   }
 
-  getCategoryId(category: string): string {
-    return this.getCategories().find(p => p.Title === category).id;
-  }
-
-  getCategoriesName(): string[]{
-    let categoriesName: string[] = [];
-    let categories: IProductCategory[] = this.getCategories();
-    categoriesName.push("All");
-    for (let i = 0; i < categories.length; i++){
-      if(!categoriesName.find(p => p === categories[i].Title)){
-        categoriesName.push(categories[i].Title);
-      }
+  /**
+   * Sets the current category that was chosen by user.
+   * @param categoryName chosen category from dropdown box.
+   */
+  public setCategory(category: IProductCategory) {
+    this.chosenCategory = category.Title;
+    let shownProducts: IProduct[] = [];
+    if (category.Title !== 'All') {
+      shownProducts = this.products.filter(product => product.CategoryId === category.id);
     }
-    return categoriesName;
+    else {
+      shownProducts = this.products;
+    }
+    this._products.next(shownProducts);
   }
 
-  writeToList(productDetails){
-    const temp = JSON.stringify(this.products[0]);
-    let product: IProduct = JSON.parse(temp);
-    product.Title = productDetails.Title;
-    product.Price = productDetails.Price as string;
-    product.Image = productDetails.Image;
-    product.BigImage = productDetails.BigImage;
-    product.Description = productDetails.Description;
-    product.CategoryId = this.getCategoryId(productDetails.Category);
-    let productIndex: number = this.products.findIndex(p => p.Title === product.Title);
-    if(productIndex !== -1){
+  /**
+   * Sets the state for editing an product to true.
+   * this add/edit page knows if the user wants to edit or add new product.
+   */
+  public setToEdit(): void {
+    this.editProduct = !this.editProduct;
+  }
+
+  /**
+   * Gets the state of editing an product.
+   * @returns true if the user clicked on edit button.
+   */
+  public getToEdit(): boolean {
+    return this.editProduct;
+  }
+
+  /**
+   * Sets product for editing mode.
+   * @param product this is the product that was selected for edit.
+   */
+  public setProductForEdit(product: IProduct): void {
+    this.productToEdit = product;
+  }
+
+  /**
+   * Gets product for editing mode.
+   * @returns the product that needs to be edited.
+   */
+  public getProductForEdit(): IProduct {
+    return this.productToEdit;
+  }
+
+  /**
+   * Writes to the products list.
+   * @param product the product that was added/edited
+   */
+  public writeToList(product: IProduct): void {
+    let productIndex: number = this.products.findIndex(p => p.id === product.id);
+    if (productIndex !== -1) {
       this.products[productIndex] = product;
+      this.cartService.updateProduct(product);
     }
-    else{
+    else {
       this.products.push(product);
     }
+    this._products.next(this.products);
+  }
+
+  /**
+   * Gets category with the desired id and returns it.
+   * @param categoryId the id of the desired category.
+   * @returns the category object that has the same id .
+   */
+  public getCategory(categoryId: string): IProductCategory {
+    let returnedCategory: IProductCategory;
+    this.categoriesObserv.subscribe(
+      categories => {
+        returnedCategory = categories.find(category => category.id === categoryId)
+      });
+      return returnedCategory;
   }
 }
