@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 
 import { IProduct } from '../../models/iproduct';
-
-interface ICart {
-  username: IProduct[];
-}
 
 @Injectable({
   providedIn: 'root'
@@ -15,51 +9,33 @@ interface ICart {
 export class CartService {
   private _cart: BehaviorSubject<IProduct[]> = new BehaviorSubject<IProduct[]>([]);
   public readonly cart: Observable<IProduct[]> = this._cart.asObservable();
-  private carts: ICart[] = [];
+
+  private carts: IProduct[][] = [];
   private currentUserCart: IProduct[] = [];
+  private usernames: string[] = []; //helper array for users cart indexing in carts array
 
   private cartSelectedProduct: string;
   set cartProduct(productId: string) { this.cartSelectedProduct = productId };
   get cartProduct(): string { return this.cartSelectedProduct };
 
-  constructor(private http: HttpClient) {
-    this.loadCarts();
-  }
-
-  /**
-   * Gets the users data and changes it accordingly.
-   * @returns Promise representation of the users list.
-   */
-  private getCartPromise(): Promise<ICart[]> {
-    return this.http.get('../../assets/static/cart.json')
-      .pipe(
-        map(json =>  json as ICart[])
-      )
-      .toPromise()
-      .catch((error) => Promise.reject('error'));
-  }
-
-  /**
-   * Loads users into the the private list variable.
-   */
-  private loadCarts() {
-    this.getCartPromise()
-      .then((carts) => { 
-        this.carts = carts;
-        if(localStorage.getItem('user')){
-          this.currentUserCart = this.carts[localStorage.getItem('user')];
-          this._cart.next(this.currentUserCart);
-        }
-       });
+  constructor() {
+    if (localStorage.getItem('user')) {
+      this.currentCart(localStorage.getItem('user'));
+    }
   }
 
   /**
    * Sets the current cart for current logged user.
-   * Called from menu component.
+   * The carts array updates dynamically if the user has
+   * logged for the first time.
    * @param currentUser The username of logged user.
    */
   public currentCart(currentUser: string): void {
-    this.currentUserCart = this.carts[currentUser];
+    if (!this.usernames.find(username => username === currentUser)) {
+      this.usernames.push(currentUser);
+      this.carts[this.usernames.indexOf(currentUser)] = [];
+    }
+    this.currentUserCart = this.carts[this.usernames.indexOf(currentUser)];
     this._cart.next(this.currentUserCart);
   }
 
@@ -92,5 +68,18 @@ export class CartService {
   public removeFromCart(product: IProduct): void {
     this.currentUserCart.splice(this.currentUserCart.findIndex(p => p.id === product.id), 1);
     this._cart.next(this.currentUserCart);
+  }
+
+  /**
+   * Updates edited product if in cart.
+   * @param product The edited product.
+   */
+  public updateProduct(editedProduct: IProduct): void {
+    for (let i: number = 0; i < this.carts.length; i++) {
+      let productIndex: number = this.carts[i].findIndex(product => product.id === editedProduct.id);
+      if (productIndex !== -1){
+        this.carts[i][productIndex] = editedProduct;
+      }
+    }
   }
 }

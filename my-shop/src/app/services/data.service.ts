@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { IProduct } from '../../models/iproduct';
 import { IProductCategory } from '../../models/iproduct-category';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class DataService {
     return ++this.latestId;
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cartService: CartService) {
     this.loadProducts();
     this.loadCategories();
   }
@@ -161,6 +162,7 @@ export class DataService {
     let productIndex: number = this.products.findIndex(p => p.id === product.id);
     if (productIndex !== -1) {
       this.products[productIndex] = product;
+      this.cartService.updateProduct(product);
     }
     else {
       this.products.push(product);

@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
 
   /**
    * function that emits when an item on menu is clicked.
-   * It emits an output for app component for menu sliding.
+   * It emits an output to app component for menu sliding.
    * @param menuItem a string representation of menu item.
    */
   menuItemClicked(menuItem: string): void {
