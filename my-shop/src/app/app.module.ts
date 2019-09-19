@@ -5,6 +5,7 @@ import { FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,6 +24,7 @@ import { ErrorNotFoundComponent } from './components/error-not-found/error-not-f
 
 import { LocalizationPipe } from './pipes/localization.pipe';
 import { PermissionDirective } from './directives/permission.directive';
+import { LogInterceptor } from './interceptors/log';
 
 
 @NgModule({
@@ -52,6 +54,7 @@ import { PermissionDirective } from './directives/permission.directive';
     AppRoutingModule,
     HttpClientModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true } ]
 })
 export class AppModule { }
