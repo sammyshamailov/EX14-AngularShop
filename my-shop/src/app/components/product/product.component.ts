@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { IProduct } from '../../../models/iproduct';
+import { IProduct } from 'src/app/shared/models/iproduct';
 
 import { DataService } from '../../services/data.service';
 

@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { IProduct } from '../../../models/iproduct';
-import { IProductCategory } from '../../../models/iproduct-category';
-import { User } from '../../../models/user';
+import { IProduct } from 'src/app/shared/models/iproduct';
+import { IProductCategory } from 'src/app/shared/models/iproduct-category';
+import { User } from 'src/app/shared/models/user';
 
 import { DataService } from '../../services/data.service';
 import { CartService } from '../../services/cart.service';

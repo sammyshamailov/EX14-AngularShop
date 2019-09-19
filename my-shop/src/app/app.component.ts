@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { slider } from './route-animations';
 import { trigger, state, style, transition, animate } from '@angular/animations'
 
-import { MenuItems } from '../models/menu-items';
+import { MenuItems } from 'src/app/shared/models/menu-items';
 
 @Component({
   selector: 'app-root',

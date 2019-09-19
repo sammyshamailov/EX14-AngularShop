@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { DataService } from '../../services/data.service';
 
-import { IProduct } from '../../../models/iproduct';
+import { IProduct } from 'src/app/shared/models/iproduct';
 
 
 

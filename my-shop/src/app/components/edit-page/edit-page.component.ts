@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { DataService } from '../../services/data.service'
 
-import { IProductCategory } from '../../../models/iproduct-category';
-import { IProduct } from '../../../models/iproduct';
+import { IProductCategory } from 'src/app/shared/models/iproduct-category';
+import { IProduct } from 'src/app/shared/models/iproduct';
 
 @Component({
   selector: 'app-edit-page',

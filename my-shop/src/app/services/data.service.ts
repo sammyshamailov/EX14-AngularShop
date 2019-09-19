@@ -3,8 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { IProduct } from '../../models/iproduct';
-import { IProductCategory } from '../../models/iproduct-category';
+import { IProduct } from 'src/app/shared/models/iproduct';
+import { IProductCategory } from 'src/app/shared/models/iproduct-category';
+
 import { CartService } from './cart.service';
 
 @Injectable({
