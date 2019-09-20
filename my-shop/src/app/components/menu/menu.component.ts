@@ -2,13 +2,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { MenuItems } from '../../../models/menu-items';
-import { User } from '../../../models/user';
-import { IProduct } from '../../../models/iproduct';
+import { MenuItems } from 'src/app/shared/models/menu-items';
+import { User } from 'src/app/shared/models/user';
+import { IProduct } from 'src/app/shared/models/iproduct';
 
-import { CartService } from '../../services/cart.service';
-import { UserService } from '../../services/user.service';
-import { LocalizationService } from '../../services/localization.service';
+import { UserService } from '../../core/services/user.service';
+import { LocalizationService } from '../../core/services/localization.service';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-menu',

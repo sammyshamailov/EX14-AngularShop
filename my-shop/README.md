@@ -1,5 +1,5 @@
 # MyShop
-Seventh Exercise with routing.
+Ninth Exercise with modules.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 

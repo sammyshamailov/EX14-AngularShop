@@ -1,60 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule} from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
+import { CoreModule } from './core/core.module';
+import { ProductsModule } from './products/products.module';
+import { SharedModule } from './shared/shared.module';
+import { LoginModule } from './login/login.module';
+
 import { AboutPageComponent } from './components/about-page/about-page.component';
-import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { ContactPageComponent } from './components/contact-page/contact-page.component';
-import { CategoryChoiceComponent } from './components/category-choice/category-choice.component';
-import { SocialLinkComponent } from './components/social-link/social-link.component';
-import { ProductComponent } from './components/product/product.component';
-import { CartComponent } from './components/cart/cart.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
-import { EditPageComponent } from './components/edit-page/edit-page.component';
 import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
-
-import { LocalizationPipe } from './pipes/localization.pipe';
-import { PermissionDirective } from './directives/permission.directive';
-import { LogInterceptor } from './interceptors/log';
-
+import { HeaderComponent } from './components/header/header.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { SocialLinkComponent } from './components/social-link/social-link.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductsServiceModule } from './products/products-service.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    SocialLinkComponent,
     MenuComponent,
     HomePageComponent,
     AboutPageComponent,
-    ProductsPageComponent,
     ContactPageComponent,
-    CategoryChoiceComponent,
-    SocialLinkComponent,
-    ProductComponent,
-    CartComponent,
-    LoginPageComponent,
-    EditPageComponent,
-    LocalizationPipe,
-    PermissionDirective,
     ErrorNotFoundComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    HttpClientModule
+    SharedModule,
+    CoreModule,
+    ProductsServiceModule,
+    ProductsModule,
+    LoginModule,
+    AppRoutingModule
   ],
-  bootstrap: [AppComponent],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true } ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
