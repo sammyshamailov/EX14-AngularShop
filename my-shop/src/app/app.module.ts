@@ -18,7 +18,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsServiceModule } from './products/products-service.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
