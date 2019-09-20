@@ -2,26 +2,29 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocalizationPipe } from './pipes/localization.pipe';
+import { PermissionDirective } from './directives/permission.directive';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LocalizationPipe,
+    PermissionDirective,
+    ProductComponent
+  ],
   imports: [
     CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
   exports: [
     CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    LocalizationPipe,
+    PermissionDirective
   ]
 })
 export class SharedModule { }

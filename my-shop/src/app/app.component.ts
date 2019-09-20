@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
    * @returns The current activated route.
    */
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+    return outlet && outlet.activatedRouteData;
   }
 
   /**
