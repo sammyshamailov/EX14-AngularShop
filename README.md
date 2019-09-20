@@ -1,6 +1,6 @@
 # EX14-AngularShop
 
-master contains eighth exercise - asynchrony
+master contains ninth exercise - modules
 
 ## details
 
