@@ -4,7 +4,6 @@ import { CategoryChoiceComponent } from './components/category-choice/category-c
 import { SharedModule } from '../shared/shared.module';
 import { ProductsRoutingModule } from './products-routing.module';
 import { EditPageComponent } from './components/edit-page/edit-page.component';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [

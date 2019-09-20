@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { EditPageComponent } from 'src/app/products/components/edit-page/edit-page.component';
 
-import { DataService } from '../../services/data.service';
+import { DataService } from 'src/app/products/services/data.service';
 
 @Injectable()
 export class OutFromFormGuard implements CanDeactivate<EditPageComponent> {

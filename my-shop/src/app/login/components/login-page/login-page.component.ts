@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserService } from '../../../services/user.service';
-import { CartService } from '../../../services/cart.service';
+import { CartService } from 'src/app/core/services/cart.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-login-page',

@@ -1,21 +1,29 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LogInterceptor } from './interceptors/log';
+
 import { SharedModule } from '../shared/shared.module';
 import { AdminGuard } from './guards/admin.guard';
 import { LoggedGuard } from './guards/logged.guard';
 import { OutFromFormGuard } from './guards/out-from-form.guard';
+import { LogInterceptor } from './interceptors/log';
+import { CartService } from './services/cart.service';
+import { LocalizationService } from './services/localization.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [],
   imports: [
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true },
     AdminGuard,
     LoggedGuard,
-    OutFromFormGuard
+    OutFromFormGuard,
+    CartService,
+    LocalizationService,
+    UserService
   ]
 })
 export class CoreModule {

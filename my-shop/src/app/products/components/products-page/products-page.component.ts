@@ -6,9 +6,10 @@ import { IProduct } from 'src/app/shared/models/iproduct';
 import { IProductCategory } from 'src/app/shared/models/iproduct-category';
 import { User } from 'src/app/shared/models/user';
 
-import { CartService } from '../../../services/cart.service';
-import { DataService } from '../../../services/data.service';
-import { UserService } from '../../../services/user.service';
+import { CartService } from 'src/app/core/services/cart.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { DataService } from '../../services/data.service';
+
 
 @Component({
   selector: 'app-products-page',

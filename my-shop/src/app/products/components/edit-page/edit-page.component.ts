@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { DataService } from '../../../services/data.service'
-
 import { IProductCategory } from 'src/app/shared/models/iproduct-category';
 import { IProduct } from 'src/app/shared/models/iproduct';
+
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-edit-page',

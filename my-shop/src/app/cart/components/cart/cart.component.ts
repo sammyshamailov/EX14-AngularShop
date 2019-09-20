@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { CartService } from '../../../services/cart.service';
-import { DataService } from '../../../services/data.service';
-
 import { IProduct } from 'src/app/shared/models/iproduct';
 
-
+import { CartService } from 'src/app/core/services/cart.service';
+import { DataService } from 'src/app/products/services/data.service';
 
 @Component({
   selector: 'app-cart',
@@ -48,6 +46,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.cartProducts$ = this.cartService.cart;
+    console.log("cart comp");
   }
 
 }

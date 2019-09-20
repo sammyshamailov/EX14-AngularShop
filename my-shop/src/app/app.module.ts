@@ -16,7 +16,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SocialLinkComponent } from './components/social-link/social-link.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { ProductsServiceModule } from './products/products-service.module';
 
 
 @NgModule({
@@ -35,6 +35,7 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
+    ProductsServiceModule,
     ProductsModule,
     LoginModule,
     AppRoutingModule

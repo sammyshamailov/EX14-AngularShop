@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { DataService } from 'src/app/services/data.service';
-
 import { IProductCategory } from 'src/app/shared/models/iproduct-category';
+
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-category-choice',

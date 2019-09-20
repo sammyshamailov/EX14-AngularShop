@@ -3,8 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { IProduct } from 'src/app/shared/models/iproduct';
-
-import { DataService } from '../../../services/data.service';
+import { DataService } from 'src/app/products/services/data.service';
 
 
 @Component({
