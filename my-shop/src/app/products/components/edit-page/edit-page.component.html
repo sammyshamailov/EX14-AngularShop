@@ -1,0 +1,32 @@
+<span class="header">Add/Edit Product</span>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit(); revert();" class="edit-form">
+    Category:
+    <select formControlName="Category">
+        <ng-container *ngFor="let category of (categories$ | async)">
+            <option *ngIf="category.Title !== 'All'" [ngValue]="category">{{ category.Title }}</option>
+        </ng-container>
+    </select>
+    <span *ngIf="CategoryForm.invalid && CategoryForm.errors.required">Category is required.</span>
+    Image URL: <input type="text" formControlName="Image">
+    <span *ngIf="ImageForm.invalid && ImageForm.errors.required">Image URL is required.</span>
+    Big Image URL: <input type="text" formControlName="BigImage">
+    <span *ngIf="BigImageForm.invalid && BigImageForm.errors.required">Big Image URL is required.</span>
+    Title: <input type="text" formControlName="Title">
+    <span *ngIf="TitleForm.invalid && TitleForm.errors.required">Title is required.</span>
+    Price: <input type="number" formControlName="Price">
+    <span *ngIf="PriceForm.invalid && PriceForm.errors.required">Price is required.</span>
+    <span *ngIf="PriceForm.invalid && PriceForm.errors.min">Price must be larger than 0.</span>
+    Description: <textarea name="description" formControlName="Description"></textarea>
+    <button type="submit" [disabled]="!editForm.valid">Add/Edit</button>
+</form>
+
+<!-- The Modal -->
+<div id="myModal" [class]="popupHidden? 'hidden': 'modal'">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="closePopup()">&times;</span>
+        <p>Product was Added/Edited successfully</p>
+    </div>
+
+</div>
