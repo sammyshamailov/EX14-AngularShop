@@ -4,16 +4,20 @@ master contains ninth exercise - modules
 
 ## details
 
-EX14-AngularShop1 is for components, inputs, outputs.
+Exercise 1 (angularShop-components) is for components, inputs, outputs.
 
-EX14-AngularShop2 is for content projection, hooks.
+Exercise 2 (angularShop-hooks) is for content projection, hooks.
 
-EX14-AngularShop3 is for services.
+Exercise 3 (angularShop-services) is for services.
 
-EX14-AngularShop4 is for forms.
+Exercise 4 (angularShop-forms) is for forms.
 
-EX14-AngularShop5 is for pipes.
+Exercise 5 (angularShop-pipes) is for pipes.
 
-EX14-AngularShop6 is for directives.
+Exercise 6 (angularShop-directives) is for directives.
 
-EX14-AngularShop7 is for routing.
+Exercise 7 (angularShop-routing) is for routing.
+
+Exercise 8 (angularShop-asynchrony) is for asynchrony.
+
+Exercise 9 (angularShop-modules) is for modules.
