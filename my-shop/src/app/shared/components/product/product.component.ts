@@ -36,7 +36,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.chosenProduct = null;
   }
 

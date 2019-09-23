@@ -1,6 +1,6 @@
-<app-header (isVisible)="updateVisibility()"></app-header>
-<app-menu (chosenPage)="updateVisibility()" [@slideInOut]='menuState'></app-menu>
+<app-header (isVisible)="updateMenuVisibilityState()"></app-header>
+<app-menu (chosenPage)="updateMenuVisibilityState()" [@slideInOut]='menuState'></app-menu>
 
-<div [@routeAnimations]="prepareRoute(outlet)" >
+<div [@routeAnimations]="outlet && outlet.activatedRouteData" >
   <router-outlet #outlet="outlet"></router-outlet>
 </div>

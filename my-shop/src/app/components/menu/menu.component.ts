@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
   menuItems = MenuItems;
   currentUser$: Observable<User>;
   currentCart$: Observable<IProduct[]>;
-  get currLanguage(): string { return this.localizationService.currLanguage };
+  get currLanguage(): string { return this.localizationService.currLanguage; }
 
   constructor(
     private cartService: CartService,
@@ -49,7 +49,7 @@ export class MenuComponent implements OnInit {
    * @param chosenLang a string representation of language.
    */
   changeLang(chosenLang: string): void {
-    this.localizationService.changeLang(chosenLang);
+    this.localizationService.changeCurrentLanguage(chosenLang);
   }
 
   ngOnInit() {

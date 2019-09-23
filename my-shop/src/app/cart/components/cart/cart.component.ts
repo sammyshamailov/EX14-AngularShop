@@ -26,9 +26,9 @@ export class CartComponent implements OnInit {
    * @param product the requested product.
    */
   removeFromCart(product: IProduct): void {
-    this.cartService.removeFromCart(product);
-    //enter when the removed product was displayed in details page.
-    if(this.cartService.cartProduct === product.id){
+    this.cartService.removeProductFromCart(product);
+    // enter when the removed product was displayed in details page.
+    if (this.cartService.cartProduct === product.id) {
       this.router.navigate(['/cart'], {relativeTo: this.activatedRoute});
     }
   }
@@ -38,7 +38,7 @@ export class CartComponent implements OnInit {
    * When product is clicked, the function emits and goes to product component.
    * @param product  the selected product.
    */
-  showDetails(product: IProduct): void {
+  showProductDetails(product: IProduct): void {
     this.dataService.productToShow = product;
     this.router.navigate(['/cart/product', product.Title], {relativeTo: this.activatedRoute});
     this.cartService.cartProduct = product.id;
@@ -46,7 +46,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.cartProducts$ = this.cartService.cart;
-    console.log("cart comp");
   }
 
 }

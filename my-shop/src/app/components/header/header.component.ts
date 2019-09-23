@@ -7,17 +7,17 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Output() isVisible = new EventEmitter<boolean>();
-  visible: boolean = false;
+  isMenuVisible = false;
 
   constructor() { }
 
   /**
-   * Determines whether menu is visible or not.
-   * emits the current visibilty to app component.
+   * Reverts the menu visibility state and
+   * emits the current visibilty state to app component.
    */
-  isMenuVisible(): void {
-    this.isVisible.emit(!this.visible);
-    this.visible = !this.visible;
+  RevertMenuState(): void {
+    this.isVisible.emit(!this.isMenuVisible);
+    this.isMenuVisible = !this.isMenuVisible;
   }
 
   ngOnInit() {

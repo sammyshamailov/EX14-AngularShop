@@ -10,15 +10,15 @@ export class CartService {
 
   private carts: IProduct[][] = [];
   private currentUserCart: IProduct[] = [];
-  private usernames: string[] = []; //helper array for users cart indexing in carts array
+  private usernames: string[] = []; // helper array for users cart indexing in carts array.
 
   private cartSelectedProduct: string;
-  set cartProduct(productId: string) { this.cartSelectedProduct = productId };
-  get cartProduct(): string { return this.cartSelectedProduct };
+  set cartProduct(productId: string) { this.cartSelectedProduct = productId; }
+  get cartProduct(): string { return this.cartSelectedProduct; }
 
   constructor() {
     if (localStorage.getItem('user')) {
-      this.currentCart(localStorage.getItem('user'));
+      this.setCurrentUserCart(localStorage.getItem('user'));
     }
   }
 
@@ -28,7 +28,8 @@ export class CartService {
    * logged for the first time.
    * @param currentUser The username of logged user.
    */
-  public currentCart(currentUser: string): void {
+  public setCurrentUserCart(currentUser: string): void {
+    // enter if current user doesn't have a cart and set one.
     if (!this.usernames.find(username => username === currentUser)) {
       this.usernames.push(currentUser);
       this.carts[this.usernames.indexOf(currentUser)] = [];
@@ -43,18 +44,18 @@ export class CartService {
    * @returns true if product in cart.
    */
   public getProductState(product: IProduct): boolean {
-    let temp: IProduct[];
+    let desiredProudct: IProduct[];
     this._cart.subscribe(p => {
-      temp = p;
+      desiredProudct = p;
     });
-    return temp.find(p => p.id === product.id) ? true : false;
+    return desiredProudct.find(p => p.id === product.id) ? true : false;
   }
 
   /**
    * Adds product to cart.
    * @param product The selected product.
    */
-  public addToCart(product: IProduct): void {
+  public addProductToCart(product: IProduct): void {
     this.currentUserCart.push(product);
     this._cart.next(this.currentUserCart);
   }
@@ -63,7 +64,7 @@ export class CartService {
    * Removes product from cart.
    * @param product The selected product.
    */
-  public removeFromCart(product: IProduct): void {
+  public removeProductFromCart(product: IProduct): void {
     this.currentUserCart.splice(this.currentUserCart.findIndex(p => p.id === product.id), 1);
     this._cart.next(this.currentUserCart);
   }
@@ -72,10 +73,11 @@ export class CartService {
    * Updates edited product if in cart.
    * @param product The edited product.
    */
-  public updateProduct(editedProduct: IProduct): void {
-    for (let i: number = 0; i < this.carts.length; i++) {
-      let productIndex: number = this.carts[i].findIndex(product => product.id === editedProduct.id);
-      if (productIndex !== -1){
+  public updateProductInCarts(editedProduct: IProduct): void {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.carts.length; i++) {
+      const productIndex: number = this.carts[i].findIndex(product => product.id === editedProduct.id);
+      if (productIndex !== -1) {
         this.carts[i][productIndex] = editedProduct;
       }
     }
