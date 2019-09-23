@@ -6,8 +6,6 @@ import { EditPageComponent } from './components/edit-page/edit-page.component';
 import { AdminGuard } from '../core/guards/admin.guard';
 import { OutFromFormGuard } from '../core/guards/out-from-form.guard';
 
-
-//This is my case 
 const routes: Routes = [
     { path: 'products', component: ProductsPageComponent },
     { path: 'product/:title', component: ProductComponent },

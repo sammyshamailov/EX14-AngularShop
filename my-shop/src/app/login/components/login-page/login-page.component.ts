@@ -25,11 +25,10 @@ export class LoginPageComponent implements OnInit {
    */
   logIn(): void {
     if (this.userService.logIn(this.username, this.password)) {
-      this.cartService.currentCart(this.username);
+      this.cartService.setCurrentUserCart(this.username);
       this.router.navigate(['/home']);
-    }
-    else {
-      alert("incorrect username or password");
+    } else {
+      alert('incorrect username or password');
     }
   }
 

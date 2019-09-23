@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import languagesData from '../../../assets/static/language.json'
+import languagesData from '../../../assets/static/language.json';
 
 @Injectable()
 export class LocalizationService {
-  private currentLang: string = "EN";
-  get currLanguage() { return this.currentLang; };
+  private currentLang = 'EN';
+  get currLanguage() { return this.currentLang; }
 
   constructor() { }
 
@@ -12,7 +12,7 @@ export class LocalizationService {
    * Changes current language.
    * @param lang The selected language.
    */
-  changeLang(lang: string) {
+  changeCurrentLanguage(lang: string) {
     this.currentLang = lang;
   }
 

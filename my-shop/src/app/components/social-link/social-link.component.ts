@@ -7,7 +7,7 @@ import { Component, OnInit, AfterContentInit, ContentChildren, QueryList, Elemen
 })
 export class SocialLinkComponent implements OnInit, AfterContentInit {
 
-  @ContentChildren ('link') links : QueryList<ElementRef>;
+  @ContentChildren ('link') links: QueryList<ElementRef>;
 
   constructor() { }
 

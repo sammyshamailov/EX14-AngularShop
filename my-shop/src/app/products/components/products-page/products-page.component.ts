@@ -34,13 +34,13 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
    * @param product a product from the list.
    * @returns Remove image if in cart, else buy image.
    */
-  setMyStyles(product: IProduct): {'background-image': string} {
-    let styles = {
+  getCartButtonStyle(product: IProduct): { 'background-image': string } {
+    const cartButtonStyle = {
       'background-image': this.cartService.getProductState(product) ?
-        "url('../../../../assets/icons/remove.svg')" :
-        "url('../../../../assets/icons/buy.svg')"
+        'url(\'../../../../assets/icons/remove.svg\')' :
+        'url(\'../../../../assets/icons/buy.svg\')'
     };
-    return styles;
+    return cartButtonStyle;
   }
 
   /**
@@ -60,7 +60,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
    */
   goToEditProduct(product: IProduct): void {
     this.dataService.setToEdit();
-    this.dataService.setProductForEdit(product)
+    this.dataService.setProductForEdit(product);
     this.router.navigate(['/add-edit']);
   }
 
@@ -69,20 +69,20 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
    * @param product The selected product.
    */
   changeProductState(product: IProduct) {
-    this.cartService.getProductState(product)?
-    this.cartService.removeFromCart(product):
-    this.cartService.addToCart(product);
+    this.cartService.getProductState(product) ?
+      this.cartService.removeProductFromCart(product) :
+      this.cartService.addProductToCart(product);
   }
 
   ngOnInit() {
     this.products$ = this.dataService.productsObserv;
     this.categories$ = this.dataService.categoriesObserv;
     this.curentUser$ = this.userService.usersObserv;
-   }
+  }
 
-  ngOnDestroy(){
-    //sending fictive category to show default all
-    this.dataService.setCategory({id:'All', Title:'All'});
+  ngOnDestroy() {
+    // sending fictive category to show default option all.
+    this.dataService.setCategory({ id: 'All', Title: 'All' });
   }
 
 }

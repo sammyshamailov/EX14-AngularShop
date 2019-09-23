@@ -17,9 +17,13 @@ export class OutFromFormGuard implements CanDeactivate<EditPageComponent> {
     currentState: RouterStateSnapshot,
     nextState: RouterStateSnapshot
   ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
-    if(component.isDirty){
-      if(confirm("Are You Sure?")){
-        if(this.dataService.getToEdit()){
+    if (component.isDirty) {
+      if (confirm('Are You Sure?')) {
+        /*
+        * enter if admin is currently in edit mode and wants
+        * to get out before completing product editing.
+        */
+        if (this.dataService.getToEdit()) {
           this.dataService.setToEdit();
         }
         return true;

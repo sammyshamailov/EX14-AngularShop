@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
 import { IProductCategory } from 'src/app/shared/models/iproduct-category';
 
 import { DataService } from '../../services/data.service';
@@ -12,7 +11,7 @@ import { DataService } from '../../services/data.service';
 export class CategoryChoiceComponent implements OnInit {
 
   @Input() categories: IProductCategory[];
-  get chosenCategory(): string { return this.dataService.category }
+  get chosenCategory(): string { return this.dataService.category; }
 
   constructor(private dataService: DataService) { }
 

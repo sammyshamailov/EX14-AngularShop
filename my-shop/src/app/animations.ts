@@ -1,6 +1,6 @@
-import { trigger, style, transition, animate, query, group } from '@angular/animations'
+import { trigger, style, transition, animate, query, group, state } from '@angular/animations';
 
-export const slider =
+export const componentSlider =
     trigger('routeAnimations', [
         transition('* <=> *', [
             query(':enter, :leave',
@@ -19,4 +19,16 @@ export const slider =
                 ], { optional: true }),
             ])
         ]),
+    ]);
+
+export const menuSlider =
+    trigger('slideInOut', [
+        state('in', style({
+            transform: 'translate3d(0, 0, 0)'
+        })),
+        state('out', style({
+            transform: 'translate3d(-110%, 0, 0)'
+        })),
+        transition('in => out', animate('400ms ease-in')),
+        transition('out => in', animate('400ms ease-out'))
     ]);

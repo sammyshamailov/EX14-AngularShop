@@ -6,22 +6,21 @@ import { map } from 'rxjs/operators';
 import { IProduct } from 'src/app/shared/models/iproduct';
 import { IProductCategory } from 'src/app/shared/models/iproduct-category';
 
-import { CartService } from 'src/app/core/services/cart.service';
-
-
 @Injectable()
 export class DataService {
 
+  // tslint:disable-next-line: variable-name
   private _products = new BehaviorSubject([]);
   public readonly productsObserv: Observable<IProduct[]> = this._products.asObservable();
   private products: IProduct[] = [];
 
+  // tslint:disable-next-line: variable-name
   private _categories = new BehaviorSubject([]);
   public readonly categoriesObserv: Observable<IProductCategory[]> = this._categories.asObservable();
 
-  private editProduct: boolean = false;
+  private editProduct = false;
   private productToEdit: IProduct;
-  private chosenCategory: string = 'All';
+  private chosenCategory = 'All';
   private productShow: IProduct;
   private latestId: number;
 
@@ -30,30 +29,30 @@ export class DataService {
    */
   set productToShow(product: IProduct) {
     this.productShow = product;
-  };
+  }
 
   /**
    * returns a product that was chosen for details.
    */
   get productToShow(): IProduct {
     return this.productShow;
-  };
+  }
 
   /**
    * returns the current category that was chosen by the user.
    */
   get category(): string {
     return this.chosenCategory;
-  };
+  }
 
   /**
    * returns new id for new product generated with the last product id.
    */
   get newProductId(): number {
     return ++this.latestId;
-  };
+  }
 
-  constructor(private http: HttpClient, private cartService: CartService) {
+  constructor(private http: HttpClient) {
     this.loadProducts();
     this.loadCategories();
   }
@@ -115,8 +114,7 @@ export class DataService {
     let shownProducts: IProduct[] = [];
     if (category.Title !== 'All') {
       shownProducts = this.products.filter(product => product.CategoryId === category.id);
-    }
-    else {
+    } else {
       shownProducts = this.products;
     }
     this._products.next(shownProducts);
@@ -158,13 +156,12 @@ export class DataService {
    * Writes to the products list.
    * @param product the product that was added/edited
    */
-  public writeToList(product: IProduct): void {
-    let productIndex: number = this.products.findIndex(p => p.id === product.id);
+  public addProductToList(product: IProduct): void {
+    const productIndex: number = this.products.findIndex(p => p.id === product.id);
+    // enter if the product is new.
     if (productIndex !== -1) {
       this.products[productIndex] = product;
-      this.cartService.updateProduct(product);
-    }
-    else {
+    } else {
       this.products.push(product);
     }
     this._products.next(this.products);
@@ -173,14 +170,14 @@ export class DataService {
   /**
    * Gets category with the desired id and returns it.
    * @param categoryId the id of the desired category.
-   * @returns the category object that has the same id .
+   * @returns the category object that has the same id.
    */
   public getCategory(categoryId: string): IProductCategory {
     let returnedCategory: IProductCategory;
     this.categoriesObserv.subscribe(
       categories => {
-        returnedCategory = categories.find(category => category.id === categoryId)
+        returnedCategory = categories.find(category => category.id === categoryId);
       });
-      return returnedCategory;
+    return returnedCategory;
   }
 }

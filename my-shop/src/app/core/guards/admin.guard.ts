@@ -16,9 +16,9 @@ export class AdminGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    let usersPromise: Promise<User[]> = this.userService.getUserPromise();
+    const usersPromise: Promise<User[]> = this.userService.getUserPromise();
     let isAdmin: boolean;
-    let currentUser: string = localStorage.getItem('user');
+    const currentUser: string = localStorage.getItem('user');
     return new Promise((resolve, reject) => {
       usersPromise.then(users => {
         isAdmin = currentUser ? users.find(user => user.Username === currentUser).isAdmin : false;
@@ -28,6 +28,6 @@ export class AdminGuard implements CanActivate {
         }
         resolve(true);
       });
-    })
+    });
   }
 }
